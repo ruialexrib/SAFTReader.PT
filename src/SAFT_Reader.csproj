@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>default_FCj_icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>C138D5DF501DA411017B4957EC1A8A166A09149D</ManifestCertificateThumbprint>
@@ -88,12 +88,12 @@
     <Reference Include="Syncfusion.DataSource.WinForms, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.DataSource.WinForms.18.2.0.59\lib\net46\Syncfusion.DataSource.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Base, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.Grid.Base.18.2.0.58\lib\net46\Syncfusion.Grid.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Grid.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Grid.Base.18.2.0.59\lib\net46\Syncfusion.Grid.Base.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.Grid.Grouping.Windows, Version=18.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Grid.Windows, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.Grid.Windows.18.2.0.58\lib\net46\Syncfusion.Grid.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Grid.Windows, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Grid.Windows.18.2.0.59\lib\net46\Syncfusion.Grid.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.GridCommon.WinForms, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.GridCommon.WinForms.18.2.0.59\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
@@ -120,17 +120,17 @@
     <Reference Include="Syncfusion.Shared.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Shared.Base.18.2.0.59\lib\net46\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Windows, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.Shared.Windows.18.2.0.58\lib\net46\Syncfusion.Shared.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Windows, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Shared.Windows.18.2.0.59\lib\net46\Syncfusion.Shared.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SpellChecker.Base, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.SpellChecker.Base.18.2.0.58\lib\net46\Syncfusion.SpellChecker.Base.dll</HintPath>
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SpellChecker.Base.18.2.0.59\lib\net46\Syncfusion.SpellChecker.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Base, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.Tools.Base.18.2.0.58\lib\net46\Syncfusion.Tools.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Tools.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Tools.Base.18.2.0.59\lib\net46\Syncfusion.Tools.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Windows, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.Tools.Windows.18.2.0.58\lib\net46\Syncfusion.Tools.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Tools.Windows, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Tools.Windows.18.2.0.59\lib\net46\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.XlsIO.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.XlsIO.WinForms.18.2.0.59\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
@@ -165,22 +165,22 @@
     <Compile Include="Models\InvoiceLine.cs" />
     <Compile Include="Models\TaxTableEntryItem.cs" />
     <Compile Include="Models\TaxTableEntryTotal.cs" />
-    <Compile Include="OpenFileDialog.cs">
+    <Compile Include="UI\OpenFileDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OpenFileDialog.Designer.cs">
-      <DependentUpon>OpenFileDialog.cs</DependentUpon>
+    <Compile Include="UI\OpenFileDialogForm.Designer.cs">
+      <DependentUpon>OpenFileDialogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SAFTTotalsForm.cs">
+    <Compile Include="UI\SAFTTotalsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SAFTTotalsForm.Designer.cs">
+    <Compile Include="UI\SAFTTotalsForm.Designer.cs">
       <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="OpenFileDialog.resx">
-      <DependentUpon>OpenFileDialog.cs</DependentUpon>
+    <EmbeddedResource Include="UI\OpenFileDialogForm.resx">
+      <DependentUpon>OpenFileDialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,7 +191,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SAFTTotalsForm.resx">
+    <EmbeddedResource Include="UI\SAFTTotalsForm.resx">
       <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -210,7 +210,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default_FCj_icon.ico" />
+    <Content Include="icon.ico" />
+    <Content Include="SAFT_IDEMO599999999_v1.04.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SyncfusionLicense.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

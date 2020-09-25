@@ -1,6 +1,6 @@
-﻿namespace SAFT_Reader
+﻿namespace SAFT_Reader.UI
 {
-    partial class OpenFileDialog
+    partial class OpenFileDialogForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpenFileDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpenFileDialogForm));
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -37,13 +37,14 @@
             this.cmdOK = new Syncfusion.WinForms.Controls.SfButton();
             this.cmdCancel = new Syncfusion.WinForms.Controls.SfButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmdOpenDemo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtFilePath
             // 
             this.txtFilePath.Enabled = false;
-            this.txtFilePath.Location = new System.Drawing.Point(24, 100);
+            this.txtFilePath.Location = new System.Drawing.Point(24, 88);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(355, 21);
@@ -52,7 +53,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 84);
+            this.label1.Location = new System.Drawing.Point(21, 72);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 5;
@@ -77,7 +78,7 @@
             this.cmdFind.AccessibleName = "Button";
             this.cmdFind.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdFind.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdFind.Location = new System.Drawing.Point(385, 100);
+            this.cmdFind.Location = new System.Drawing.Point(385, 88);
             this.cmdFind.Name = "cmdFind";
             this.cmdFind.Size = new System.Drawing.Size(24, 21);
             this.cmdFind.TabIndex = 11;
@@ -119,11 +120,23 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // OpenFileDialog
+            // cmdOpenDemo
+            // 
+            this.cmdOpenDemo.AutoSize = true;
+            this.cmdOpenDemo.Location = new System.Drawing.Point(24, 116);
+            this.cmdOpenDemo.Name = "cmdOpenDemo";
+            this.cmdOpenDemo.Size = new System.Drawing.Size(325, 13);
+            this.cmdOpenDemo.TabIndex = 15;
+            this.cmdOpenDemo.TabStop = true;
+            this.cmdOpenDemo.Text = "Abrir Ficheiro Demonstração [SAFT_IDEMO599999999_v1.04.xml]";
+            this.cmdOpenDemo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdOpenDemo_LinkClicked);
+            // 
+            // OpenFileDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 199);
+            this.Controls.Add(this.cmdOpenDemo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdOK);
@@ -137,7 +150,7 @@
             this.IconSize = new System.Drawing.Size(16, 16);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "OpenFileDialog";
+            this.Name = "OpenFileDialogForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style.MdiChild.IconHorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
@@ -157,5 +170,6 @@
         private Syncfusion.WinForms.Controls.SfButton cmdOK;
         private Syncfusion.WinForms.Controls.SfButton cmdCancel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel cmdOpenDemo;
     }
 }

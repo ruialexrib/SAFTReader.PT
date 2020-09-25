@@ -1,21 +1,24 @@
 ﻿using Programatica.Saft.Models;
 using SAFT_Reader.Models;
 using Syncfusion.Data;
-using Syncfusion.WinForms.Controls;
+using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGridConverter;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SAFT_Reader
+namespace SAFT_Reader.UI
 {
-    public partial class SAFTTotalsForm : SfForm
+    public partial class SAFTTotalsForm : RibbonForm
     {
+        public SfDataGrid SelectedGrid { get; set; }
+
         public SAFTTotalsForm()
         {
             InitializeComponent();
@@ -28,6 +31,8 @@ namespace SAFT_Reader
             this.lblInfoGithub.ForeColor = Color.FromArgb(255, 118, 167, 151);
 
             this.Text = $"{this.Text} [{Globals.Filepath}]";
+            this.ribbonControlAdv1.MenuButtonVisible = false;
+            SelectedGrid = gridLines;
         }
 
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
@@ -330,26 +335,56 @@ namespace SAFT_Reader
             this.gridDocuments.TableSummaryRows.Add(sum);
         }
 
-        private void cmdAutoSize_Click(object sender, EventArgs e)
+              
+
+        private void GridEnter(object sender, EventArgs e)
+        {
+            SelectedGrid = (SfDataGrid)sender;
+        }
+
+        private void cmdToolGroup_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            gridLines.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            SelectedGrid.ShowGroupDropArea = !SelectedGrid.ShowGroupDropArea;
             Cursor.Current = Cursors.Default;
         }
 
-        private void cmdSearch_Click(object sender, EventArgs e)
+        private void cmdToolAutoExpand_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            this.gridLines.SearchController.Search(txtSearch.Text);
+            SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
             Cursor.Current = Cursors.Default;
         }
 
-        private void cmdExportPdf_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            SelectedGrid.SearchController.Search(txtToolFilter.Text);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolRemoveFilters_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            SelectedGrid.ClearFilters();
+            SelectedGrid.SearchController.ClearSearch();
+            txtToolFilter.Text = string.Empty;
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.Close();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolExportPdf_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
             PdfExportingOptions options = new PdfExportingOptions();
             options.AutoColumnWidth = true;
-            var document = gridLines.ExportToPdf(options);
+            var document = SelectedGrid.ExportToPdf(options);
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf";
@@ -358,14 +393,15 @@ namespace SAFT_Reader
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 document.Save(sfd.FileName);
+                Process.Start(sfd.FileName);
             }
             Cursor.Current = Cursors.Default;
         }
 
-        private void cmdExportExcel_Click(object sender, EventArgs e)
+        private void cmdToolExportExcel_Click(object sender, EventArgs e)
         {
             var options = new ExcelExportingOptions();
-            var excelEngine = gridLines.ExportToExcel(gridLines.View, options);
+            var excelEngine = SelectedGrid.ExportToExcel(SelectedGrid.View, options);
             var workBook = excelEngine.Excel.Workbooks[0];
 
             SaveFileDialog sfd = new SaveFileDialog();
@@ -375,15 +411,38 @@ namespace SAFT_Reader
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 workBook.SaveAs(sfd.FileName);
+                Process.Start(sfd.FileName);
             }
             Cursor.Current = Cursors.Default;
         }
 
-        private void cmdGroup_Click(object sender, EventArgs e)
+        private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            gridLines.ShowGroupDropArea = cmdGroup.Checked;
-            Cursor.Current = Cursors.Default;
+            var index = tabControlAdv1.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    gridLines.Focus();
+                    break;
+                case 1:
+                    gridDocuments.Focus();
+                    break;
+                case 2:
+                    gridCustomers.Focus();
+                    break;
+                case 3:
+                    gridProducts.Focus();
+                    break;
+                case 4:
+                    gridTax.Focus();
+                    break;
+                case 5:
+                    gridAccounts.Focus();
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 }

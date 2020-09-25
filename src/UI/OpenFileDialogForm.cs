@@ -4,9 +4,9 @@ using Syncfusion.WinForms.Controls;
 using System;
 using System.Windows.Forms;
 
-namespace SAFT_Reader
+namespace SAFT_Reader.UI
 {
-    public partial class OpenFileDialog : SfForm
+    public partial class OpenFileDialogForm : SfForm
     {
         public string FilePath
         {
@@ -17,7 +17,7 @@ namespace SAFT_Reader
         private readonly IFileStreamAdapter _fileStreamAdapter;
         private readonly IXmlSerializerAdapter _xmlSerializerAdapter;
 
-        public OpenFileDialog(
+        public OpenFileDialogForm(
             IFileStreamAdapter fileStreamAdapter,
             IXmlSerializerAdapter xmlSerializerAdapter)
         {
@@ -77,6 +77,14 @@ namespace SAFT_Reader
         {
             Cursor.Current = Cursors.WaitCursor;
             Application.Exit();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdOpenDemo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            txtFilePath.Text = $"{AppDomain.CurrentDomain.BaseDirectory}/SAFT_IDEMO599999999_v1.04.xml";
+            cmdOK.Enabled = true;
             Cursor.Current = Cursors.Default;
         }
     }
