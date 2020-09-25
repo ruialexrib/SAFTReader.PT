@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -359,6 +360,7 @@ namespace SAFT_Reader.UI
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
+            SelectedGrid.SearchController.AllowFiltering = true;
             SelectedGrid.SearchController.Search(txtToolFilter.Text);
             Cursor.Current = Cursors.Default;
         }
@@ -368,53 +370,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.WaitCursor;
             SelectedGrid.ClearFilters();
             SelectedGrid.SearchController.ClearSearch();
+            SelectedGrid.SearchController.AllowFiltering = false;
             txtToolFilter.Text = string.Empty;
             Cursor.Current = Cursors.Default;
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            this.Close();
-            Cursor.Current = Cursors.Default;
-        }
-
-        private void cmdToolExportPdf_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            PdfExportingOptions options = new PdfExportingOptions();
-            options.AutoColumnWidth = true;
-            var document = SelectedGrid.ExportToPdf(options);
-
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf";
-            sfd.Title = "Guardar ficheiro pdf";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                document.Save(sfd.FileName);
-                Process.Start(sfd.FileName);
-            }
-            Cursor.Current = Cursors.Default;
-        }
-
-        private void cmdToolExportExcel_Click(object sender, EventArgs e)
-        {
-            var options = new ExcelExportingOptions();
-            var excelEngine = SelectedGrid.ExportToExcel(SelectedGrid.View, options);
-            var workBook = excelEngine.Excel.Workbooks[0];
-
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "xlsx File|*.xlsx|Ficheiro Excel|*.xlsx";
-            sfd.Title = "Guardar ficheiro Excel";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                workBook.SaveAs(sfd.FileName);
-                Process.Start(sfd.FileName);
-            }
-            Cursor.Current = Cursors.Default;
-        }
 
         private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -466,8 +426,53 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.WaitCursor;
             if (e.KeyCode == Keys.Enter)
             {
+                SelectedGrid.SearchController.AllowFiltering = true;
                 SelectedGrid.SearchController.Search(txtToolFilter.Text);
             }
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolExportXLS_Click(object sender, EventArgs e)
+        {
+            var options = new ExcelExportingOptions();
+            var excelEngine = SelectedGrid.ExportToExcel(SelectedGrid.View, options);
+            var workBook = excelEngine.Excel.Workbooks[0];
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "xlsx File|*.xlsx|Ficheiro Excel|*.xlsx";
+            sfd.Title = "Guardar ficheiro Excel";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                workBook.SaveAs(sfd.FileName);
+                Process.Start(sfd.FileName);
+            }
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            PdfExportingOptions options = new PdfExportingOptions();
+            options.AutoColumnWidth = true;
+            var document = SelectedGrid.ExportToPdf(options);
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf";
+            sfd.Title = "Guardar ficheiro pdf";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                document.Save(sfd.FileName);
+                Process.Start(sfd.FileName);
+            }
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolExit_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.Close();
             Cursor.Current = Cursors.Default;
         }
     }
