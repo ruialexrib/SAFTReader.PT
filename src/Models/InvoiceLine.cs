@@ -11,7 +11,7 @@ namespace SAFT_Reader.Models
         public string InvoiceNo { get; set; }
         public string InvoiceDate { get; set; }
         public string InvoiceType { get; set; }
-        public string CustomerID { get; set; }
+        public string CustomerTaxID { get; set; }
         public string CompanyName { get; set; }
         public string LineNumber { get; set; }
         public string ProductDescription { get; set; }

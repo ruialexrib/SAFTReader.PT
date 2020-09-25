@@ -27,11 +27,7 @@ namespace SAFT_Reader.UI
 
         private void InitializeView()
         {
-            this.lblInfoApp.ForeColor = Color.FromArgb(255, 118, 167, 151);
-            this.lblInfoGithub.ForeColor = Color.FromArgb(255, 118, 167, 151);
-
             this.Text = $"{this.Text} [{Globals.Filepath}]";
-            this.ribbonControlAdv1.MenuButtonVisible = false;
             SelectedGrid = gridLines;
         }
 
@@ -163,7 +159,11 @@ namespace SAFT_Reader.UI
                             InvoiceNo = invoice.InvoiceNo,
                             InvoiceDate = invoice.InvoiceDate,
                             InvoiceType = invoice.InvoiceType,
-                            CustomerID = invoice.CustomerID,
+                            CustomerTaxID = audit.MasterFiles
+                                                .Customer
+                                                .Where(x => x.CustomerID.Equals(invoice.CustomerID))
+                                                .FirstOrDefault()
+                                                .CustomerTaxID,
                             CompanyName = audit.MasterFiles
                                                 .Customer
                                                 .Where(x => x.CustomerID.Equals(invoice.CustomerID))
@@ -335,7 +335,7 @@ namespace SAFT_Reader.UI
             this.gridDocuments.TableSummaryRows.Add(sum);
         }
 
-              
+
 
         private void GridEnter(object sender, EventArgs e)
         {
@@ -418,6 +418,7 @@ namespace SAFT_Reader.UI
 
         private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             var index = tabControlAdv1.SelectedIndex;
             switch (index)
             {
@@ -442,7 +443,32 @@ namespace SAFT_Reader.UI
                 default:
                     break;
             }
+            Cursor.Current = Cursors.Default;
         }
 
+        private void lblInfoGithub_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            ToolStripStatusLabel tssl = (ToolStripStatusLabel)sender;
+            string url;
+            url = tssl.Text;
+            if (!url.Contains("://"))
+            {
+                url = "https://" + url;
+            }
+            var si = new ProcessStartInfo(url);
+            Process.Start(si);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void txtToolFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            if (e.KeyCode == Keys.Enter)
+            {
+                SelectedGrid.SearchController.Search(txtToolFilter.Text);
+            }
+            Cursor.Current = Cursors.Default;
+        }
     }
 }
