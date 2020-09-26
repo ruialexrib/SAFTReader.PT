@@ -25,6 +25,12 @@ namespace SAFT_Reader.UI
             _xmlSerializerAdapter = xmlSerializerAdapter;
 
             InitializeComponent();
+            InitializeView();
+        }
+
+        private void InitializeView()
+        {
+            lblVersion.Text = $"{Globals.VersionLabel}";
         }
 
         private AuditFile OpenFile(string path)

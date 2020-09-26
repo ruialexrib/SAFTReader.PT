@@ -38,6 +38,7 @@
             this.cmdCancel = new Syncfusion.WinForms.Controls.SfButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmdOpenDemo = new System.Windows.Forms.LinkLabel();
+            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.txtFilePath.Location = new System.Drawing.Point(24, 88);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
-            this.txtFilePath.Size = new System.Drawing.Size(355, 21);
+            this.txtFilePath.Size = new System.Drawing.Size(427, 21);
             this.txtFilePath.TabIndex = 4;
             // 
             // label1
@@ -78,7 +79,7 @@
             this.cmdFind.AccessibleName = "Button";
             this.cmdFind.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdFind.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdFind.Location = new System.Drawing.Point(385, 88);
+            this.cmdFind.Location = new System.Drawing.Point(457, 88);
             this.cmdFind.Name = "cmdFind";
             this.cmdFind.Size = new System.Drawing.Size(24, 21);
             this.cmdFind.TabIndex = 11;
@@ -91,7 +92,7 @@
             this.cmdOK.Enabled = false;
             this.cmdOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdOK.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdOK.Location = new System.Drawing.Point(313, 155);
+            this.cmdOK.Location = new System.Drawing.Point(385, 155);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(96, 28);
             this.cmdOK.TabIndex = 12;
@@ -103,7 +104,7 @@
             this.cmdCancel.AccessibleName = "Button";
             this.cmdCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdCancel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCancel.Location = new System.Drawing.Point(211, 155);
+            this.cmdCancel.Location = new System.Drawing.Point(283, 155);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(96, 28);
             this.cmdCancel.TabIndex = 13;
@@ -113,7 +114,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(377, 14);
+            this.pictureBox1.Location = new System.Drawing.Point(449, 14);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -131,11 +132,22 @@
             this.cmdOpenDemo.Text = "Abrir Ficheiro Demonstração [SAFT_IDEMO599999999_v1.04.xml]";
             this.cmdOpenDemo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdOpenDemo_LinkClicked);
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblVersion.Location = new System.Drawing.Point(21, 170);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(15, 13);
+            this.lblVersion.TabIndex = 16;
+            this.lblVersion.Text = "#";
+            // 
             // OpenFileDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 199);
+            this.ClientSize = new System.Drawing.Size(495, 199);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmdOpenDemo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cmdCancel);
@@ -171,5 +183,6 @@
         private Syncfusion.WinForms.Controls.SfButton cmdCancel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel cmdOpenDemo;
+        private System.Windows.Forms.Label lblVersion;
     }
 }

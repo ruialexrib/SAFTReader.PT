@@ -29,6 +29,7 @@ namespace SAFT_Reader.UI
         private void InitializeView()
         {
             this.Text = $"{this.Text} [{Globals.Filepath}]";
+            this.lblInfoApp.Text = $"{Globals.VersionLabel} - Copyright 2020, Rui Ribeiro. Todos os direitos reservados.";
             SelectedGrid = gridLines;
         }
 
