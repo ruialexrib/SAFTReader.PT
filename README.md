@@ -11,4 +11,4 @@ A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por mu
 
 ## Funcionalidades Principais
 
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif" width="600">
+<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif" width="800">
