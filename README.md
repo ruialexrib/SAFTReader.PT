@@ -8,7 +8,13 @@ O software SAFT READER permite visualizar, validar e analisar os dados do Fichei
 
 A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por multiplos critérios, bem como exportada para pdf ou excel, para posterior análise.
 
+### Ultima Release
 
-## Funcionalidades Principais
+[![Download SAFT_READER](https://img.shields.io/badge/Download-SaftReader.zip-blue?style=for-the-badge)](https://github.com/ruialexrib/Programatica.SAFTReader/releases/latest/download/release.zip)
 
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif" width="800">
+### Funcionalidades Principais
+
+<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif?raw=true" width="800">
+
+Para efeitos de demonstração das funcionalidades do aplicativo foi incluído o ficheiro [Demo da Autoridade Tributária, versão 1.04.](https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/src/SAFT_IDEMO599999999_v1.04.xml)
+
