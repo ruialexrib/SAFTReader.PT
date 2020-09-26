@@ -1,4 +1,4 @@
-![Travis Build](https://travis-ci.com/ruialexrib/Programatica.SAFTReader.svg?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![GitHub repo size](https://img.shields.io/github/repo-size/ruialexrib/Programatica.SAFTReader) ![GitHub top language](https://img.shields.io/github/languages/top/ruialexrib/Programatica.SAFTReader) ![GitHub All Releases](https://img.shields.io/github/downloads/ruialexrib/Programatica.SAFTReader/total)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![GitHub repo size](https://img.shields.io/github/repo-size/ruialexrib/Programatica.SAFTReader) ![GitHub top language](https://img.shields.io/github/languages/top/ruialexrib/Programatica.SAFTReader) ![GitHub All Releases](https://img.shields.io/github/downloads/ruialexrib/Programatica.SAFTReader/total)
 
 # Programatica.SAFTReader
 
