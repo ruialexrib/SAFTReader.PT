@@ -476,5 +476,16 @@ namespace SAFT_Reader.UI
             this.Close();
             Cursor.Current = Cursors.Default;
         }
+
+        private void cmdToolValidate_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Clipboard.SetText(Globals.Filepath);
+            var validator = $"{AppDomain.CurrentDomain.BaseDirectory}/validador_v1_04.jar";
+            Process.Start(validator);
+            Cursor.Current = Cursors.Default;
+        }
+
+
     }
 }

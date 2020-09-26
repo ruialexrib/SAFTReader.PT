@@ -3,6 +3,9 @@ using SAFT_Reader.Adapter;
 using Syncfusion.WinForms.Controls;
 using System;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace SAFT_Reader.UI
 {
@@ -64,10 +67,11 @@ namespace SAFT_Reader.UI
             {
                 Globals.AuditFile = OpenFile(FilePath);
                 Globals.Filepath = FilePath;
+
                 var f = CompositionRoot.Resolve<SAFTTotalsForm>();
                 f.ShowDialog(this);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro ao abrir o ficheiro Saft-PT. \n\r" +
                     "Garanta que se trata de um ficheiro válido, no formato 1.04_01 " +
@@ -93,5 +97,6 @@ namespace SAFT_Reader.UI
             cmdOK.Enabled = true;
             Cursor.Current = Cursors.Default;
         }
+
     }
 }
