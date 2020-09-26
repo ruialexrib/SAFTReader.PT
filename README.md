@@ -11,26 +11,4 @@ A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por mu
 
 ## Funcionalidades Principais
 
-### Agrupar Colunas
-
-Este utilitário permite o agrupamento hierarquico de multiplas colunas, facilitando a visualização agregada da informação.
-
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Group.gif" width="500">
-
-### Filtrar e Localizar Registos
-
-Para facilitar a consulta e a localização dos registos, foram implementadas ferramentas de Filtro e Pesquisa.
-
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/FilterSearch.gif" width="500">
-
-### Ordenação
-
-É também possivel a ordenação ascendente e descendente de multiplas colunas.
-
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Order.gif" width="500">
-
-### Exportação
-
-Com o objetivo de facilitar a validação e conferência dos documentos foi implementada a funcionalidade de exportação dos dados para Excel ou Pdf.
-
-<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Export.gif" width="500">
+<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif" width="800">
