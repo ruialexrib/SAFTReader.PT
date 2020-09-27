@@ -44,7 +44,7 @@
             // txtFilePath
             // 
             this.txtFilePath.Enabled = false;
-            this.txtFilePath.Location = new System.Drawing.Point(279, 114);
+            this.txtFilePath.Location = new System.Drawing.Point(210, 114);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(318, 21);
@@ -53,7 +53,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(279, 98);
+            this.label1.Location = new System.Drawing.Point(210, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 5;
@@ -66,7 +66,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(279, 14);
+            this.label3.Location = new System.Drawing.Point(210, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(355, 71);
             this.label3.TabIndex = 10;
@@ -77,7 +77,7 @@
             this.cmdFind.AccessibleName = "Button";
             this.cmdFind.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdFind.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdFind.Location = new System.Drawing.Point(603, 114);
+            this.cmdFind.Location = new System.Drawing.Point(534, 114);
             this.cmdFind.Name = "cmdFind";
             this.cmdFind.Size = new System.Drawing.Size(24, 21);
             this.cmdFind.TabIndex = 11;
@@ -90,7 +90,7 @@
             this.cmdOK.Enabled = false;
             this.cmdOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdOK.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdOK.Location = new System.Drawing.Point(538, 199);
+            this.cmdOK.Location = new System.Drawing.Point(462, 199);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(96, 28);
             this.cmdOK.TabIndex = 12;
@@ -102,7 +102,7 @@
             this.cmdClose.AccessibleName = "Button";
             this.cmdClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdClose.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdClose.Location = new System.Drawing.Point(436, 199);
+            this.cmdClose.Location = new System.Drawing.Point(360, 199);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(96, 28);
             this.cmdClose.TabIndex = 13;
@@ -112,7 +112,7 @@
             // cmdOpenDemo
             // 
             this.cmdOpenDemo.AutoSize = true;
-            this.cmdOpenDemo.Location = new System.Drawing.Point(279, 152);
+            this.cmdOpenDemo.Location = new System.Drawing.Point(210, 152);
             this.cmdOpenDemo.Name = "cmdOpenDemo";
             this.cmdOpenDemo.Size = new System.Drawing.Size(325, 13);
             this.cmdOpenDemo.TabIndex = 15;
@@ -122,11 +122,10 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(271, 234);
+            this.pictureBox2.Size = new System.Drawing.Size(202, 184);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 17;
             this.pictureBox2.TabStop = false;
@@ -135,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 238);
+            this.ClientSize = new System.Drawing.Size(564, 238);
             this.Controls.Add(this.cmdOpenDemo);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdOK);
