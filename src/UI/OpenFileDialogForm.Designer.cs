@@ -37,7 +37,6 @@
             this.cmdOK = new Syncfusion.WinForms.Controls.SfButton();
             this.cmdClose = new Syncfusion.WinForms.Controls.SfButton();
             this.cmdOpenDemo = new System.Windows.Forms.LinkLabel();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +68,7 @@
             // 
             this.label3.Location = new System.Drawing.Point(279, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(362, 71);
+            this.label3.Size = new System.Drawing.Size(355, 71);
             this.label3.TabIndex = 10;
             this.label3.Text = resources.GetString("label3.Text");
             // 
@@ -91,7 +90,7 @@
             this.cmdOK.Enabled = false;
             this.cmdOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdOK.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdOK.Location = new System.Drawing.Point(531, 199);
+            this.cmdOK.Location = new System.Drawing.Point(538, 199);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(96, 28);
             this.cmdOK.TabIndex = 12;
@@ -103,7 +102,7 @@
             this.cmdClose.AccessibleName = "Button";
             this.cmdClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdClose.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdClose.Location = new System.Drawing.Point(429, 199);
+            this.cmdClose.Location = new System.Drawing.Point(436, 199);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(96, 28);
             this.cmdClose.TabIndex = 13;
@@ -121,16 +120,6 @@
             this.cmdOpenDemo.Text = "Abrir Ficheiro Demonstração [SAFT_IDEMO599999999_v1.04.xml]";
             this.cmdOpenDemo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdOpenDemo_LinkClicked);
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblVersion.Location = new System.Drawing.Point(279, 214);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(15, 13);
-            this.lblVersion.TabIndex = 16;
-            this.lblVersion.Text = "#";
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -147,7 +136,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 238);
-            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmdOpenDemo);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdOK);
@@ -182,7 +170,6 @@
         private Syncfusion.WinForms.Controls.SfButton cmdOK;
         private Syncfusion.WinForms.Controls.SfButton cmdClose;
         private System.Windows.Forms.LinkLabel cmdOpenDemo;
-        private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

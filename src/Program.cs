@@ -19,6 +19,10 @@ namespace SAFT_Reader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var splash = CompositionRoot.Resolve<SplashForm>();
+            splash.IsSplash=true;
+            splash.ShowDialog();
+
             var openFileDialog = CompositionRoot.Resolve<OpenFileDialogForm>();
             Application.Run(openFileDialog);
         }

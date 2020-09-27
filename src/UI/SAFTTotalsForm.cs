@@ -31,7 +31,7 @@ namespace SAFT_Reader.UI
         private void InitializeView()
         {
             this.Text = $"{this.Text} [{Globals.Filepath}]";
-            this.lblInfoApp.Text = $"{Globals.VersionLabel} - Copyright 2020, Rui Ribeiro. Todos os direitos reservados.";
+            this.lblInfoApp.Text = $"{Globals.VersionLabel}";
             SelectedGrid = gridLines;
         }
 
@@ -534,6 +534,14 @@ namespace SAFT_Reader.UI
             this.Dispose();
             f.Show(o);
 
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolAbout_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            var f = CompositionRoot.Resolve<SplashForm>();
+            f.ShowDialog(this);
             Cursor.Current = Cursors.Default;
         }
     }
