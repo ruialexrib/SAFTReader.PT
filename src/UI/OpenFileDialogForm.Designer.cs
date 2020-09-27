@@ -35,26 +35,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmdFind = new Syncfusion.WinForms.Controls.SfButton();
             this.cmdOK = new Syncfusion.WinForms.Controls.SfButton();
-            this.cmdCancel = new Syncfusion.WinForms.Controls.SfButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmdClose = new Syncfusion.WinForms.Controls.SfButton();
             this.cmdOpenDemo = new System.Windows.Forms.LinkLabel();
             this.lblVersion = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // txtFilePath
             // 
             this.txtFilePath.Enabled = false;
-            this.txtFilePath.Location = new System.Drawing.Point(24, 88);
+            this.txtFilePath.Location = new System.Drawing.Point(279, 114);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
-            this.txtFilePath.Size = new System.Drawing.Size(427, 21);
+            this.txtFilePath.Size = new System.Drawing.Size(318, 21);
             this.txtFilePath.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 72);
+            this.label1.Location = new System.Drawing.Point(279, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 5;
@@ -67,19 +67,18 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(21, 14);
+            this.label3.Location = new System.Drawing.Point(279, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(350, 43);
+            this.label3.Size = new System.Drawing.Size(362, 71);
             this.label3.TabIndex = 10;
-            this.label3.Text = "O software SAFT READER permite visualizar, validar e analisar os dados do Ficheir" +
-    "o SAF-T PT, criado a partir de qualquer programa.";
+            this.label3.Text = resources.GetString("label3.Text");
             // 
             // cmdFind
             // 
             this.cmdFind.AccessibleName = "Button";
             this.cmdFind.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdFind.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdFind.Location = new System.Drawing.Point(457, 88);
+            this.cmdFind.Location = new System.Drawing.Point(603, 114);
             this.cmdFind.Name = "cmdFind";
             this.cmdFind.Size = new System.Drawing.Size(24, 21);
             this.cmdFind.TabIndex = 11;
@@ -92,39 +91,29 @@
             this.cmdOK.Enabled = false;
             this.cmdOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmdOK.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdOK.Location = new System.Drawing.Point(385, 155);
+            this.cmdOK.Location = new System.Drawing.Point(531, 199);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(96, 28);
             this.cmdOK.TabIndex = 12;
             this.cmdOK.Text = "OK";
             this.cmdOK.Click += new System.EventHandler(this.cmdOk_Click_1);
             // 
-            // cmdCancel
+            // cmdClose
             // 
-            this.cmdCancel.AccessibleName = "Button";
-            this.cmdCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmdCancel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCancel.Location = new System.Drawing.Point(283, 155);
-            this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(96, 28);
-            this.cmdCancel.TabIndex = 13;
-            this.cmdCancel.Text = "Cancelar";
-            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(449, 14);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.cmdClose.AccessibleName = "Button";
+            this.cmdClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cmdClose.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdClose.Location = new System.Drawing.Point(429, 199);
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.Size = new System.Drawing.Size(96, 28);
+            this.cmdClose.TabIndex = 13;
+            this.cmdClose.Text = "Fechar";
+            this.cmdClose.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
             // cmdOpenDemo
             // 
             this.cmdOpenDemo.AutoSize = true;
-            this.cmdOpenDemo.Location = new System.Drawing.Point(24, 116);
+            this.cmdOpenDemo.Location = new System.Drawing.Point(279, 152);
             this.cmdOpenDemo.Name = "cmdOpenDemo";
             this.cmdOpenDemo.Size = new System.Drawing.Size(325, 13);
             this.cmdOpenDemo.TabIndex = 15;
@@ -136,26 +125,37 @@
             // 
             this.lblVersion.AutoSize = true;
             this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblVersion.Location = new System.Drawing.Point(21, 170);
+            this.lblVersion.Location = new System.Drawing.Point(279, 214);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(15, 13);
             this.lblVersion.TabIndex = 16;
             this.lblVersion.Text = "#";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(2, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(271, 234);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
             // OpenFileDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 199);
+            this.ClientSize = new System.Drawing.Size(639, 238);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmdOpenDemo);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdOK);
             this.Controls.Add(this.cmdFind);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFilePath);
+            this.Controls.Add(this.pictureBox2);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -167,7 +167,7 @@
             this.Style.MdiChild.IconHorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             this.Text = "SAFT READER";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,9 +180,9 @@
         private System.Windows.Forms.Label label3;
         private Syncfusion.WinForms.Controls.SfButton cmdFind;
         private Syncfusion.WinForms.Controls.SfButton cmdOK;
-        private Syncfusion.WinForms.Controls.SfButton cmdCancel;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private Syncfusion.WinForms.Controls.SfButton cmdClose;
         private System.Windows.Forms.LinkLabel cmdOpenDemo;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

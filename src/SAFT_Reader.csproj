@@ -183,6 +183,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\TaxByDocumentFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaxByDocumentFormDialog.Designer.cs">
+      <DependentUpon>TaxByDocumentFormDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SAFTTotalsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\TaxByDocumentFormDialog.resx">
+      <DependentUpon>TaxByDocumentFormDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SAFTTotalsForm.resx">
       <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
     </EmbeddedResource>

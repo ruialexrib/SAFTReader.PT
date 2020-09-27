@@ -1,6 +1,9 @@
 ﻿using Programatica.Saft.Models;
 using SAFT_Reader.Models;
 using Syncfusion.Data;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
 using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
@@ -10,7 +13,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -58,7 +60,7 @@ namespace SAFT_Reader.UI
             SetGridLinesGroupSummaries();
             SetGridLinesSummaries();
             SetGridDocumentsSummaries();
-        }
+        }   
 
         private List<Customer> LoadCustomers()
         {
@@ -455,8 +457,34 @@ namespace SAFT_Reader.UI
         {
             Cursor.Current = Cursors.WaitCursor;
             PdfExportingOptions options = new PdfExportingOptions();
+            var document = new PdfDocument();
+            document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+            var page = document.Pages.Add();
+
             options.AutoColumnWidth = true;
-            var document = SelectedGrid.ExportToPdf(options);
+            options.AutoRowHeight = true;
+            options.RepeatHeaders = true;
+            options.ExportGroups = true;
+            options.ExportStackedHeaders = true;
+            options.FitAllColumnsInOnePage = true;
+
+            foreach (var c in SelectedGrid.Columns)
+            {
+                if (c.Width == 0)
+                {
+                    options.ExcludeColumns.Add(c.MappingName);
+                }
+            }
+
+            var PDFGrid = SelectedGrid.ExportToPdfGrid(SelectedGrid.View, options);
+
+            var format = new PdfGridLayoutFormat()
+            {
+                Layout = PdfLayoutType.Paginate,
+                Break = PdfLayoutBreakType.FitPage
+            };
+
+            PDFGrid.Draw(page, new PointF(), format);
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf";
@@ -486,6 +514,27 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        private void cmdToolTaxByDocument_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.tabControlAdv1.SelectedIndex = 0;
 
+            var f = CompositionRoot.Resolve<TaxByDocumentFormDialog>();
+            f.DataGrid = this.gridLines;
+            f.Show(this);
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdReset_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            var f = CompositionRoot.Resolve<SAFTTotalsForm>();
+            var o = this.Owner;
+            this.Dispose();
+            f.Show(o);
+
+            Cursor.Current = Cursors.Default;
+        }
     }
 }
