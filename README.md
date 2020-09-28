@@ -10,7 +10,7 @@ A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por mu
 
 [![Download SAFT_READER](https://img.shields.io/badge/Download-SaftReader.zip-blue?style=for-the-badge)](https://github.com/ruialexrib/Programatica.SAFTReader/releases/latest/download/saftreader.zip)
 
-### Funcionalidades Principais
+### Principais Funcionalidades
 
 <img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif?raw=true" width="800">
 
