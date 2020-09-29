@@ -2,7 +2,7 @@
 
 # SAFTReader.PT
 
-As empresas continuam a apresentar diferenças entre os documentos enviados via ficheiro SAF-T e as respetivas declarações periódicas do IVA.
+As empresas continuam a apresentar diferenças entre a informação constante do ficheiro SAF-T e as respetivas declarações do IVA.
 
 <img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/logo.png?raw=true" width="300">
 
