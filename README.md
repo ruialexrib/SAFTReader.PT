@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![GitHub repo size](https://img.shields.io/github/repo-size/ruialexrib/Programatica.SAFTReader) ![GitHub top language](https://img.shields.io/github/languages/top/ruialexrib/Programatica.SAFTReader) ![GitHub All Releases](https://img.shields.io/github/downloads/ruialexrib/Programatica.SAFTReader/total)
 
-# Programatica.SAFTReader
+# SAFTReader.PT
 
 As empresas continuam a apresentar diferenças entre os documentos enviados via ficheiro SAF-T e as respetivas declarações periódicas do IVA.
 
