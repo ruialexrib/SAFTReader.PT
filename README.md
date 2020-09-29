@@ -4,6 +4,8 @@
 
 As empresas continuam a apresentar diferenças entre os documentos enviados via ficheiro SAF-T e as respetivas declarações periódicas do IVA.
 
+<img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/logo.png?raw=true" width="300">
+
 O software SAFT READER permite visualizar, validar e analisar os dados do Ficheiro SAF-T PT, no formato 1.04_01 [(Portaria n.º 302/2016, de 2 de dezembro)](https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/Portaria_302_2016.pdf), criado a partir de qualquer programa, relativos a documentos de venda, tabelas de impostos, clientes e produtos. 
 
 A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por multiplos critérios, bem como exportada para pdf ou excel, para posterior análise.
