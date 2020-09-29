@@ -38,6 +38,7 @@
             this.lblReader = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblCopy = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,14 +53,14 @@
             this.lblUrl.Size = new System.Drawing.Size(466, 13);
             this.lblUrl.TabIndex = 35;
             this.lblUrl.TabStop = true;
-            this.lblUrl.Text = "https://github.com/ruialexrib/Programatica.SAFTReader";
+            this.lblUrl.Text = "www.saftreader.pt";
             this.lblUrl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSaft
             // 
             this.lblSaft.AutoSize = true;
             this.lblSaft.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaft.Location = new System.Drawing.Point(146, 11);
+            this.lblSaft.Location = new System.Drawing.Point(120, 11);
             this.lblSaft.Name = "lblSaft";
             this.lblSaft.Size = new System.Drawing.Size(98, 39);
             this.lblSaft.TabIndex = 30;
@@ -90,7 +91,7 @@
             // 
             this.lblReader.AutoSize = true;
             this.lblReader.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReader.Location = new System.Drawing.Point(235, 11);
+            this.lblReader.Location = new System.Drawing.Point(209, 11);
             this.lblReader.Name = "lblReader";
             this.lblReader.Size = new System.Drawing.Size(131, 39);
             this.lblReader.TabIndex = 31;
@@ -117,11 +118,22 @@
             this.lblCopy.Text = "#";
             this.lblCopy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(331, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 39);
+            this.label2.TabIndex = 37;
+            this.label2.Text = ".PT";
+            // 
             // SplashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 338);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCopy);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.lblSaft);
@@ -156,5 +168,6 @@
         private System.Windows.Forms.Label lblReader;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblCopy;
+        private System.Windows.Forms.Label label2;
     }
 }

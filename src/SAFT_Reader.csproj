@@ -27,7 +27,7 @@
     <TargetCulture>pt-PT</TargetCulture>
     <ProductName>SAFT_READER</ProductName>
     <PublisherName>Rui Ribeiro</PublisherName>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -189,6 +189,24 @@
     <Compile Include="UI\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TaxByCustomerFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaxByCustomerFormDialog.Designer.cs">
+      <DependentUpon>TaxByCustomerFormDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TaxByProductFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaxByProductFormDialog.Designer.cs">
+      <DependentUpon>TaxByProductFormDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TaxByDocumentTypeFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaxByDocumentTypeFormDialog.Designer.cs">
+      <DependentUpon>TaxByDocumentTypeFormDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TaxByDocumentFormDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +236,15 @@
     </Compile>
     <EmbeddedResource Include="UI\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaxByCustomerFormDialog.resx">
+      <DependentUpon>TaxByCustomerFormDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaxByProductFormDialog.resx">
+      <DependentUpon>TaxByProductFormDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaxByDocumentTypeFormDialog.resx">
+      <DependentUpon>TaxByDocumentTypeFormDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaxByDocumentFormDialog.resx">
       <DependentUpon>TaxByDocumentFormDialog.cs</DependentUpon>

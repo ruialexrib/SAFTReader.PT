@@ -1,5 +1,4 @@
 ﻿using Programatica.Saft.Models;
-using SAFT_Reader.Models;
 using Syncfusion.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -10,10 +9,8 @@ using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGridConverter;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SAFT_Reader.UI
@@ -38,9 +35,9 @@ namespace SAFT_Reader.UI
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
         {
             var audit = Globals.AuditFile;
-            var invoiceLines = LoadInvoiceLines();
-            var totals = LoadTaxTableEntryTotals(invoiceLines);
-            var invoices = LoadInvoiLoadDocuments();
+            var invoiceLines = Globals.LoadInvoiceLines();
+            var totals = Globals.LoadTaxTableEntryTotals(invoiceLines);
+            var invoices = Globals.LoadInvoiLoadDocuments();
             var customers = LoadCustomers();
             var products = LoadProducts();
             var tax = LoadTax();
@@ -60,7 +57,7 @@ namespace SAFT_Reader.UI
             SetGridLinesGroupSummaries();
             SetGridLinesSummaries();
             SetGridDocumentsSummaries();
-        }   
+        }
 
         private List<Customer> LoadCustomers()
         {
@@ -80,125 +77,9 @@ namespace SAFT_Reader.UI
             return audit.MasterFiles.TaxTable.TaxTableEntry;
         }
 
-        //private List<Account> LoadAccounts()
-        //{
-        //    var audit = Globals.AuditFile;
-        //    if (audit.MasterFiles.GeneralLedgerAccounts.Account != null) { 
-        //    return audit.MasterFiles.GeneralLedgerAccounts.Account;
-        //    }
-        //    else { return new List<Account>(); }
-        //}
 
-        private List<InvoiceEntry> LoadInvoiLoadDocuments()
-        {
-            var audit = Globals.AuditFile;
-            return audit
-                    .SourceDocuments
-                    .SalesInvoices
-                    .Invoice
-                    .Select(i => new InvoiceEntry
-                    {
-                        InvoiceNo = i.InvoiceNo,
-                        Period = i.Period,
-                        InvoiceDate = i.InvoiceDate,
-                        InvoiceType = i.InvoiceType,
-                        SourceID = i.SourceID,
-                        CustomerID = i.CustomerID,
-                        CompanyName = audit.MasterFiles
-                                                .Customer
-                                                .Where(x => x.CustomerID.Equals(i.CustomerID))
-                                                .FirstOrDefault()
-                                                .CompanyName,
-                        InvoiceStatus = i.DocumentStatus.InvoiceStatus,
-                        TaxPayable = float.Parse(i.DocumentTotals.TaxPayable.Replace(".", ",")),
-                        NetTotal = float.Parse(i.DocumentTotals.NetTotal.Replace(".", ",")),
-                        GrossTotal = float.Parse(i.DocumentTotals.GrossTotal.Replace(".", ","))
-                    }).ToList();
-        }
 
-        private List<TaxTableEntryTotal> LoadTaxTableEntryTotals(List<InvoiceLine> invoiceLines)
-        {
-            var audit = Globals.AuditFile;
 
-            var totals = invoiceLines
-                .GroupBy(g => new { g.TaxCode, g.TaxPercentage })
-                .Select(cl => new TaxTableEntryTotal
-                {
-                    TaxCode = cl.First().TaxCode,
-                    TaxDescription = audit
-                                        .MasterFiles
-                                        .TaxTable
-                                        .TaxTableEntry
-                                        .Where(x => x.TaxCode.Equals(cl.First().TaxCode))
-                                        .FirstOrDefault()
-                                        .Description,
-                    TaxPercentage = cl.First().TaxPercentage,
-                    CreditAmount = cl.Sum(c => c.CreditAmount),
-                    DebitAmount = cl.Sum(d => d.DebitAmount),
-                    CreditTaxPayable = cl.Sum(c => c.CreditAmount) * (cl.First().TaxPercentage / 100),
-                    DebitTaxPayable = cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100)
-                }).ToList();
-
-            return totals;
-        }
-
-        private List<InvoiceLine> LoadInvoiceLines()
-        {
-            var invoiceLines = new List<InvoiceLine>();
-            var audit = Globals.AuditFile;
-
-            var invoices = audit.SourceDocuments
-                            .SalesInvoices
-                            .Invoice
-                            .Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
-
-            foreach (var invoice in invoices)
-            {
-                foreach (var line in invoice.Line)
-                {
-                    {
-                        var tp = float.Parse(line.Tax.TaxPercentage.Replace(".", ","));
-                        var invoiceLine = new InvoiceLine
-                        {
-                            InvoiceNo = invoice.InvoiceNo,
-                            InvoiceDate = invoice.InvoiceDate,
-                            InvoiceType = invoice.InvoiceType,
-                            CustomerTaxID = audit.MasterFiles
-                                                .Customer
-                                                .Where(x => x.CustomerID.Equals(invoice.CustomerID))
-                                                .FirstOrDefault()
-                                                .CustomerTaxID,
-                            CompanyName = audit.MasterFiles
-                                                .Customer
-                                                .Where(x => x.CustomerID.Equals(invoice.CustomerID))
-                                                .FirstOrDefault()
-                                                .CompanyName,
-                            LineNumber = line.LineNumber,
-                            ProductDescription = line.ProductDescription,
-                            Quantity = float.Parse(line.Quantity.Replace(".", ",")),
-                            UnitPrice = float.Parse(line.UnitPrice.Replace(".", ",")),
-                            TaxCode = line.Tax.TaxCode,
-                            TaxPercentage = tp
-                        };
-                        if (line.CreditAmount != null)
-                        {
-                            var ca = float.Parse(line.CreditAmount.Replace(".", ","));
-                            invoiceLine.CreditAmount = ca;
-                            invoiceLine.TaxPayable = ca * (tp / 100);
-                        }
-                        if (line.DebitAmount != null)
-                        {
-                            var da = float.Parse(line.DebitAmount.Replace(".", ","));
-                            invoiceLine.DebitAmount = da;
-                            invoiceLine.TaxPayable = da * (tp / 100);
-                        }
-                        invoiceLines.Add(invoiceLine);
-                    }
-                }
-            }
-
-            return invoiceLines;
-        }
 
         private void SetGridTotalsSummaries()
         {
@@ -356,7 +237,14 @@ namespace SAFT_Reader.UI
         private void cmdToolAutoExpand_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            if (SelectedGrid.AutoSizeColumnsMode == AutoSizeColumnsMode.Fill)
+            {
+                SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            }
+            else
+            {
+                SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
+            }
             Cursor.Current = Cursors.Default;
         }
 
@@ -542,6 +430,57 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.WaitCursor;
             var f = CompositionRoot.Resolve<SplashForm>();
             f.ShowDialog(this);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void lblWebsite_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            ToolStripStatusLabel tssl = (ToolStripStatusLabel)sender;
+            string url;
+            url = tssl.Text;
+            if (!url.Contains("://"))
+            {
+                url = "https://" + url;
+            }
+            var si = new ProcessStartInfo(url);
+            Process.Start(si);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolTaxByDocumentType_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.tabControlAdv1.SelectedIndex = 0;
+
+            var f = CompositionRoot.Resolve<TaxByDocumentTypeFormDialog>();
+            f.DataGrid = this.gridLines;
+            f.Show(this);
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolTaxByCustomer_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.tabControlAdv1.SelectedIndex = 0;
+
+            var f = CompositionRoot.Resolve<TaxByCustomerFormDialog>();
+            f.DataGrid = this.gridLines;
+            f.Show(this);
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdTooltaxByProduct_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.tabControlAdv1.SelectedIndex = 0;
+
+            var f = CompositionRoot.Resolve<TaxByProductFormDialog>();
+            f.DataGrid = this.gridLines;
+            f.Show(this);
+
             Cursor.Current = Cursors.Default;
         }
     }

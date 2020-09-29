@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SAFT_Reader")]
 [assembly: AssemblyDescription("O software SAFT READER permite visualizar, validar e analisar os dados do Ficheiro SAF-T PT, criado a partir de qualquer programa.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Programatica <https://github.com/ruialexrib/Programatica.SAFTReader>")]
+[assembly: AssemblyCompany("Programatica <www.saftreader.pt>")]
 [assembly: AssemblyProduct("SAFT_Reader")]
 [assembly: AssemblyCopyright("Copyright ©  Rui Ribeiro 2020")]
 [assembly: AssemblyTrademark("")]
