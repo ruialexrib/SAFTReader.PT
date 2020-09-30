@@ -1,6 +1,8 @@
 author: Rui Ribeiro
 
 show_downloads: true
-google_analytics:
+
+github:
+  release: https://github.com/ruialexrib/Programatica.SAFTReader/releases/latest/download/saftreader.zip
 
 theme: jekyll-theme-cayman
