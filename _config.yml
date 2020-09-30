@@ -1,6 +1,6 @@
 author: Rui Ribeiro
 
-show_downloads: true
+show_downloads: false
 
 github:
   zip_url: https://github.com/ruialexrib/Programatica.SAFTReader/releases/latest/download/saftreader.zip
