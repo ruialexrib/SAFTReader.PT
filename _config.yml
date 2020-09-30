@@ -3,4 +3,8 @@ author: Rui Ribeiro
 github_username:  ruialexrib
 github_show_profile_link: true
 
+social-network-links:
+  linkedin: ruialexrib
+  github: ruialexrib
+
 theme: jekyll-theme-cayman
