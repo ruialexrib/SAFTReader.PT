@@ -1,4 +1,5 @@
 ﻿using Programatica.Saft.Models;
+using SAFT_Reader.Extensions;
 using Syncfusion.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -7,6 +8,7 @@ using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGridConverter;
+using Syncfusion.XPS;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,7 +29,8 @@ namespace SAFT_Reader.UI
 
         private void InitializeView()
         {
-            this.Text = $"{this.Text} [{Globals.Filepath}]";
+            this.ribbonControlAdv1.Size = new Size { Width = this.ribbonControlAdv1.Size.Width, Height = 150 };
+            //this.Text = $"{this.Text} [{Globals.AttachedFiles}]";
             this.lblInfoApp.Text = $"{Globals.VersionLabel}";
             SelectedGrid = gridLines;
         }
@@ -43,8 +46,6 @@ namespace SAFT_Reader.UI
             var tax = LoadTax();
             //var accounts = LoadAccounts();
 
-            propertyGrid1.SelectedObject = audit.Header;
-            propertyGrid2.SelectedObject = audit.SourceDocuments.SalesInvoices;
             gridLines.DataSource = invoiceLines;
             gridTotals.DataSource = totals;
             gridDocuments.DataSource = invoices;
@@ -57,6 +58,26 @@ namespace SAFT_Reader.UI
             SetGridLinesGroupSummaries();
             SetGridLinesSummaries();
             SetGridDocumentsSummaries();
+
+
+
+            gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
+            gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTotals.Columns["BalanceAmount"].CellStyle.Font.Bold = true;
+            gridTotals.Columns["BalanceTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridTotals.Columns["BalanceTaxPayable"].CellStyle.Font.Bold = true;
+
+            gridLines.Columns["TaxCode"].CellStyle.Font.Bold = true;
+            gridLines.Columns["InvoiceNo"].CellStyle.Font.Bold = true;
+             gridLines.Columns["TaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridLines.Columns["TaxPayable"].CellStyle.Font.Bold = true;
+            gridLines.Columns["CreditAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridLines.Columns["CreditAmount"].CellStyle.Font.Bold = true;
+            gridLines.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridLines.Columns["DebitAmount"].CellStyle.Font.Bold = true;
+
+
+            LoadAuditHeaderPropertyGrids();
         }
 
         private List<Customer> LoadCustomers()
@@ -77,7 +98,24 @@ namespace SAFT_Reader.UI
             return audit.MasterFiles.TaxTable.TaxTableEntry;
         }
 
+        private void LoadAuditHeaderPropertyGrids ()
+        {
+            //tabControlAdv3
+            foreach (var file in Globals.AttachedFiles)
+            {
+                var pg = new PropertyGrid(); 
+                var tab = new TabPageAdv();
 
+                pg.SelectedObject = file.AuditFile.ToHeaderPt();
+                pg.Dock = DockStyle.Fill;
+                pg.HelpVisible = false;
+                pg.ToolbarVisible = false;
+                tab.Text = $"{System.IO.Path.GetFileName(file.FilePath)}";
+                tab.Controls.Add(pg);
+                
+                tabControlAdv3.TabPages.Add(tab);
+            }
+        }
 
 
 
@@ -101,6 +139,12 @@ namespace SAFT_Reader.UI
             da.MappingName = "DebitAmount";
             da.SummaryType = SummaryType.DoubleAggregate;
 
+            GridSummaryColumn ba = new GridSummaryColumn();
+            ba.Name = "BalanceAmount";
+            ba.Format = "{Sum:c}";
+            ba.MappingName = "BalanceAmount";
+            ba.SummaryType = SummaryType.DoubleAggregate;
+
             GridSummaryColumn ctp = new GridSummaryColumn();
             ctp.Name = "CreditTaxPayable";
             ctp.Format = "{Sum:c}";
@@ -113,10 +157,18 @@ namespace SAFT_Reader.UI
             dtp.MappingName = "DebitTaxPayable";
             dtp.SummaryType = SummaryType.DoubleAggregate;
 
+            GridSummaryColumn btp = new GridSummaryColumn();
+            btp.Name = "BalanceTaxPayable";
+            btp.Format = "{Sum:c}";
+            btp.MappingName = "BalanceTaxPayable";
+            btp.SummaryType = SummaryType.DoubleAggregate;
+
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
+            sum.SummaryColumns.Add(ba);
             sum.SummaryColumns.Add(ctp);
             sum.SummaryColumns.Add(dtp);
+            sum.SummaryColumns.Add(btp);
 
             this.gridTotals.TableSummaryRows.Add(sum);
         }
@@ -389,14 +441,13 @@ namespace SAFT_Reader.UI
         private void cmdToolExit_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            this.Close();
+            Application.Exit();
             Cursor.Current = Cursors.Default;
         }
 
         private void cmdToolValidate_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Clipboard.SetText(Globals.Filepath);
             var validator = $"{AppDomain.CurrentDomain.BaseDirectory}/validador_v1_04.jar";
             Process.Start(validator);
             Cursor.Current = Cursors.Default;
@@ -480,6 +531,33 @@ namespace SAFT_Reader.UI
             var f = CompositionRoot.Resolve<TaxByProductFormDialog>();
             f.DataGrid = this.gridLines;
             f.Show(this);
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolOpen_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.Close();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmdToolAddSaft_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            this.tabControlAdv1.SelectedIndex = 0;
+
+            var f = CompositionRoot.Resolve<AttachedFilesFormDialog>();
+            f.DataGrid = this.gridLines;
+            var r = f.ShowDialog(this);
+
+            if (r == DialogResult.OK)
+            {
+                var fr = CompositionRoot.Resolve<SAFTTotalsForm>();
+                var o = this.Owner;
+                this.Dispose();
+                fr.Show(o);
+            }
 
             Cursor.Current = Cursors.Default;
         }

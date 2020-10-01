@@ -170,7 +170,9 @@
     <Compile Include="Adapter\XmlSerializerAdapter.cs" />
     <Compile Include="ApplicationModule.cs" />
     <Compile Include="CompositionRoot.cs" />
+    <Compile Include="Extensions\AuditFileExtensions.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Models\HeaderPt.cs" />
     <Compile Include="Models\InvoiceEntry.cs" />
     <Compile Include="Models\InvoiceLine.cs" />
     <Compile Include="Models\TaxTableEntryItem.cs" />
@@ -188,6 +190,12 @@
     </Compile>
     <Compile Include="UI\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AttachedFilesFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AttachedFilesFormDialog.Designer.cs">
+      <DependentUpon>AttachedFilesFormDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TaxByCustomerFormDialog.cs">
       <SubType>Form</SubType>
@@ -236,6 +244,9 @@
     </Compile>
     <EmbeddedResource Include="UI\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AttachedFilesFormDialog.resx">
+      <DependentUpon>AttachedFilesFormDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaxByCustomerFormDialog.resx">
       <DependentUpon>TaxByCustomerFormDialog.cs</DependentUpon>

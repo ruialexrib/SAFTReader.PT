@@ -94,7 +94,7 @@
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(96, 28);
             this.cmdOK.TabIndex = 12;
-            this.cmdOK.Text = "OK";
+            this.cmdOK.Text = "Abrir";
             this.cmdOK.Click += new System.EventHandler(this.cmdOk_Click_1);
             // 
             // cmdClose

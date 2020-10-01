@@ -45,13 +45,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAFTTotalsForm));
             this.gridTotals = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tabControlAdv3 = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
-            this.tabPageAdv3 = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            this.tabPageAdv9 = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            this.propertyGrid2 = new System.Windows.Forms.PropertyGrid();
             this.tabControlAdv2 = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
             this.tabPageAdv2 = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             this.tabControlAdv1 = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
@@ -73,6 +69,10 @@
             this.lblWebsite = new System.Windows.Forms.ToolStripStatusLabel();
             this.ribbonControlAdv1 = new Syncfusion.Windows.Forms.Tools.RibbonControlAdv();
             this.toolStripTabItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
+            this.toolStripEx9 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.cmdToolOpen = new System.Windows.Forms.ToolStripButton();
+            this.cmdToolAddSaft = new System.Windows.Forms.ToolStripButton();
+            this.cmdToolReset = new System.Windows.Forms.ToolStripButton();
             this.toolStripEx1 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.cmdToolGroup = new System.Windows.Forms.ToolStripButton();
             this.cmdToolAutoExpand = new System.Windows.Forms.ToolStripButton();
@@ -86,7 +86,6 @@
             this.toolStripEx6 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.cmdToolValidate = new System.Windows.Forms.ToolStripButton();
             this.toolStripEx7 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
-            this.cmdReset = new System.Windows.Forms.ToolStripButton();
             this.cmdToolAbout = new System.Windows.Forms.ToolStripButton();
             this.cmdToolExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripTabItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
@@ -94,10 +93,10 @@
             this.cmdToolTaxByDocument = new System.Windows.Forms.ToolStripButton();
             this.cmdToolTaxByDocumentType = new System.Windows.Forms.ToolStripButton();
             this.cmdToolTaxByCustomer = new System.Windows.Forms.ToolStripButton();
+            this.cmdTooltaxByProduct = new System.Windows.Forms.ToolStripButton();
             this.toolStripEx5 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripEx3 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
-            this.cmdTooltaxByProduct = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridTotals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -108,9 +107,6 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv3)).BeginInit();
-            this.tabControlAdv3.SuspendLayout();
-            this.tabPageAdv3.SuspendLayout();
-            this.tabPageAdv9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv2)).BeginInit();
             this.tabControlAdv2.SuspendLayout();
             this.tabPageAdv2.SuspendLayout();
@@ -132,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).BeginInit();
             this.ribbonControlAdv1.SuspendLayout();
             this.toolStripTabItem1.Panel.SuspendLayout();
+            this.toolStripEx9.SuspendLayout();
             this.toolStripEx1.SuspendLayout();
             this.toolStripEx2.SuspendLayout();
             this.toolStripEx4.SuspendLayout();
@@ -155,7 +152,7 @@
             this.gridTotals.RowHeaderWidth = 10D;
             this.gridTotals.ShowRowHeader = true;
             this.gridTotals.ShowSortNumbers = true;
-            this.gridTotals.Size = new System.Drawing.Size(488, 57);
+            this.gridTotals.Size = new System.Drawing.Size(652, 49);
             gridBordersInfo1.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo1.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo1.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -182,27 +179,16 @@
             // groupBox1
             // 
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(1, 168);
+            this.groupBox1.Location = new System.Drawing.Point(2, 192);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(916, 2);
+            this.groupBox1.Size = new System.Drawing.Size(981, 2);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.HelpVisible = false;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.propertyGrid1.Size = new System.Drawing.Size(418, 57);
-            this.propertyGrid1.TabIndex = 4;
-            this.propertyGrid1.ToolbarVisible = false;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(1, 170);
+            this.splitContainer1.Location = new System.Drawing.Point(2, 194);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -213,8 +199,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlAdv1);
-            this.splitContainer1.Size = new System.Drawing.Size(916, 259);
-            this.splitContainer1.SplitterDistance = 81;
+            this.splitContainer1.Size = new System.Drawing.Size(981, 235);
+            this.splitContainer1.SplitterDistance = 73;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer3
@@ -230,74 +216,31 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tabControlAdv2);
-            this.splitContainer3.Size = new System.Drawing.Size(916, 81);
-            this.splitContainer3.SplitterDistance = 421;
+            this.splitContainer3.Size = new System.Drawing.Size(981, 73);
+            this.splitContainer3.SplitterDistance = 322;
             this.splitContainer3.TabIndex = 5;
             // 
             // tabControlAdv3
             // 
             this.tabControlAdv3.ActiveTabFont = new System.Drawing.Font("Tahoma", 8.25F);
-            this.tabControlAdv3.BeforeTouchSize = new System.Drawing.Size(421, 81);
-            this.tabControlAdv3.Controls.Add(this.tabPageAdv3);
-            this.tabControlAdv3.Controls.Add(this.tabPageAdv9);
+            this.tabControlAdv3.BeforeTouchSize = new System.Drawing.Size(322, 73);
             this.tabControlAdv3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAdv3.Location = new System.Drawing.Point(0, 0);
             this.tabControlAdv3.Name = "tabControlAdv3";
-            this.tabControlAdv3.Size = new System.Drawing.Size(421, 81);
+            this.tabControlAdv3.Size = new System.Drawing.Size(322, 73);
             this.tabControlAdv3.TabIndex = 5;
             this.tabControlAdv3.TabStyle = typeof(Syncfusion.Windows.Forms.Tools.TabRendererOffice2016White);
             this.tabControlAdv3.ThemeName = "TabRendererOffice2016White";
             // 
-            // tabPageAdv3
-            // 
-            this.tabPageAdv3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tabPageAdv3.Controls.Add(this.propertyGrid1);
-            this.tabPageAdv3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.tabPageAdv3.Image = null;
-            this.tabPageAdv3.ImageSize = new System.Drawing.Size(16, 16);
-            this.tabPageAdv3.Location = new System.Drawing.Point(1, 22);
-            this.tabPageAdv3.Name = "tabPageAdv3";
-            this.tabPageAdv3.ShowCloseButton = true;
-            this.tabPageAdv3.Size = new System.Drawing.Size(418, 57);
-            this.tabPageAdv3.TabIndex = 1;
-            this.tabPageAdv3.Text = "Cabeçalho do Documento";
-            this.tabPageAdv3.ThemesEnabled = false;
-            // 
-            // tabPageAdv9
-            // 
-            this.tabPageAdv9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tabPageAdv9.Controls.Add(this.propertyGrid2);
-            this.tabPageAdv9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.tabPageAdv9.Image = null;
-            this.tabPageAdv9.ImageSize = new System.Drawing.Size(16, 16);
-            this.tabPageAdv9.Location = new System.Drawing.Point(1, 22);
-            this.tabPageAdv9.Name = "tabPageAdv9";
-            this.tabPageAdv9.ShowCloseButton = true;
-            this.tabPageAdv9.Size = new System.Drawing.Size(418, 57);
-            this.tabPageAdv9.TabIndex = 2;
-            this.tabPageAdv9.Text = "Totais de Documentos";
-            this.tabPageAdv9.ThemesEnabled = false;
-            // 
-            // propertyGrid2
-            // 
-            this.propertyGrid2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid2.HelpVisible = false;
-            this.propertyGrid2.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid2.Name = "propertyGrid2";
-            this.propertyGrid2.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.propertyGrid2.Size = new System.Drawing.Size(418, 57);
-            this.propertyGrid2.TabIndex = 5;
-            this.propertyGrid2.ToolbarVisible = false;
-            // 
             // tabControlAdv2
             // 
             this.tabControlAdv2.ActiveTabFont = new System.Drawing.Font("Tahoma", 8.25F);
-            this.tabControlAdv2.BeforeTouchSize = new System.Drawing.Size(491, 81);
+            this.tabControlAdv2.BeforeTouchSize = new System.Drawing.Size(655, 73);
             this.tabControlAdv2.Controls.Add(this.tabPageAdv2);
             this.tabControlAdv2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAdv2.Location = new System.Drawing.Point(0, 0);
             this.tabControlAdv2.Name = "tabControlAdv2";
-            this.tabControlAdv2.Size = new System.Drawing.Size(491, 81);
+            this.tabControlAdv2.Size = new System.Drawing.Size(655, 73);
             this.tabControlAdv2.TabIndex = 1;
             this.tabControlAdv2.TabStyle = typeof(Syncfusion.Windows.Forms.Tools.TabRendererOffice2016White);
             this.tabControlAdv2.ThemeName = "TabRendererOffice2016White";
@@ -312,7 +255,7 @@
             this.tabPageAdv2.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv2.Name = "tabPageAdv2";
             this.tabPageAdv2.ShowCloseButton = true;
-            this.tabPageAdv2.Size = new System.Drawing.Size(488, 57);
+            this.tabPageAdv2.Size = new System.Drawing.Size(652, 49);
             this.tabPageAdv2.TabIndex = 1;
             this.tabPageAdv2.Text = "Resumo de Imposto";
             this.tabPageAdv2.ThemesEnabled = false;
@@ -320,7 +263,7 @@
             // tabControlAdv1
             // 
             this.tabControlAdv1.ActiveTabFont = new System.Drawing.Font("Tahoma", 8.25F);
-            this.tabControlAdv1.BeforeTouchSize = new System.Drawing.Size(916, 174);
+            this.tabControlAdv1.BeforeTouchSize = new System.Drawing.Size(981, 158);
             this.tabControlAdv1.Controls.Add(this.tabPageAdv1);
             this.tabControlAdv1.Controls.Add(this.tabPageAdv7);
             this.tabControlAdv1.Controls.Add(this.tabPageAdv4);
@@ -331,7 +274,7 @@
             this.tabControlAdv1.FocusOnTabClick = false;
             this.tabControlAdv1.Location = new System.Drawing.Point(0, 0);
             this.tabControlAdv1.Name = "tabControlAdv1";
-            this.tabControlAdv1.Size = new System.Drawing.Size(916, 174);
+            this.tabControlAdv1.Size = new System.Drawing.Size(981, 158);
             this.tabControlAdv1.TabIndex = 2;
             this.tabControlAdv1.TabStyle = typeof(Syncfusion.Windows.Forms.Tools.TabRendererOffice2016White);
             this.tabControlAdv1.ThemeName = "TabRendererOffice2016White";
@@ -347,7 +290,7 @@
             this.tabPageAdv1.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv1.Name = "tabPageAdv1";
             this.tabPageAdv1.ShowCloseButton = true;
-            this.tabPageAdv1.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv1.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv1.TabIndex = 1;
             this.tabPageAdv1.Text = "Linhas";
             this.tabPageAdv1.ThemesEnabled = false;
@@ -365,7 +308,7 @@
             this.gridLines.RowHeaderWidth = 10D;
             this.gridLines.ShowRowHeader = true;
             this.gridLines.ShowSortNumbers = true;
-            this.gridLines.Size = new System.Drawing.Size(913, 150);
+            this.gridLines.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo3.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo3.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo3.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -409,7 +352,7 @@
             this.tabPageAdv7.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv7.Name = "tabPageAdv7";
             this.tabPageAdv7.ShowCloseButton = true;
-            this.tabPageAdv7.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv7.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv7.TabIndex = 5;
             this.tabPageAdv7.Text = "Lista de Documentos";
             this.tabPageAdv7.ThemesEnabled = false;
@@ -427,7 +370,7 @@
             this.gridDocuments.RowHeaderWidth = 10D;
             this.gridDocuments.ShowRowHeader = true;
             this.gridDocuments.ShowSortNumbers = true;
-            this.gridDocuments.Size = new System.Drawing.Size(913, 150);
+            this.gridDocuments.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo5.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo5.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo5.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -464,7 +407,7 @@
             this.tabPageAdv4.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv4.Name = "tabPageAdv4";
             this.tabPageAdv4.ShowCloseButton = true;
-            this.tabPageAdv4.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv4.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv4.TabIndex = 2;
             this.tabPageAdv4.Text = "Lista de Clientes";
             this.tabPageAdv4.ThemesEnabled = false;
@@ -482,7 +425,7 @@
             this.gridCustomers.RowHeaderWidth = 10D;
             this.gridCustomers.ShowRowHeader = true;
             this.gridCustomers.ShowSortNumbers = true;
-            this.gridCustomers.Size = new System.Drawing.Size(913, 150);
+            this.gridCustomers.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo7.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo7.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo7.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -519,7 +462,7 @@
             this.tabPageAdv5.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv5.Name = "tabPageAdv5";
             this.tabPageAdv5.ShowCloseButton = true;
-            this.tabPageAdv5.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv5.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv5.TabIndex = 3;
             this.tabPageAdv5.Text = "Lista de Produtos";
             this.tabPageAdv5.ThemesEnabled = false;
@@ -537,7 +480,7 @@
             this.gridProducts.RowHeaderWidth = 10D;
             this.gridProducts.ShowRowHeader = true;
             this.gridProducts.ShowSortNumbers = true;
-            this.gridProducts.Size = new System.Drawing.Size(913, 150);
+            this.gridProducts.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo9.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo9.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo9.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -574,7 +517,7 @@
             this.tabPageAdv6.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv6.Name = "tabPageAdv6";
             this.tabPageAdv6.ShowCloseButton = true;
-            this.tabPageAdv6.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv6.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv6.TabIndex = 4;
             this.tabPageAdv6.Text = "Lista de Taxas";
             this.tabPageAdv6.ThemesEnabled = false;
@@ -592,7 +535,7 @@
             this.gridTax.RowHeaderWidth = 10D;
             this.gridTax.ShowRowHeader = true;
             this.gridTax.ShowSortNumbers = true;
-            this.gridTax.Size = new System.Drawing.Size(913, 150);
+            this.gridTax.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo11.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo11.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo11.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -629,7 +572,7 @@
             this.tabPageAdv8.Location = new System.Drawing.Point(1, 22);
             this.tabPageAdv8.Name = "tabPageAdv8";
             this.tabPageAdv8.ShowCloseButton = true;
-            this.tabPageAdv8.Size = new System.Drawing.Size(913, 150);
+            this.tabPageAdv8.Size = new System.Drawing.Size(978, 134);
             this.tabPageAdv8.TabIndex = 6;
             this.tabPageAdv8.TabVisible = false;
             this.tabPageAdv8.Text = "Plano de Contas";
@@ -648,7 +591,7 @@
             this.gridAccounts.RowHeaderWidth = 10D;
             this.gridAccounts.ShowRowHeader = true;
             this.gridAccounts.ShowSortNumbers = true;
-            this.gridAccounts.Size = new System.Drawing.Size(913, 150);
+            this.gridAccounts.Size = new System.Drawing.Size(978, 134);
             gridBordersInfo13.Bottom = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.WhiteSmoke);
             gridBordersInfo13.Left = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
             gridBordersInfo13.Right = new Syncfusion.WinForms.DataGrid.Styles.GridBorder(Syncfusion.WinForms.DataGrid.Styles.GridBorderStyle.Solid, System.Drawing.Color.White);
@@ -682,9 +625,9 @@
             this.lblInfoApp,
             this.lblInfoGithub,
             this.lblWebsite});
-            this.statusStrip1.Location = new System.Drawing.Point(1, 429);
+            this.statusStrip1.Location = new System.Drawing.Point(2, 429);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(916, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -692,7 +635,7 @@
             // 
             this.lblInfoApp.Image = ((System.Drawing.Image)(resources.GetObject("lblInfoApp.Image")));
             this.lblInfoApp.Name = "lblInfoApp";
-            this.lblInfoApp.Size = new System.Drawing.Size(300, 17);
+            this.lblInfoApp.Size = new System.Drawing.Size(322, 17);
             this.lblInfoApp.Spring = true;
             this.lblInfoApp.Text = "SAFT READER - Versão 1.1 - Copyright 2020, Rui Ribeiro. Todos os direitos reserva" +
     "dos.";
@@ -703,7 +646,7 @@
             this.lblInfoGithub.Image = ((System.Drawing.Image)(resources.GetObject("lblInfoGithub.Image")));
             this.lblInfoGithub.IsLink = true;
             this.lblInfoGithub.Name = "lblInfoGithub";
-            this.lblInfoGithub.Size = new System.Drawing.Size(300, 17);
+            this.lblInfoGithub.Size = new System.Drawing.Size(322, 17);
             this.lblInfoGithub.Spring = true;
             this.lblInfoGithub.Text = "https://github.com/ruialexrib/Programatica.SAFTReader";
             this.lblInfoGithub.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -714,7 +657,7 @@
             this.lblWebsite.Image = ((System.Drawing.Image)(resources.GetObject("lblWebsite.Image")));
             this.lblWebsite.IsLink = true;
             this.lblWebsite.Name = "lblWebsite";
-            this.lblWebsite.Size = new System.Drawing.Size(300, 17);
+            this.lblWebsite.Size = new System.Drawing.Size(322, 17);
             this.lblWebsite.Spring = true;
             this.lblWebsite.Text = "www.saftreader.pt";
             this.lblWebsite.Click += new System.EventHandler(this.lblWebsite_Click);
@@ -744,7 +687,7 @@
             this.ribbonControlAdv1.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
             this.ribbonControlAdv1.SelectedTab = this.toolStripTabItem1;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = true;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(920, 168);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(987, 192);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 7;
@@ -758,6 +701,7 @@
             // 
             // ribbonControlAdv1.ribbonPanel1
             // 
+            this.toolStripTabItem1.Panel.Controls.Add(this.toolStripEx9);
             this.toolStripTabItem1.Panel.Controls.Add(this.toolStripEx1);
             this.toolStripTabItem1.Panel.Controls.Add(this.toolStripEx2);
             this.toolStripTabItem1.Panel.Controls.Add(this.toolStripEx4);
@@ -772,6 +716,59 @@
             this.toolStripTabItem1.Tag = "1";
             this.toolStripTabItem1.Text = "GERAL";
             // 
+            // toolStripEx9
+            // 
+            this.toolStripEx9.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripEx9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripEx9.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolStripEx9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripEx9.Image = null;
+            this.toolStripEx9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmdToolOpen,
+            this.cmdToolAddSaft,
+            this.cmdToolReset});
+            this.toolStripEx9.Location = new System.Drawing.Point(0, 1);
+            this.toolStripEx9.Name = "toolStripEx9";
+            this.toolStripEx9.Office12Mode = false;
+            this.toolStripEx9.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.toolStripEx9.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripEx9.Size = new System.Drawing.Size(148, 128);
+            this.toolStripEx9.TabIndex = 8;
+            this.toolStripEx9.Text = "Formulário";
+            // 
+            // cmdToolOpen
+            // 
+            this.cmdToolOpen.Image = ((System.Drawing.Image)(resources.GetObject("cmdToolOpen.Image")));
+            this.cmdToolOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmdToolOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdToolOpen.Name = "cmdToolOpen";
+            this.cmdToolOpen.Size = new System.Drawing.Size(37, 111);
+            this.cmdToolOpen.Text = "Abrir \r\nSAFT";
+            this.cmdToolOpen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmdToolOpen.Click += new System.EventHandler(this.cmdToolOpen_Click);
+            // 
+            // cmdToolAddSaft
+            // 
+            this.cmdToolAddSaft.Image = ((System.Drawing.Image)(resources.GetObject("cmdToolAddSaft.Image")));
+            this.cmdToolAddSaft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmdToolAddSaft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdToolAddSaft.Name = "cmdToolAddSaft";
+            this.cmdToolAddSaft.Size = new System.Drawing.Size(41, 111);
+            this.cmdToolAddSaft.Text = "Fundir\r\nSAFT";
+            this.cmdToolAddSaft.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmdToolAddSaft.Click += new System.EventHandler(this.cmdToolAddSaft_Click);
+            // 
+            // cmdToolReset
+            // 
+            this.cmdToolReset.Image = ((System.Drawing.Image)(resources.GetObject("cmdToolReset.Image")));
+            this.cmdToolReset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmdToolReset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdToolReset.Name = "cmdToolReset";
+            this.cmdToolReset.Size = new System.Drawing.Size(61, 111);
+            this.cmdToolReset.Text = "Reset\r\nFormulário";
+            this.cmdToolReset.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmdToolReset.Click += new System.EventHandler(this.cmdReset_Click);
+            // 
             // toolStripEx1
             // 
             this.toolStripEx1.Dock = System.Windows.Forms.DockStyle.None;
@@ -782,12 +779,12 @@
             this.toolStripEx1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmdToolGroup,
             this.cmdToolAutoExpand});
-            this.toolStripEx1.Location = new System.Drawing.Point(0, 1);
+            this.toolStripEx1.Location = new System.Drawing.Point(150, 1);
             this.toolStripEx1.Name = "toolStripEx1";
             this.toolStripEx1.Office12Mode = false;
             this.toolStripEx1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx1.Size = new System.Drawing.Size(127, 104);
+            this.toolStripEx1.Size = new System.Drawing.Size(127, 128);
             this.toolStripEx1.TabIndex = 0;
             this.toolStripEx1.Text = "Colunas";
             // 
@@ -797,7 +794,7 @@
             this.cmdToolGroup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolGroup.Name = "cmdToolGroup";
-            this.cmdToolGroup.Size = new System.Drawing.Size(49, 87);
+            this.cmdToolGroup.Size = new System.Drawing.Size(49, 111);
             this.cmdToolGroup.Text = "Agupar\r\nColunas";
             this.cmdToolGroup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolGroup.Click += new System.EventHandler(this.cmdToolGroup_Click);
@@ -808,7 +805,7 @@
             this.cmdToolAutoExpand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolAutoExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolAutoExpand.Name = "cmdToolAutoExpand";
-            this.cmdToolAutoExpand.Size = new System.Drawing.Size(69, 87);
+            this.cmdToolAutoExpand.Size = new System.Drawing.Size(69, 111);
             this.cmdToolAutoExpand.Text = "Dimensionar\nColunas";
             this.cmdToolAutoExpand.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolAutoExpand.Click += new System.EventHandler(this.cmdToolAutoExpand_Click);
@@ -825,12 +822,12 @@
             this.toolStripButton1,
             this.cmdToolRemoveFilters});
             this.toolStripEx2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripEx2.Location = new System.Drawing.Point(129, 1);
+            this.toolStripEx2.Location = new System.Drawing.Point(279, 1);
             this.toolStripEx2.Name = "toolStripEx2";
             this.toolStripEx2.Office12Mode = false;
             this.toolStripEx2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx2.Size = new System.Drawing.Size(217, 104);
+            this.toolStripEx2.Size = new System.Drawing.Size(217, 128);
             this.toolStripEx2.TabIndex = 1;
             this.toolStripEx2.Text = "Procurar";
             // 
@@ -838,7 +835,7 @@
             // 
             this.txtToolFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtToolFilter.Name = "txtToolFilter";
-            this.txtToolFilter.Size = new System.Drawing.Size(100, 90);
+            this.txtToolFilter.Size = new System.Drawing.Size(100, 114);
             this.txtToolFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtToolFilter_KeyDown);
             // 
             // toolStripButton1
@@ -847,7 +844,7 @@
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(52, 87);
+            this.toolStripButton1.Size = new System.Drawing.Size(52, 111);
             this.toolStripButton1.Text = "Procurar\r\nRegistos";
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.ToolTipText = "Procurar\r\nRegistos";
@@ -859,7 +856,7 @@
             this.cmdToolRemoveFilters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolRemoveFilters.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolRemoveFilters.Name = "cmdToolRemoveFilters";
-            this.cmdToolRemoveFilters.Size = new System.Drawing.Size(54, 87);
+            this.cmdToolRemoveFilters.Size = new System.Drawing.Size(54, 111);
             this.cmdToolRemoveFilters.Text = "Remover\r\nFiltros";
             this.cmdToolRemoveFilters.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolRemoveFilters.Click += new System.EventHandler(this.cmdToolRemoveFilters_Click);
@@ -874,12 +871,12 @@
             this.toolStripEx4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmdToolExportXLS,
             this.toolStripButton3});
-            this.toolStripEx4.Location = new System.Drawing.Point(348, 1);
+            this.toolStripEx4.Location = new System.Drawing.Point(498, 1);
             this.toolStripEx4.Name = "toolStripEx4";
             this.toolStripEx4.Office12Mode = false;
             this.toolStripEx4.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx4.Size = new System.Drawing.Size(115, 104);
+            this.toolStripEx4.Size = new System.Drawing.Size(115, 128);
             this.toolStripEx4.TabIndex = 4;
             this.toolStripEx4.Text = "Exportar";
             // 
@@ -889,7 +886,7 @@
             this.cmdToolExportXLS.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolExportXLS.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolExportXLS.Name = "cmdToolExportXLS";
-            this.cmdToolExportXLS.Size = new System.Drawing.Size(53, 87);
+            this.cmdToolExportXLS.Size = new System.Drawing.Size(53, 111);
             this.cmdToolExportXLS.Text = "Exportar\r\nExcel";
             this.cmdToolExportXLS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolExportXLS.Click += new System.EventHandler(this.cmdToolExportXLS_Click);
@@ -900,7 +897,7 @@
             this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(53, 87);
+            this.toolStripButton3.Size = new System.Drawing.Size(53, 111);
             this.toolStripButton3.Text = "Exportar\r\nPDF";
             this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
@@ -914,12 +911,12 @@
             this.toolStripEx6.Image = null;
             this.toolStripEx6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmdToolValidate});
-            this.toolStripEx6.Location = new System.Drawing.Point(465, 1);
+            this.toolStripEx6.Location = new System.Drawing.Point(615, 1);
             this.toolStripEx6.Name = "toolStripEx6";
             this.toolStripEx6.Office12Mode = false;
             this.toolStripEx6.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx6.Size = new System.Drawing.Size(66, 104);
+            this.toolStripEx6.Size = new System.Drawing.Size(66, 128);
             this.toolStripEx6.TabIndex = 5;
             this.toolStripEx6.Text = "Validação";
             // 
@@ -929,7 +926,7 @@
             this.cmdToolValidate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolValidate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolValidate.Name = "cmdToolValidate";
-            this.cmdToolValidate.Size = new System.Drawing.Size(57, 87);
+            this.cmdToolValidate.Size = new System.Drawing.Size(57, 111);
             this.cmdToolValidate.Text = "Validador\r\nAut. Trib.";
             this.cmdToolValidate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolValidate.Click += new System.EventHandler(this.cmdToolValidate_Click);
@@ -942,28 +939,16 @@
             this.toolStripEx7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripEx7.Image = null;
             this.toolStripEx7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmdReset,
             this.cmdToolAbout,
             this.cmdToolExit});
-            this.toolStripEx7.Location = new System.Drawing.Point(533, 1);
+            this.toolStripEx7.Location = new System.Drawing.Point(683, 1);
             this.toolStripEx7.Name = "toolStripEx7";
             this.toolStripEx7.Office12Mode = false;
             this.toolStripEx7.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx7.Size = new System.Drawing.Size(187, 104);
+            this.toolStripEx7.Size = new System.Drawing.Size(121, 128);
             this.toolStripEx7.TabIndex = 6;
             this.toolStripEx7.Text = "Formulário";
-            // 
-            // cmdReset
-            // 
-            this.cmdReset.Image = ((System.Drawing.Image)(resources.GetObject("cmdReset.Image")));
-            this.cmdReset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmdReset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cmdReset.Name = "cmdReset";
-            this.cmdReset.Size = new System.Drawing.Size(61, 87);
-            this.cmdReset.Text = "Reset\r\nFormulário";
-            this.cmdReset.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
             // 
             // cmdToolAbout
             // 
@@ -971,7 +956,7 @@
             this.cmdToolAbout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolAbout.Name = "cmdToolAbout";
-            this.cmdToolAbout.Size = new System.Drawing.Size(56, 87);
+            this.cmdToolAbout.Size = new System.Drawing.Size(56, 111);
             this.cmdToolAbout.Text = "Sobre\r\nAplicação";
             this.cmdToolAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolAbout.Click += new System.EventHandler(this.cmdToolAbout_Click);
@@ -982,8 +967,8 @@
             this.cmdToolExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolExit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolExit.Name = "cmdToolExit";
-            this.cmdToolExit.Size = new System.Drawing.Size(61, 87);
-            this.cmdToolExit.Text = "Fechar\r\nFormulário";
+            this.cmdToolExit.Size = new System.Drawing.Size(56, 111);
+            this.cmdToolExit.Text = "Fechar\r\nAplicação";
             this.cmdToolExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolExit.Click += new System.EventHandler(this.cmdToolExit_Click);
             // 
@@ -1020,7 +1005,7 @@
             this.toolStripEx8.Office12Mode = false;
             this.toolStripEx8.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx8.Size = new System.Drawing.Size(292, 104);
+            this.toolStripEx8.Size = new System.Drawing.Size(292, 125);
             this.toolStripEx8.TabIndex = 7;
             this.toolStripEx8.Text = "Resumos de Imposto";
             // 
@@ -1030,7 +1015,7 @@
             this.cmdToolTaxByDocument.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolTaxByDocument.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolTaxByDocument.Name = "cmdToolTaxByDocument";
-            this.cmdToolTaxByDocument.Size = new System.Drawing.Size(78, 87);
+            this.cmdToolTaxByDocument.Size = new System.Drawing.Size(78, 108);
             this.cmdToolTaxByDocument.Text = "Imposto \r\np/ Documento";
             this.cmdToolTaxByDocument.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolTaxByDocument.Click += new System.EventHandler(this.cmdToolTaxByDocument_Click);
@@ -1041,7 +1026,7 @@
             this.cmdToolTaxByDocumentType.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolTaxByDocumentType.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolTaxByDocumentType.Name = "cmdToolTaxByDocumentType";
-            this.cmdToolTaxByDocumentType.Size = new System.Drawing.Size(86, 87);
+            this.cmdToolTaxByDocumentType.Size = new System.Drawing.Size(86, 108);
             this.cmdToolTaxByDocumentType.Text = "Imposto p/ Tipo\r\nDocumento";
             this.cmdToolTaxByDocumentType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolTaxByDocumentType.Click += new System.EventHandler(this.cmdToolTaxByDocumentType_Click);
@@ -1052,10 +1037,21 @@
             this.cmdToolTaxByCustomer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cmdToolTaxByCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cmdToolTaxByCustomer.Name = "cmdToolTaxByCustomer";
-            this.cmdToolTaxByCustomer.Size = new System.Drawing.Size(57, 87);
+            this.cmdToolTaxByCustomer.Size = new System.Drawing.Size(57, 108);
             this.cmdToolTaxByCustomer.Text = "Imposto \r\np/ Cliente";
             this.cmdToolTaxByCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmdToolTaxByCustomer.Click += new System.EventHandler(this.cmdToolTaxByCustomer_Click);
+            // 
+            // cmdTooltaxByProduct
+            // 
+            this.cmdTooltaxByProduct.Image = ((System.Drawing.Image)(resources.GetObject("cmdTooltaxByProduct.Image")));
+            this.cmdTooltaxByProduct.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmdTooltaxByProduct.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdTooltaxByProduct.Name = "cmdTooltaxByProduct";
+            this.cmdTooltaxByProduct.Size = new System.Drawing.Size(62, 108);
+            this.cmdTooltaxByProduct.Text = "Imposto \r\np/ Produto";
+            this.cmdTooltaxByProduct.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmdTooltaxByProduct.Click += new System.EventHandler(this.cmdTooltaxByProduct_Click);
             // 
             // toolStripEx5
             // 
@@ -1100,22 +1096,11 @@
             this.toolStripEx3.TabIndex = 2;
             this.toolStripEx3.Text = "Filtros";
             // 
-            // cmdTooltaxByProduct
-            // 
-            this.cmdTooltaxByProduct.Image = ((System.Drawing.Image)(resources.GetObject("cmdTooltaxByProduct.Image")));
-            this.cmdTooltaxByProduct.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmdTooltaxByProduct.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cmdTooltaxByProduct.Name = "cmdTooltaxByProduct";
-            this.cmdTooltaxByProduct.Size = new System.Drawing.Size(62, 87);
-            this.cmdTooltaxByProduct.Text = "Imposto \r\np/ Produto";
-            this.cmdTooltaxByProduct.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cmdTooltaxByProduct.Click += new System.EventHandler(this.cmdTooltaxByProduct_Click);
-            // 
             // SAFTTotalsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 452);
+            this.ClientSize = new System.Drawing.Size(985, 452);
             this.Controls.Add(this.ribbonControlAdv1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
@@ -1140,9 +1125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv3)).EndInit();
-            this.tabControlAdv3.ResumeLayout(false);
-            this.tabPageAdv3.ResumeLayout(false);
-            this.tabPageAdv9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv2)).EndInit();
             this.tabControlAdv2.ResumeLayout(false);
             this.tabPageAdv2.ResumeLayout(false);
@@ -1167,6 +1149,8 @@
             this.ribbonControlAdv1.PerformLayout();
             this.toolStripTabItem1.Panel.ResumeLayout(false);
             this.toolStripTabItem1.Panel.PerformLayout();
+            this.toolStripEx9.ResumeLayout(false);
+            this.toolStripEx9.PerformLayout();
             this.toolStripEx1.ResumeLayout(false);
             this.toolStripEx1.PerformLayout();
             this.toolStripEx2.ResumeLayout(false);
@@ -1192,7 +1176,6 @@
 
         private Syncfusion.WinForms.DataGrid.SfDataGrid gridTotals;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Syncfusion.WinForms.DataGrid.SfDataGrid gridLines;
         private System.Windows.Forms.SplitContainer splitContainer3;
@@ -1204,7 +1187,6 @@
         private Syncfusion.Windows.Forms.Tools.TabControlAdv tabControlAdv2;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv2;
         private Syncfusion.Windows.Forms.Tools.TabControlAdv tabControlAdv3;
-        private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv3;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv7;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv4;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv5;
@@ -1215,8 +1197,6 @@
         private Syncfusion.WinForms.DataGrid.SfDataGrid gridTax;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv8;
         private Syncfusion.WinForms.DataGrid.SfDataGrid gridAccounts;
-        private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv9;
-        private System.Windows.Forms.PropertyGrid propertyGrid2;
         private Syncfusion.Windows.Forms.Tools.RibbonControlAdv ribbonControlAdv1;
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem toolStripTabItem1;
         private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx1;
@@ -1239,11 +1219,14 @@
         private Syncfusion.Windows.Forms.Tools.ToolStripTabItem toolStripTabItem2;
         private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx8;
         private System.Windows.Forms.ToolStripButton cmdToolTaxByDocument;
-        private System.Windows.Forms.ToolStripButton cmdReset;
         private System.Windows.Forms.ToolStripButton cmdToolAbout;
         private System.Windows.Forms.ToolStripStatusLabel lblWebsite;
         private System.Windows.Forms.ToolStripButton cmdToolTaxByDocumentType;
         private System.Windows.Forms.ToolStripButton cmdToolTaxByCustomer;
         private System.Windows.Forms.ToolStripButton cmdTooltaxByProduct;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx9;
+        private System.Windows.Forms.ToolStripButton cmdToolAddSaft;
+        private System.Windows.Forms.ToolStripButton cmdToolOpen;
+        private System.Windows.Forms.ToolStripButton cmdToolReset;
     }
 }

@@ -1,6 +1,8 @@
-﻿using SAFT_Reader.UI;
+﻿using Programatica.Saft.Models;
+using SAFT_Reader.UI;
 using Syncfusion.Licensing;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SAFT_Reader
@@ -18,6 +20,11 @@ namespace SAFT_Reader
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //Globals.AttachedFilePaths = new List<string>();
+            //Globals.AttachedAuditFiles = new List<AuditFile>();
+
+            Globals.AttachedFiles = new List<AttachedFile>();
 
             var splash = CompositionRoot.Resolve<SplashForm>();
             splash.IsSplash=true;

@@ -10,7 +10,11 @@ namespace SAFT_Reader
     public static class Globals
     {
         public static AuditFile AuditFile { get; set; }
-        public static string Filepath { get; set; }
+        //public static string Filepath { get; set; }
+        //public static List<string> AttachedFilePaths { get; set; }
+        //public static List<AuditFile> AttachedAuditFiles { get; set; }
+
+        public static List<AttachedFile> AttachedFiles { get; set; }
 
         public static string VersionLabel
         {
@@ -137,11 +141,22 @@ namespace SAFT_Reader
                     TaxPercentage = cl.First().TaxPercentage,
                     CreditAmount = cl.Sum(c => c.CreditAmount),
                     DebitAmount = cl.Sum(d => d.DebitAmount),
+                    BalanceAmount = cl.Sum(c => c.CreditAmount) - cl.Sum(d => d.DebitAmount),
                     CreditTaxPayable = cl.Sum(c => c.CreditAmount) * (cl.First().TaxPercentage / 100),
-                    DebitTaxPayable = cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100)
+                    DebitTaxPayable = cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100),
+                    BalanceTaxPayable = cl.Sum(c => c.CreditAmount) * (cl.First().TaxPercentage / 100) - cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100)
                 }).ToList();
 
             return totals;
         }
+
+    }
+
+    public class AttachedFile
+    {
+        public Guid ID { get; set; }
+        public string FilePath { get; set; }
+        public AuditFile AuditFile { get; set; }
+        public bool IsPrincipal { get; set; }
     }
 }
