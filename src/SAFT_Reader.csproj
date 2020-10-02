@@ -105,7 +105,6 @@
     <Reference Include="Syncfusion.Grid.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Grid.Base.18.2.0.59\lib\net46\Syncfusion.Grid.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Grouping.Windows, Version=18.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Grid.Windows, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Grid.Windows.18.2.0.59\lib\net46\Syncfusion.Grid.Windows.dll</HintPath>
     </Reference>
