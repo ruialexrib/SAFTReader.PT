@@ -54,7 +54,7 @@ namespace SAFT_Reader.UI
             {
                 ColumnName = "TaxCode"
             });
-            DataGrid.ExpandAllGroup();
+            //DataGrid.ExpandAllGroup();
             DataGrid.AutoFitGroupDropAreaItem = true;
 
             Cursor.Current = Cursors.Default;
