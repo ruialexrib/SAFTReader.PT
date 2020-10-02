@@ -261,7 +261,7 @@ __pycache__/
 *.pyc
 
 # syncfusion license
-SyncfusionLicense.txt
+# SyncfusionLicense.txt
 
 # setup
 pub/setup.exe
