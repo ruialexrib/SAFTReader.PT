@@ -81,7 +81,7 @@ namespace SAFT_Reader.UI
                 var f = CompositionRoot.Resolve<SAFTTotalsForm>();
                 f.ShowDialog(this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Ocorreu um erro ao abrir o ficheiro Saft-PT. \n\r" +
                     "Garanta que se trata de um ficheiro válido, no formato 1.04_01 " +

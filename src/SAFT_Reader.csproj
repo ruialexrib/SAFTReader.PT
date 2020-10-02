@@ -111,7 +111,6 @@
     <Reference Include="Syncfusion.GridCommon.WinForms, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.GridCommon.WinForms.18.2.0.59\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grouping.Base, Version=18.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Licensing, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Licensing.18.2.0.59\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
@@ -286,9 +285,9 @@
     <Content Include="SAFT_IDEMO599999999_v1.04.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SyncfusionLicense.txt">
+    <None Include="SyncfusionLicense.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
