@@ -262,3 +262,6 @@ __pycache__/
 
 # syncfusion license
 SyncfusionLicense.txt
+
+# setup
+setup.exe
