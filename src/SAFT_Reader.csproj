@@ -24,13 +24,14 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://raw.githubusercontent.com/ruialexrib/SAFTReader.PT/master/src/publish/</InstallUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/ruialexrib/SAFTReader.PT/master/src/publish/</UpdateUrl>
     <SupportUrl>https://github.com/ruialexrib/Programatica.SAFTReader</SupportUrl>
     <TargetCulture>pt-PT</TargetCulture>
     <ProductName>SAFT_READER</ProductName>
     <PublisherName>Rui Ribeiro</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
