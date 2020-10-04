@@ -16,12 +16,16 @@ namespace SAFT_Reader.Models
         public string InvoiceDate { get; set; }
         [Display(Name = "Tipo")]
         public string InvoiceType { get; set; }
+        [Display(Name = "Estado")]
+        public string InvoiceStatus { get; set; }
         [Display(Name = "NIF")]
         public string CustomerTaxID { get; set; }
         [Display(Name = "Cliente")]
         public string CompanyName { get; set; }
         [Display(Name = "Linha")]
         public string LineNumber { get; set; }
+        [Display(Name = "ProdutoID")]
+        public string ProductCode { get; set; }
         [Display(Name = "Produto")]
         public string ProductDescription { get; set; }
         [Display(Name = "Quant.")]

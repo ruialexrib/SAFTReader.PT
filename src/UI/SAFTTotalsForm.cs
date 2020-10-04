@@ -41,8 +41,8 @@ namespace SAFT_Reader.UI
             var invoiceLines = Globals.LoadInvoiceLines();
             var totals = Globals.LoadTaxTableEntryTotals(invoiceLines);
             var invoices = Globals.LoadInvoiLoadDocuments();
-            var customers = LoadCustomers();
-            var products = LoadProducts();
+            var customers = Globals.LoadCustomerLines();
+            var products = Globals.LoadProductLines();
             var tax = LoadTax();
             //var accounts = LoadAccounts();
 
@@ -58,6 +58,8 @@ namespace SAFT_Reader.UI
             SetGridLinesGroupSummaries();
             SetGridLinesSummaries();
             SetGridDocumentsSummaries();
+            SetCustomerLinesSummaries();
+            SetProductLinesSummaries();
 
 
 
@@ -77,15 +79,37 @@ namespace SAFT_Reader.UI
             gridLines.Columns["CreditAmount"].CellStyle.Font.Bold = true;
             gridLines.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
             gridLines.Columns["DebitAmount"].CellStyle.Font.Bold = true;
+            gridLines.Columns["ProductCode"].Width = 70;
+            gridLines.Columns["LineNumber"].Width = 50;
+            gridLines.Columns["InvoiceType"].Width = 50;
+            gridLines.Columns["InvoiceStatus"].Width = 50;
+            gridLines.Columns["TaxCode"].Width = 50;
+            gridLines.Columns["TaxPercentage"].Width = 50;
+            gridLines.Columns["Quantity"].Width = 50;
 
+            gridDocuments.Columns["InvoiceNo"].CellStyle.Font.Bold = true;
+            gridDocuments.Columns["NetTotal"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridDocuments.Columns["NetTotal"].CellStyle.Font.Bold = true;
+            gridDocuments.Columns["TaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridDocuments.Columns["TaxPayable"].CellStyle.Font.Bold = true;
+            gridDocuments.Columns["GrossTotal"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridDocuments.Columns["GrossTotal"].CellStyle.Font.Bold = true;
+
+            gridCustomers.Columns["CustomerID"].CellStyle.Font.Bold = true;
+            gridCustomers.Columns["CompanyName"].CellStyle.Font.Bold = true;
+            gridCustomers.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridCustomers.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
+            gridCustomers.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridCustomers.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
+
+            gridProducts.Columns["ProductCode"].CellStyle.Font.Bold = true;
+            gridProducts.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridProducts.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
+            gridProducts.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridProducts.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
+            gridProducts.AutoSizeColumnsMode = AutoSizeColumnsMode.None;
 
             LoadAuditHeaderPropertyGrids();
-        }
-
-        private List<Customer> LoadCustomers()
-        {
-            var audit = Globals.AuditFile;
-            return audit.MasterFiles.Customer;
         }
 
         private List<Product> LoadProducts()
@@ -214,6 +238,60 @@ namespace SAFT_Reader.UI
             sum.SummaryColumns.Add(dtp);
 
             this.gridLines.TableSummaryRows.Add(sum);
+        }
+
+
+        private void SetCustomerLinesSummaries()
+        {
+            GridTableSummaryRow sum = new GridTableSummaryRow();
+            sum.ShowSummaryInRow = false;
+            sum.TitleColumnCount = 1;
+            sum.Position = VerticalPosition.Bottom;
+            sum.Title = "Totais";
+
+            GridSummaryColumn ca = new GridSummaryColumn();
+            ca.Name = "TotalCreditAmmount";
+            ca.Format = "{Sum:c}";
+            ca.MappingName = "TotalCreditAmmount";
+            ca.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn da = new GridSummaryColumn();
+            da.Name = "TotalDebitAmmount";
+            da.Format = "{Sum:c}";
+            da.MappingName = "TotalDebitAmmount";
+            da.SummaryType = SummaryType.DoubleAggregate;
+
+            sum.SummaryColumns.Add(ca);
+            sum.SummaryColumns.Add(da);
+
+            this.gridCustomers.TableSummaryRows.Add(sum);
+        }
+
+
+        private void SetProductLinesSummaries()
+        {
+            GridTableSummaryRow sum = new GridTableSummaryRow();
+            sum.ShowSummaryInRow = false;
+            sum.TitleColumnCount = 1;
+            sum.Position = VerticalPosition.Bottom;
+            sum.Title = "Totais";
+
+            GridSummaryColumn ca = new GridSummaryColumn();
+            ca.Name = "TotalCreditAmmount";
+            ca.Format = "{Sum:c}";
+            ca.MappingName = "TotalCreditAmmount";
+            ca.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn da = new GridSummaryColumn();
+            da.Name = "TotalDebitAmmount";
+            da.Format = "{Sum:c}";
+            da.MappingName = "TotalDebitAmmount";
+            da.SummaryType = SummaryType.DoubleAggregate;
+
+            sum.SummaryColumns.Add(ca);
+            sum.SummaryColumns.Add(da);
+
+            this.gridProducts.TableSummaryRows.Add(sum);
         }
 
         private void SetGridLinesGroupSummaries()

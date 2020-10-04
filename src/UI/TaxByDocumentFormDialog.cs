@@ -59,6 +59,13 @@ namespace SAFT_Reader.UI
                 FilterType = FilterType.Equals,
                 FilterValue = filter
             });
+            {
+                DataGrid.Columns["InvoiceStatus"].FilterPredicates.Add(new FilterPredicate()
+                {
+                    FilterType = FilterType.Equals,
+                    FilterValue = "N"
+                });
+            }
             DataGrid.GroupColumnDescriptions.Add(new GroupColumnDescription()
             {
                 ColumnName = "TaxCode"

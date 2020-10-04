@@ -44,8 +44,8 @@ namespace SAFT_Reader.UI
                                                                                         .FirstOrDefault()
                                                                                         .CompanyName,
                                                 })
-                                                .GroupBy(p=>p.CustomerTaxID)
-                                                .Select(p=>p.First())
+                                                .GroupBy(p => p.CustomerTaxID)
+                                                .Select(p => p.First())
                                                 .ToList();
 
             this.multiColumnComboBox1.DataSource = records;
@@ -66,6 +66,14 @@ namespace SAFT_Reader.UI
                 FilterType = FilterType.Equals,
                 FilterValue = filter
             });
+            if (chkOnlyNormal.Checked)
+            {
+                DataGrid.Columns["InvoiceStatus"].FilterPredicates.Add(new FilterPredicate()
+                {
+                    FilterType = FilterType.Equals,
+                    FilterValue = "N"
+                });
+            }
             DataGrid.GroupColumnDescriptions.Add(new GroupColumnDescription()
             {
                 ColumnName = "TaxCode"

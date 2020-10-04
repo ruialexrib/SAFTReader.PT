@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.MetroColorTable metroColorTable2 = new Syncfusion.Windows.Forms.MetroColorTable();
+            Syncfusion.Windows.Forms.MetroColorTable metroColorTable1 = new Syncfusion.Windows.Forms.MetroColorTable();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaxByDocumentFormDialog));
             this.cmdOK = new Syncfusion.WinForms.Controls.SfButton();
             this.multiColumnComboBox1 = new Syncfusion.Windows.Forms.Tools.MultiColumnComboBox();
@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmdCancel = new Syncfusion.WinForms.Controls.SfButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.chkOnlyNormal = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.multiColumnComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             this.multiColumnComboBox1.Location = new System.Drawing.Point(216, 122);
             this.multiColumnComboBox1.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.multiColumnComboBox1.Name = "multiColumnComboBox1";
-            this.multiColumnComboBox1.ScrollMetroColorTable = metroColorTable2;
+            this.multiColumnComboBox1.ScrollMetroColorTable = metroColorTable1;
             this.multiColumnComboBox1.Size = new System.Drawing.Size(258, 21);
             this.multiColumnComboBox1.TabIndex = 22;
             this.multiColumnComboBox1.Text = "multiColumnComboBox1";
@@ -105,11 +106,24 @@
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
             // 
+            // chkOnlyNormal
+            // 
+            this.chkOnlyNormal.AutoSize = true;
+            this.chkOnlyNormal.Checked = true;
+            this.chkOnlyNormal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOnlyNormal.Location = new System.Drawing.Point(216, 149);
+            this.chkOnlyNormal.Name = "chkOnlyNormal";
+            this.chkOnlyNormal.Size = new System.Drawing.Size(261, 17);
+            this.chkOnlyNormal.TabIndex = 29;
+            this.chkOnlyNormal.Text = "Apenas calcular para docs. no estado \'N-Normal\'.";
+            this.chkOnlyNormal.UseVisualStyleBackColor = true;
+            // 
             // TaxByDocumentFormDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(486, 232);
+            this.Controls.Add(this.chkOnlyNormal);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.label2);
@@ -140,5 +154,6 @@
         private System.Windows.Forms.Label label2;
         private Syncfusion.WinForms.Controls.SfButton cmdCancel;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox chkOnlyNormal;
     }
 }

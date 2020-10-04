@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmdCancel = new Syncfusion.WinForms.Controls.SfButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.chkOnlyNormal = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.multiColumnComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -104,11 +105,24 @@
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
             // 
+            // chkOnlyNormal
+            // 
+            this.chkOnlyNormal.AutoSize = true;
+            this.chkOnlyNormal.Checked = true;
+            this.chkOnlyNormal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOnlyNormal.Location = new System.Drawing.Point(216, 149);
+            this.chkOnlyNormal.Name = "chkOnlyNormal";
+            this.chkOnlyNormal.Size = new System.Drawing.Size(261, 17);
+            this.chkOnlyNormal.TabIndex = 29;
+            this.chkOnlyNormal.Text = "Apenas calcular para docs. no estado \'N-Normal\'.";
+            this.chkOnlyNormal.UseVisualStyleBackColor = true;
+            // 
             // TaxByProductFormDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(486, 232);
+            this.Controls.Add(this.chkOnlyNormal);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.label2);
@@ -139,5 +153,6 @@
         private System.Windows.Forms.Label label2;
         private Syncfusion.WinForms.Controls.SfButton cmdCancel;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox chkOnlyNormal;
     }
 }

@@ -23,18 +23,72 @@ namespace SAFT_Reader
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
                 {
                     Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                    return string.Format("Versão: {0}.{1}.{2}.{3} (NetworkDeployed)", 
-                        ver.Major, ver.Minor, ver.Build, ver.Revision, 
+                    return string.Format("Versão: {0}.{1}.{2}.{3} (NetworkDeployed)",
+                        ver.Major, ver.Minor, ver.Build, ver.Revision,
                         Assembly.GetEntryAssembly().GetName().Name);
                 }
                 else
                 {
                     var ver = Assembly.GetExecutingAssembly().GetName().Version;
-                    return string.Format("Versão: {0}.{1}.{2}.{3} (Debug)", 
-                        ver.Major, ver.Minor, ver.Build, ver.Revision, 
+                    return string.Format("Versão: {0}.{1}.{2}.{3} (Debug)",
+                        ver.Major, ver.Minor, ver.Build, ver.Revision,
                         Assembly.GetEntryAssembly().GetName().Name);
                 }
             }
+        }
+
+
+        public static List<CustomerEntry> LoadCustomerLines()
+        {
+            var audit = Globals.AuditFile;
+            var lines = LoadInvoiceLines();
+
+            return audit.MasterFiles
+                            .Customer
+                            .Select(c => new CustomerEntry
+                            {
+                                CustomerID = c.CustomerID,
+                                AccountID = c.AccountID,
+                                CustomerTaxID = c.CustomerTaxID,
+                                CompanyName = c.CompanyName,
+                                AddressDetail = c.BillingAddress.AddressDetail,
+                                City = c.BillingAddress.City,
+                                PostalCode = c.BillingAddress.PostalCode,
+                                Country = c.BillingAddress.Country,
+                                SelfBillingIndicator = c.SelfBillingIndicator,
+                                TotalCreditAmmount = lines
+                                                        .Where(x=>x.CustomerTaxID == c.CustomerTaxID)
+                                                        .Sum(s=>s.CreditAmount),
+                                TotalDebitAmmount = lines
+                                                        .Where(x => x.CustomerTaxID == c.CustomerTaxID)
+                                                        .Sum(s => s.DebitAmount),
+
+                            }).ToList();
+
+        }
+
+        public static List<ProductEntry> LoadProductLines()
+        {
+            var audit = Globals.AuditFile;
+            var lines = LoadInvoiceLines();
+
+            return audit.MasterFiles
+                            .Product
+                            .Select(c => new ProductEntry
+                            {
+                                ProductType = c.ProductType,
+                                ProductCode = c.ProductCode,
+                                ProductDescription = c.ProductDescription,
+                                ProductNumberCode = c.ProductNumberCode,                             
+                                TotalCreditAmmount = lines
+                                                        .Where(x => x.ProductCode == c.ProductCode)
+                                                        .Sum(s => s.CreditAmount),
+                                TotalDebitAmmount = lines
+                                                        .Where(x => x.ProductCode == c.ProductCode)
+                                                        .Sum(s => s.DebitAmount),
+
+                            }).ToList();
+
         }
 
         public static List<InvoiceLine> LoadInvoiceLines()
@@ -44,8 +98,8 @@ namespace SAFT_Reader
 
             var invoices = audit.SourceDocuments
                             .SalesInvoices
-                            .Invoice
-                            .Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
+                            .Invoice;
+                            //.Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
 
             foreach (var invoice in invoices)
             {
@@ -58,6 +112,7 @@ namespace SAFT_Reader
                             InvoiceNo = invoice.InvoiceNo,
                             InvoiceDate = invoice.InvoiceDate,
                             InvoiceType = invoice.InvoiceType,
+                            InvoiceStatus = invoice.DocumentStatus.InvoiceStatus,
                             CustomerTaxID = audit.MasterFiles
                                                 .Customer
                                                 .Where(x => x.CustomerID.Equals(invoice.CustomerID))
@@ -69,6 +124,7 @@ namespace SAFT_Reader
                                                 .FirstOrDefault()
                                                 .CompanyName,
                             LineNumber = line.LineNumber,
+                            ProductCode = line.ProductCode,
                             ProductDescription = line.ProductDescription,
                             Quantity = float.Parse(line.Quantity.Replace(".", ",")),
                             UnitPrice = float.Parse(line.UnitPrice.Replace(".", ",")),
@@ -109,7 +165,11 @@ namespace SAFT_Reader
                         InvoiceDate = i.InvoiceDate,
                         InvoiceType = i.InvoiceType,
                         SourceID = i.SourceID,
-                        CustomerID = i.CustomerID,
+                        CustomerTaxID = audit.MasterFiles
+                                                .Customer
+                                                .Where(x => x.CustomerID.Equals(i.CustomerID))
+                                                .FirstOrDefault()
+                                                .CustomerTaxID,
                         CompanyName = audit.MasterFiles
                                                 .Customer
                                                 .Where(x => x.CustomerID.Equals(i.CustomerID))
@@ -127,6 +187,7 @@ namespace SAFT_Reader
             var audit = Globals.AuditFile;
 
             var totals = invoiceLines
+                .Where(s=>s.InvoiceStatus.Equals("N"))
                 .GroupBy(g => new { g.TaxCode, g.TaxPercentage })
                 .Select(cl => new TaxTableEntryTotal
                 {

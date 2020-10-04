@@ -174,9 +174,11 @@
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Extensions\AuditFileExtensions.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Models\CustomerEntry.cs" />
     <Compile Include="Models\HeaderPt.cs" />
     <Compile Include="Models\InvoiceEntry.cs" />
     <Compile Include="Models\InvoiceLine.cs" />
+    <Compile Include="Models\ProductEntry.cs" />
     <Compile Include="Models\TaxTableEntryItem.cs" />
     <Compile Include="Models\TaxTableEntryTotal.cs" />
     <Compile Include="UI\OpenFileDialogForm.cs">
