@@ -18,6 +18,4 @@ A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por mu
 
 <img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif?raw=true" width="800">
 
-Com o SaftReader é agora possível agregar vários SAFT relativos ao mesmo NIF. 
 
-Visualize a informação de vários estabelecimentos ou de vários períodos da sua empresa.
