@@ -27,7 +27,6 @@ namespace SAFT_Reader.UI
         private void InitializeView()
         {
             this.ribbonControlAdv1.Size = new Size { Width = this.ribbonControlAdv1.Size.Width, Height = 150 };
-            //this.Text = $"{this.Text} [{Globals.AttachedFiles}]";
             this.lblInfoApp.Text = $"{Globals.VersionLabel}";
             SelectedGrid = gridLines;
         }
@@ -41,7 +40,6 @@ namespace SAFT_Reader.UI
             var customers = Globals.LoadCustomerLines();
             var products = Globals.LoadProductLines();
             var tax = Globals.LoadTaxLines();
-            //var accounts = LoadAccounts();
 
             gridLines.DataSource = invoiceLines;
             gridTotals.DataSource = totals;
@@ -49,7 +47,6 @@ namespace SAFT_Reader.UI
             gridCustomers.DataSource = customers;
             gridProducts.DataSource = products;
             gridTax.DataSource = tax;
-            //gridAccounts.DataSource = accounts;
 
             SetGridTotalsSummaries();
             SetGridLinesGroupSummaries();
@@ -58,7 +55,6 @@ namespace SAFT_Reader.UI
             SetCustomerLinesSummaries();
             SetProductLinesSummaries();
             SetTaxLinesSummaries();
-
 
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
@@ -104,7 +100,6 @@ namespace SAFT_Reader.UI
             gridProducts.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
             gridProducts.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
             gridProducts.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
-            //gridProducts.AutoSizeColumnsMode = AutoSizeColumnsMode.None;
 
             gridTax.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridTax.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
@@ -117,7 +112,6 @@ namespace SAFT_Reader.UI
 
         private void LoadAuditHeaderPropertyGrids()
         {
-            //tabControlAdv3
             foreach (var file in Globals.AttachedFiles)
             {
                 var pg = new PropertyGrid();
@@ -313,38 +307,6 @@ namespace SAFT_Reader.UI
 
         private void SetGridLinesGroupSummaries()
         {
-            //GridSummaryRow sum = new GridSummaryRow();
-            //sum.Name = "GroupSummary";
-            //sum.ShowSummaryInRow = false;
-            //sum.Title = "Sub-Totais";
-
-            //GridSummaryColumn ca = new GridSummaryColumn();
-            //ca.Name = "CreditAmount";
-            //ca.SummaryType = SummaryType.DoubleAggregate;
-            //ca.Format = "{Sum:c}";
-            //ca.MappingName = "CreditAmount";
-
-            //GridSummaryColumn da = new GridSummaryColumn();
-            //da.Name = "DebitAmount";
-            //da.SummaryType = SummaryType.DoubleAggregate;
-            //da.Format = "{Sum:c}";
-            //da.MappingName = "DebitAmount";
-
-            //GridSummaryColumn tp = new GridSummaryColumn();
-            //tp.Name = "TaxPayable";
-            //tp.SummaryType = SummaryType.DoubleAggregate;
-            //tp.Format = "{Sum:c}";
-            //tp.MappingName = "TaxPayable";
-
-            //sum.SummaryColumns.Add(ca);
-            //sum.SummaryColumns.Add(da);
-            //sum.SummaryColumns.Add(tp);
-
-            //this.gridLines.GroupSummaryRows.Add(sum);
-
-
-
-
             // Creates the GridSummaryRow.
             GridSummaryRow captionSummaryRow = new GridSummaryRow();
             captionSummaryRow.Name = "CaptionSummary";
@@ -375,7 +337,6 @@ namespace SAFT_Reader.UI
             summaryColumn4.Format = "{Sum:c}";
             summaryColumn4.MappingName = "DebitTaxPayable";
             summaryColumn4.SummaryType = SummaryType.DoubleAggregate;
-
 
             // Adds the summary column in the SummaryColumns collection.
             captionSummaryRow.SummaryColumns.Add(summaryColumn1);
@@ -413,15 +374,12 @@ namespace SAFT_Reader.UI
             gt.MappingName = "GrossTotal";
             gt.SummaryType = SummaryType.DoubleAggregate;
 
-
             sum.SummaryColumns.Add(tp);
             sum.SummaryColumns.Add(nt);
             sum.SummaryColumns.Add(gt);
 
             this.gridDocuments.TableSummaryRows.Add(sum);
         }
-
-
 
         private void GridEnter(object sender, EventArgs e)
         {
@@ -466,7 +424,6 @@ namespace SAFT_Reader.UI
             txtToolFilter.Text = string.Empty;
             Cursor.Current = Cursors.Default;
         }
-
 
         private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
