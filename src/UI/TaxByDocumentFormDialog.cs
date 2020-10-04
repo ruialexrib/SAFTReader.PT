@@ -1,15 +1,9 @@
-﻿using Programatica.Saft.Models;
-using Syncfusion.Data;
+﻿using Syncfusion.Data;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SAFT_Reader.UI
@@ -31,19 +25,17 @@ namespace SAFT_Reader.UI
             var records = Globals.AuditFile.SourceDocuments
                                                 .SalesInvoices
                                                 .Invoice
-                                                .Where(x=>x.DocumentStatus.InvoiceStatus.Equals("N"))
                                                 .Select(z => new
                                                 {
-                                                    z.InvoiceNo,
-                                                    z.InvoiceType,
-                                                    z.InvoiceDate,
-                                                    z.CustomerID,
-                                                    z.DocumentTotals.TaxPayable
+                                                    Documento = z.InvoiceNo,
+                                                    Tipo = z.InvoiceType,
+                                                    Data = z.InvoiceDate,
+                                                    Imposto = z.DocumentTotals.TaxPayable
                                                 }).ToList();
 
             this.multiColumnComboBox1.DataSource = records;
-            this.multiColumnComboBox1.DisplayMember = "InvoiceNo";
-            this.multiColumnComboBox1.ValueMember = "InvoiceNo";
+            this.multiColumnComboBox1.DisplayMember = "Documento";
+            this.multiColumnComboBox1.ValueMember = "Documento";
         }
 
         private void cmdOK_Click(object sender, EventArgs e)
@@ -59,6 +51,7 @@ namespace SAFT_Reader.UI
                 FilterType = FilterType.Equals,
                 FilterValue = filter
             });
+            if (chkOnlyNormal.Checked)
             {
                 DataGrid.Columns["InvoiceStatus"].FilterPredicates.Add(new FilterPredicate()
                 {

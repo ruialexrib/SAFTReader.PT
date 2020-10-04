@@ -29,12 +29,12 @@ namespace SAFT_Reader.UI
                                                 .Select(p=>p.First())
                                                 .Select(z => new
                                                 {
-                                                    z.InvoiceType
+                                                    Tipo = z.InvoiceType
                                                 }).ToList();
 
             this.multiColumnComboBox1.DataSource = records;
-            this.multiColumnComboBox1.DisplayMember = "InvoiceType";
-            this.multiColumnComboBox1.ValueMember = "InvoiceType";
+            this.multiColumnComboBox1.DisplayMember = "Tipo";
+            this.multiColumnComboBox1.ValueMember = "Tipo";
         }
 
         private void cmdOK_Click(object sender, EventArgs e)
@@ -50,6 +50,7 @@ namespace SAFT_Reader.UI
                 FilterType = FilterType.Equals,
                 FilterValue = filter
             });
+            if (chkOnlyNormal.Checked)
             {
                 DataGrid.Columns["InvoiceStatus"].FilterPredicates.Add(new FilterPredicate()
                 {

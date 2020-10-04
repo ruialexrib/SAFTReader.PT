@@ -1,15 +1,9 @@
-﻿using Programatica.Saft.Models;
-using Syncfusion.Data;
+﻿using Syncfusion.Data;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SAFT_Reader.UI
@@ -33,24 +27,24 @@ namespace SAFT_Reader.UI
                                                 .Invoice
                                                 .Select(z => new
                                                 {
-                                                    CustomerTaxID = Globals.AuditFile.MasterFiles
+                                                    NIF = Globals.AuditFile.MasterFiles
                                                                                         .Customer
                                                                                         .Where(x => x.CustomerID.Equals(z.CustomerID))
                                                                                         .FirstOrDefault()
                                                                                         .CustomerTaxID,
-                                                    CompanyName = Globals.AuditFile.MasterFiles
+                                                    Cliente = Globals.AuditFile.MasterFiles
                                                                                         .Customer
                                                                                         .Where(x => x.CustomerID.Equals(z.CustomerID))
                                                                                         .FirstOrDefault()
                                                                                         .CompanyName,
                                                 })
-                                                .GroupBy(p => p.CustomerTaxID)
+                                                .GroupBy(p => p.NIF)
                                                 .Select(p => p.First())
                                                 .ToList();
 
             this.multiColumnComboBox1.DataSource = records;
-            this.multiColumnComboBox1.DisplayMember = "CustomerTaxID";
-            this.multiColumnComboBox1.ValueMember = "CustomerTaxID";
+            this.multiColumnComboBox1.DisplayMember = "Cliente";
+            this.multiColumnComboBox1.ValueMember = "NIF";
         }
 
         private void cmdOK_Click(object sender, EventArgs e)

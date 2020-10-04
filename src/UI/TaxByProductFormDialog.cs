@@ -27,12 +27,13 @@ namespace SAFT_Reader.UI
                                     .Select(x=> x.First())
                                     .Select(z => new
                                     {
-                                        z.ProductDescription
+                                        Código = z.ProductCode,
+                                        Descrição = z.ProductDescription
                                     }).ToList();
 
             this.multiColumnComboBox1.DataSource = records;
-            this.multiColumnComboBox1.DisplayMember = "ProductDescription";
-            this.multiColumnComboBox1.ValueMember = "ProductDescription";
+            this.multiColumnComboBox1.DisplayMember = "Descrição";
+            this.multiColumnComboBox1.ValueMember = "Código";
         }
 
         private void cmdOK_Click(object sender, EventArgs e)
@@ -43,11 +44,12 @@ namespace SAFT_Reader.UI
             DataGrid.ClearGrouping();
             DataGrid.ClearSorting();
 
-            DataGrid.Columns["ProductDescription"].FilterPredicates.Add(new FilterPredicate()
+            DataGrid.Columns["ProductCode"].FilterPredicates.Add(new FilterPredicate()
             {
                 FilterType = FilterType.Equals,
                 FilterValue = filter
             });
+            if (chkOnlyNormal.Checked)
             {
                 DataGrid.Columns["InvoiceStatus"].FilterPredicates.Add(new FilterPredicate()
                 {

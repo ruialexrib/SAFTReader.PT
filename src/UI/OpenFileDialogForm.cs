@@ -3,9 +3,6 @@ using SAFT_Reader.Adapter;
 using Syncfusion.WinForms.Controls;
 using System;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Schema;
 
 namespace SAFT_Reader.UI
 {

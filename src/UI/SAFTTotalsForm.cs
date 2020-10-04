@@ -1,5 +1,4 @@
-﻿using Programatica.Saft.Models;
-using SAFT_Reader.Extensions;
+﻿using SAFT_Reader.Extensions;
 using Syncfusion.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -8,9 +7,7 @@ using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGridConverter;
-using Syncfusion.XPS;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -43,7 +40,7 @@ namespace SAFT_Reader.UI
             var invoices = Globals.LoadInvoiLoadDocuments();
             var customers = Globals.LoadCustomerLines();
             var products = Globals.LoadProductLines();
-            var tax = LoadTax();
+            var tax = Globals.LoadTaxLines();
             //var accounts = LoadAccounts();
 
             gridLines.DataSource = invoiceLines;
@@ -60,7 +57,7 @@ namespace SAFT_Reader.UI
             SetGridDocumentsSummaries();
             SetCustomerLinesSummaries();
             SetProductLinesSummaries();
-
+            SetTaxLinesSummaries();
 
 
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
@@ -107,21 +104,15 @@ namespace SAFT_Reader.UI
             gridProducts.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
             gridProducts.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
             gridProducts.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
-            gridProducts.AutoSizeColumnsMode = AutoSizeColumnsMode.None;
+            //gridProducts.AutoSizeColumnsMode = AutoSizeColumnsMode.None;
+
+            gridTax.Columns["TaxCode"].CellStyle.Font.Bold = true;
+            gridTax.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTax.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
+            gridTax.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTax.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
 
             LoadAuditHeaderPropertyGrids();
-        }
-
-        private List<Product> LoadProducts()
-        {
-            var audit = Globals.AuditFile;
-            return audit.MasterFiles.Product;
-        }
-
-        private List<TaxTableEntry> LoadTax()
-        {
-            var audit = Globals.AuditFile;
-            return audit.MasterFiles.TaxTable.TaxTableEntry;
         }
 
         private void LoadAuditHeaderPropertyGrids()
@@ -292,6 +283,32 @@ namespace SAFT_Reader.UI
             sum.SummaryColumns.Add(da);
 
             this.gridProducts.TableSummaryRows.Add(sum);
+        }
+
+        private void SetTaxLinesSummaries()
+        {
+            GridTableSummaryRow sum = new GridTableSummaryRow();
+            sum.ShowSummaryInRow = false;
+            sum.TitleColumnCount = 1;
+            sum.Position = VerticalPosition.Bottom;
+            sum.Title = "Totais";
+
+            GridSummaryColumn ca = new GridSummaryColumn();
+            ca.Name = "TotalCreditAmmount";
+            ca.Format = "{Sum:c}";
+            ca.MappingName = "TotalCreditAmmount";
+            ca.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn da = new GridSummaryColumn();
+            da.Name = "TotalDebitAmmount";
+            da.Format = "{Sum:c}";
+            da.MappingName = "TotalDebitAmmount";
+            da.SummaryType = SummaryType.DoubleAggregate;
+
+            sum.SummaryColumns.Add(ca);
+            sum.SummaryColumns.Add(da);
+
+            this.gridTax.TableSummaryRows.Add(sum);
         }
 
         private void SetGridLinesGroupSummaries()

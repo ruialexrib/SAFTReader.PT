@@ -66,6 +66,32 @@ namespace SAFT_Reader
                             }).ToList();
 
         }
+        public static List<TaxEntry> LoadTaxLines()
+        {
+            var audit = Globals.AuditFile;
+            var lines = LoadInvoiceLines();
+
+            return audit.MasterFiles
+                            .TaxTable
+                            .TaxTableEntry
+                            .Select(c => new TaxEntry
+                            {
+                                TaxType = c.TaxType,
+                                TaxCountryRegion = c.TaxCountryRegion,
+                                TaxCode = c.TaxCode,
+                                Description = c.Description,
+                                TaxPercentage = float.Parse(c.TaxPercentage.Replace(".", ",")),
+                                TotalCreditAmmount = lines
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == float.Parse(c.TaxPercentage.Replace(".", ",")))
+                                                        .Sum(s => s.CreditAmount),
+                                TotalDebitAmmount = lines
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == float.Parse(c.TaxPercentage.Replace(".", ",")))
+                                                        .Sum(s => s.DebitAmount),
+
+                            }).ToList();
+
+        }
+
 
         public static List<ProductEntry> LoadProductLines()
         {
