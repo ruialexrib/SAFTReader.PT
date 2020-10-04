@@ -16,5 +16,6 @@ A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por mu
 
 <img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif?raw=true" width="800">
 
-Para efeitos de demonstração das funcionalidades do aplicativo foi incluído o ficheiro [Demo da Autoridade Tributária, versão 1.04.](https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/src/SAFT_IDEMO599999999_v1.04.xml)
+Com o SaftReader é agora possível agregar vários SAFT relativos ao mesmo NIF. 
 
+Visualize a informação de vários estabelecimentos ou de vários períodos da sua empresa.
