@@ -69,8 +69,10 @@ namespace SAFT_Reader.UI
 
             gridLines.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridLines.Columns["InvoiceNo"].CellStyle.Font.Bold = true;
-             gridLines.Columns["TaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
-            gridLines.Columns["TaxPayable"].CellStyle.Font.Bold = true;
+            gridLines.Columns["CreditTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridLines.Columns["CreditTaxPayable"].CellStyle.Font.Bold = true;
+            gridLines.Columns["DebitTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridLines.Columns["DebitTaxPayable"].CellStyle.Font.Bold = true;
             gridLines.Columns["CreditAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
             gridLines.Columns["CreditAmount"].CellStyle.Font.Bold = true;
             gridLines.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
@@ -98,12 +100,12 @@ namespace SAFT_Reader.UI
             return audit.MasterFiles.TaxTable.TaxTableEntry;
         }
 
-        private void LoadAuditHeaderPropertyGrids ()
+        private void LoadAuditHeaderPropertyGrids()
         {
             //tabControlAdv3
             foreach (var file in Globals.AttachedFiles)
             {
-                var pg = new PropertyGrid(); 
+                var pg = new PropertyGrid();
                 var tab = new TabPageAdv();
 
                 pg.SelectedObject = file.AuditFile.ToHeaderPt();
@@ -112,7 +114,7 @@ namespace SAFT_Reader.UI
                 pg.ToolbarVisible = false;
                 tab.Text = $"{System.IO.Path.GetFileName(file.FilePath)}";
                 tab.Controls.Add(pg);
-                
+
                 tabControlAdv3.TabPages.Add(tab);
             }
         }
@@ -193,15 +195,23 @@ namespace SAFT_Reader.UI
             da.MappingName = "DebitAmount";
             da.SummaryType = SummaryType.DoubleAggregate;
 
-            GridSummaryColumn tp = new GridSummaryColumn();
-            tp.Name = "TaxPayable";
-            tp.Format = "{Sum:c}";
-            tp.MappingName = "TaxPayable";
-            tp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ctp = new GridSummaryColumn();
+            ctp.Name = "CreditTaxPayable";
+            ctp.Format = "{Sum:c}";
+            ctp.MappingName = "CreditTaxPayable";
+            ctp.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn dtp = new GridSummaryColumn();
+            dtp.Name = "DebitTaxPayable";
+            dtp.Format = "{Sum:c}";
+            dtp.MappingName = "DebitTaxPayable";
+            dtp.SummaryType = SummaryType.DoubleAggregate;
+
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
-            sum.SummaryColumns.Add(tp);
+            sum.SummaryColumns.Add(ctp);
+            sum.SummaryColumns.Add(dtp);
 
             this.gridLines.TableSummaryRows.Add(sum);
         }
@@ -244,8 +254,8 @@ namespace SAFT_Reader.UI
             GridSummaryRow captionSummaryRow = new GridSummaryRow();
             captionSummaryRow.Name = "CaptionSummary";
             captionSummaryRow.ShowSummaryInRow = false;
-            captionSummaryRow.TitleColumnCount = 2;
-            captionSummaryRow.Title = "{Key} : {ItemsCount} Registos";
+            captionSummaryRow.TitleColumnCount = 3;
+            captionSummaryRow.Title = "{ColumnName} = {Key} ({ItemsCount} Registos)";
 
             GridSummaryColumn summaryColumn1 = new GridSummaryColumn();
             summaryColumn1.Name = "CreditAmount";
@@ -260,16 +270,23 @@ namespace SAFT_Reader.UI
             summaryColumn2.SummaryType = SummaryType.DoubleAggregate;
 
             GridSummaryColumn summaryColumn3 = new GridSummaryColumn();
-            summaryColumn3.Name = "TaxPayable";
+            summaryColumn3.Name = "CreditTaxPayable";
             summaryColumn3.Format = "{Sum:c}";
-            summaryColumn3.MappingName = "TaxPayable";
+            summaryColumn3.MappingName = "CreditTaxPayable";
             summaryColumn3.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn summaryColumn4 = new GridSummaryColumn();
+            summaryColumn4.Name = "DebitTaxPayable";
+            summaryColumn4.Format = "{Sum:c}";
+            summaryColumn4.MappingName = "DebitTaxPayable";
+            summaryColumn4.SummaryType = SummaryType.DoubleAggregate;
 
 
             // Adds the summary column in the SummaryColumns collection.
             captionSummaryRow.SummaryColumns.Add(summaryColumn1);
             captionSummaryRow.SummaryColumns.Add(summaryColumn2);
             captionSummaryRow.SummaryColumns.Add(summaryColumn3);
+            captionSummaryRow.SummaryColumns.Add(summaryColumn4);
 
             // Initializes the caption summary row.
             this.gridLines.CaptionSummaryRow = captionSummaryRow;

@@ -39,8 +39,11 @@ namespace SAFT_Reader.Models
         [Display(Name = "Débito")]
         [DataType(DataType.Currency)]
         public float DebitAmount { get; set; }
-        [Display(Name = "Imposto")]
+        [Display(Name = "Imp. Créd.")]
         [DataType(DataType.Currency)]
-        public float TaxPayable { get; set; }
+        public float CreditTaxPayable { get; set; }
+        [Display(Name = "Imp. Deb.")]
+        [DataType(DataType.Currency)]
+        public float DebitTaxPayable { get; set; }
     }
 }

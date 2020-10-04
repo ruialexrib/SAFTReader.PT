@@ -79,13 +79,13 @@ namespace SAFT_Reader
                         {
                             var ca = float.Parse(line.CreditAmount.Replace(".", ","));
                             invoiceLine.CreditAmount = ca;
-                            invoiceLine.TaxPayable = ca * (tp / 100);
+                            invoiceLine.CreditTaxPayable = ca * (tp / 100);
                         }
                         if (line.DebitAmount != null)
                         {
                             var da = float.Parse(line.DebitAmount.Replace(".", ","));
                             invoiceLine.DebitAmount = da;
-                            invoiceLine.TaxPayable = da * (tp / 100);
+                            invoiceLine.DebitTaxPayable = da * (tp / 100);
                         }
                         invoiceLines.Add(invoiceLine);
                     }
