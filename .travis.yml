@@ -1,2 +1,2 @@
 language: csharp
-solution: /src/SAFT_Reader.sln
+solution: src/SAFT_Reader.sln
