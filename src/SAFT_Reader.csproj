@@ -76,7 +76,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key_file.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -277,7 +278,6 @@
     <EmbeddedResource Include="UI\SAFTTotalsForm.resx">
       <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="key_file.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
