@@ -10,12 +10,12 @@ O software SAFT READER permite visualizar, validar e analisar os dados do Fichei
 
 A informação de todas as tabelas pode ser agrupada, filtrada e ordenada por multiplos critérios, bem como exportada para pdf ou excel, para posterior análise.
 
+📢 Com o SaftReader é agora possível agregar vários SAFT relativos ao mesmo NIF. Visualize a informação de vários estabelecimentos ou de vários períodos da sua empresa.
+
 [![Download SAFT_READER](https://img.shields.io/badge/Download-SaftReader.zip-blue?style=for-the-badge)](https://github.com/ruialexrib/Programatica.SAFTReader/releases/latest/download/saftreader.zip)
 
 ### Principais Funcionalidades
 
 <img src="https://github.com/ruialexrib/Programatica.SAFTReader/blob/master/demos/Demo.gif?raw=true" width="800">
 
-Com o SaftReader é agora possível agregar vários SAFT relativos ao mesmo NIF. 
 
-Visualize a informação de vários estabelecimentos ou de vários períodos da sua empresa.
