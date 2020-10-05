@@ -73,11 +73,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>key_file.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -95,11 +94,11 @@
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Programatica.Framework.Core, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Programatica.Framework.Core.1.0.3\lib\netstandard2.0\Programatica.Framework.Core.dll</HintPath>
+    <Reference Include="Programatica.Framework.Core, Version=1.0.4.0, Culture=neutral, PublicKeyToken=d9e1a3e747aa1fea, processorArchitecture=MSIL">
+      <HintPath>packages\Programatica.Framework.Core.1.0.4\lib\netstandard2.0\Programatica.Framework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Programatica.Saft.Models, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Programatica.Saft.Models.1.0.2\lib\netstandard2.0\Programatica.Saft.Models.dll</HintPath>
+    <Reference Include="Programatica.Saft.Models, Version=1.0.3.0, Culture=neutral, PublicKeyToken=7e9e07fe6ff3b967, processorArchitecture=MSIL">
+      <HintPath>packages\Programatica.Saft.Models.1.0.3\lib\netstandard2.0\Programatica.Saft.Models.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.Compression.Base, Version=18.2460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Compression.Base.18.2.0.59\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
@@ -278,6 +277,7 @@
     <EmbeddedResource Include="UI\SAFTTotalsForm.resx">
       <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="key_file.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
