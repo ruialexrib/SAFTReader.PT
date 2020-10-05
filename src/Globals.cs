@@ -2,6 +2,7 @@
 using SAFT_Reader.Models;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.Linq;
 using System.Reflection;
 
@@ -20,9 +21,9 @@ namespace SAFT_Reader
         {
             get
             {
-                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                if (ApplicationDeployment.IsNetworkDeployed)
                 {
-                    Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                    Version ver = ApplicationDeployment.CurrentDeployment.CurrentVersion;
                     return string.Format("Versão: {0}.{1}.{2}.{3} (NetworkDeployed)",
                         ver.Major, ver.Minor, ver.Build, ver.Revision,
                         Assembly.GetEntryAssembly().GetName().Name);
