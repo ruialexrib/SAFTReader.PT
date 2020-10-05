@@ -1,3 +1,4 @@
+[![Travis Build Status](https://travis-ci.com/ruialexrib/SAFTReader.PT.svg?branch=master)](https://travis-ci.com/ruialexrib/SAFTReader.PT.svg?branch=master)
 [![Build Status](https://dev.azure.com/ProgramaticaSoftware/SAFTReaderPT/_apis/build/status/ruialexrib.SAFTReader.PT?branchName=master)](https://dev.azure.com/ProgramaticaSoftware/SAFTReaderPT/_build/latest?definitionId=18&branchName=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![GitHub repo size](https://img.shields.io/github/repo-size/ruialexrib/Programatica.SAFTReader) ![GitHub top language](https://img.shields.io/github/languages/top/ruialexrib/Programatica.SAFTReader) ![GitHub All Releases](https://img.shields.io/github/downloads/ruialexrib/Programatica.SAFTReader/total)
 
 # SAFTReader.PT
