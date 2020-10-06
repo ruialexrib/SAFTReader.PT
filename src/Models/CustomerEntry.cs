@@ -8,7 +8,7 @@ namespace SAFT_Reader.Models
         public string CustomerID { get; set; }
         [Display(Name = "Conta")]
         public string AccountID { get; set; }
-        [Display(Name = "NIF")]
+        [Display(Name = "NIF", Description = "Deve ser indicado sem o prefixo do país. O cliente genérico, correspondente ao designado “Consumidor final”, deve ser identificado com o NIF “999999990”. ")]
         public string CustomerTaxID { get; set; }
         [Display(Name = "Nome Cliente")]
         public string CompanyName { get; set; }

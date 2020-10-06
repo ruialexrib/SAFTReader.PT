@@ -1,6 +1,7 @@
 ﻿using Ninject.Modules;
 using Programatica.Framework.Core.Adapter;
 using SAFT_Reader.Adapter;
+using SAFT_Reader.Services;
 
 namespace SAFT_Reader
 {
@@ -12,6 +13,7 @@ namespace SAFT_Reader
             Bind<IJsonSerializerAdapter>().To<JsonSerializerAdapter>();
             Bind<IFileStreamAdapter>().To<FileStreamAdapter>();
             Bind<IXmlSerializerAdapter>().To<XmlSerializerAdapter>();
+            Bind<IAuditService>().To<AuditService>();
         }
     }
 }

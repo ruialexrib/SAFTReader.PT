@@ -1,4 +1,5 @@
 ﻿using Programatica.Saft.Models;
+using SAFT_Reader.Extensions;
 using SAFT_Reader.Models;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,6 @@ namespace SAFT_Reader
     public static class Globals
     {
         public static AuditFile AuditFile { get; set; }
-        //public static string Filepath { get; set; }
-        //public static List<string> AttachedFilePaths { get; set; }
-        //public static List<AuditFile> AttachedAuditFiles { get; set; }
 
         public static List<AttachedFile> AttachedFiles { get; set; }
 
@@ -39,7 +37,7 @@ namespace SAFT_Reader
         }
 
 
-        public static List<CustomerEntry> LoadCustomerLines()
+        public static List<CustomerEntry> LoadCustomerEntries()
         {
             var audit = Globals.AuditFile;
             var lines = LoadInvoiceLines();
@@ -58,8 +56,8 @@ namespace SAFT_Reader
                                 Country = c.BillingAddress.Country,
                                 SelfBillingIndicator = c.SelfBillingIndicator,
                                 TotalCreditAmmount = lines
-                                                        .Where(x=>x.CustomerTaxID == c.CustomerTaxID)
-                                                        .Sum(s=>s.CreditAmount),
+                                                        .Where(x => x.CustomerTaxID == c.CustomerTaxID)
+                                                        .Sum(s => s.CreditAmount),
                                 TotalDebitAmmount = lines
                                                         .Where(x => x.CustomerTaxID == c.CustomerTaxID)
                                                         .Sum(s => s.DebitAmount),
@@ -67,7 +65,7 @@ namespace SAFT_Reader
                             }).ToList();
 
         }
-        public static List<TaxEntry> LoadTaxLines()
+        public static List<TaxEntry> LoadTaxEntries()
         {
             var audit = Globals.AuditFile;
             var lines = LoadInvoiceLines();
@@ -81,20 +79,41 @@ namespace SAFT_Reader
                                 TaxCountryRegion = c.TaxCountryRegion,
                                 TaxCode = c.TaxCode,
                                 Description = c.Description,
-                                TaxPercentage = float.Parse((c.TaxPercentage ?? "0.00").Replace(".", ",")),
+                                TaxPercentage = (c.TaxPercentage ?? "0.00").ToAuditFloat(),
                                 TotalCreditAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == float.Parse((c.TaxPercentage ?? "0.00").Replace(".", ",")))
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToAuditFloat())
                                                         .Sum(s => s.CreditAmount),
                                 TotalDebitAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == float.Parse((c.TaxPercentage ?? "0.00").Replace(".", ",")))
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToAuditFloat())
                                                         .Sum(s => s.DebitAmount),
 
                             }).ToList();
 
         }
 
+        public static List<AccountEntry> LoadAccountEntries()
+        {
+            var audit = Globals.AuditFile;
 
-        public static List<ProductEntry> LoadProductLines()
+            return audit.MasterFiles
+                                ?.GeneralLedgerAccounts
+                                ?.Account
+                                ?.Select(c => new AccountEntry
+                                {
+                                    AccountID = c.AccountID,
+                                    AccountDescription = c.AccountDescription,
+                                    OpeningDebitBalance = c.OpeningDebitBalance.ToAuditFloat(),
+                                    OpeningCreditBalance = c.OpeningCreditBalance.ToAuditFloat(),
+                                    ClosingDebitBalance = c.ClosingDebitBalance.ToAuditFloat(),
+                                    ClosingCreditBalance = c.ClosingCreditBalance.ToAuditFloat(),
+                                    GroupingCategory = c.GroupingCategory.ToAuditGroupingCategoryDesc(),
+                                    GroupingCode = c.GroupingCode,
+                                    TaxonomyCode = c.TaxonomyCode
+                                }).ToList() ?? new List<AccountEntry>();
+        }
+
+
+        public static List<ProductEntry> LoadProductEntries()
         {
             var audit = Globals.AuditFile;
             var lines = LoadInvoiceLines();
@@ -106,7 +125,7 @@ namespace SAFT_Reader
                                 ProductType = c.ProductType,
                                 ProductCode = c.ProductCode,
                                 ProductDescription = c.ProductDescription,
-                                ProductNumberCode = c.ProductNumberCode,                             
+                                ProductNumberCode = c.ProductNumberCode,
                                 TotalCreditAmmount = lines
                                                         .Where(x => x.ProductCode == c.ProductCode)
                                                         .Sum(s => s.CreditAmount),
@@ -123,17 +142,18 @@ namespace SAFT_Reader
             var invoiceLines = new List<InvoiceLine>();
             var audit = Globals.AuditFile;
 
-            var invoices = audit.SourceDocuments
-                            .SalesInvoices
-                            .Invoice;
-                            //.Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
+            var invoices = audit
+                            ?.SourceDocuments
+                            ?.SalesInvoices
+                            ?.Invoice;
+            //.Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
 
-            foreach (var invoice in invoices)
+            foreach (var invoice in invoices ?? new List<Invoice>())
             {
                 foreach (var line in invoice.Line)
                 {
                     {
-                        var tp = float.Parse(line.Tax.TaxPercentage.Replace(".", ","));
+                        var tp = line.Tax.TaxPercentage.ToAuditFloat();
                         var invoiceLine = new InvoiceLine
                         {
                             InvoiceNo = invoice.InvoiceNo,
@@ -153,20 +173,20 @@ namespace SAFT_Reader
                             LineNumber = line.LineNumber,
                             ProductCode = line.ProductCode,
                             ProductDescription = line.ProductDescription,
-                            Quantity = float.Parse(line.Quantity.Replace(".", ",")),
-                            UnitPrice = float.Parse(line.UnitPrice.Replace(".", ",")),
+                            Quantity = line.Quantity.ToAuditFloat(),
+                            UnitPrice = line.UnitPrice.ToAuditFloat(),
                             TaxCode = line.Tax.TaxCode,
                             TaxPercentage = tp
                         };
                         if (line.CreditAmount != null)
                         {
-                            var ca = float.Parse(line.CreditAmount.Replace(".", ","));
+                            var ca = line.CreditAmount.ToAuditFloat();
                             invoiceLine.CreditAmount = ca;
                             invoiceLine.CreditTaxPayable = ca * (tp / 100);
                         }
                         if (line.DebitAmount != null)
                         {
-                            var da = float.Parse(line.DebitAmount.Replace(".", ","));
+                            var da = line.DebitAmount.ToAuditFloat();
                             invoiceLine.DebitAmount = da;
                             invoiceLine.DebitTaxPayable = da * (tp / 100);
                         }
@@ -178,14 +198,14 @@ namespace SAFT_Reader
             return invoiceLines;
         }
 
-        public static List<InvoiceEntry> LoadInvoiLoadDocuments()
+        public static List<InvoiceEntry> LoadInvoiceEntries()
         {
             var audit = Globals.AuditFile;
             return audit
-                    .SourceDocuments
-                    .SalesInvoices
-                    .Invoice
-                    .Select(i => new InvoiceEntry
+                    ?.SourceDocuments
+                    ?.SalesInvoices
+                    ?.Invoice
+                    ?.Select(i => new InvoiceEntry
                     {
                         InvoiceNo = i.InvoiceNo,
                         Period = i.Period,
@@ -203,18 +223,18 @@ namespace SAFT_Reader
                                                 .FirstOrDefault()
                                                 .CompanyName,
                         InvoiceStatus = i.DocumentStatus.InvoiceStatus,
-                        TaxPayable = float.Parse(i.DocumentTotals.TaxPayable.Replace(".", ",")),
-                        NetTotal = float.Parse(i.DocumentTotals.NetTotal.Replace(".", ",")),
-                        GrossTotal = float.Parse(i.DocumentTotals.GrossTotal.Replace(".", ","))
-                    }).ToList();
+                        TaxPayable = i.DocumentTotals.TaxPayable.ToAuditFloat(),
+                        NetTotal = i.DocumentTotals.NetTotal.ToAuditFloat(),
+                        GrossTotal = i.DocumentTotals.GrossTotal.ToAuditFloat()
+                    }).ToList() ?? new List<InvoiceEntry>();
         }
 
-        public static List<TaxTableEntryTotal> LoadTaxTableEntryTotals(List<InvoiceLine> invoiceLines)
+        public static List<TaxTableEntryTotal> LoadTaxEntryTotals(List<InvoiceLine> invoiceLines)
         {
             var audit = Globals.AuditFile;
 
             var totals = invoiceLines
-                .Where(s=>s.InvoiceStatus.Equals("N"))
+                .Where(s => s.InvoiceStatus.Equals("N"))
                 .GroupBy(g => new { g.TaxCode, g.TaxPercentage })
                 .Select(cl => new TaxTableEntryTotal
                 {

@@ -1,10 +1,5 @@
 ﻿using Programatica.Saft.Models;
 using SAFT_Reader.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAFT_Reader.Extensions
 {
@@ -30,9 +25,15 @@ namespace SAFT_Reader.Extensions
                 Numero_Certificado = a.Header.SoftwareCertificateNumber,
                 Nome_Aplicacao = a.Header.ProductID,
                 Versao_Aplicacao = a.Header.ProductVersion,
-                Total_Registos = int.Parse(a.SourceDocuments.SalesInvoices.NumberOfEntries),
-                Total_Creditos = float.Parse(a.SourceDocuments.SalesInvoices.TotalCredit.Replace(".",",")),
-                Total_Debitos = float.Parse(a.SourceDocuments.SalesInvoices.TotalDebit.Replace(".", ",")),
+                //Total_Registos = a?.SourceDocuments?.SalesInvoices != null 
+                //                                        ? a.SourceDocuments.SalesInvoices.NumberOfEntries.ToAuditInt() 
+                //                                        : 0,
+                //Total_Creditos = a?.SourceDocuments?.SalesInvoices != null  
+                //                                        ? a.SourceDocuments.SalesInvoices.TotalCredit.ToAuditFloat() 
+                //                                        : 0,
+                //Total_Debitos = a?.SourceDocuments?.SalesInvoices != null
+                //                                        ? a.SourceDocuments.SalesInvoices.TotalDebit.ToAuditFloat()
+                //                                        : 0,
             };
 
         }

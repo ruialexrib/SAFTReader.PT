@@ -184,7 +184,10 @@
     <Compile Include="ApplicationModule.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Extensions\AuditFileExtensions.cs" />
+    <Compile Include="Extensions\AuditStringExtensions.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Models\AccountEntry.cs" />
+    <Compile Include="Models\AuditReport.cs" />
     <Compile Include="Models\CustomerEntry.cs" />
     <Compile Include="Models\HeaderPt.cs" />
     <Compile Include="Models\InvoiceEntry.cs" />
@@ -192,6 +195,9 @@
     <Compile Include="Models\ProductEntry.cs" />
     <Compile Include="Models\TaxEntry.cs" />
     <Compile Include="Models\TaxTableEntryTotal.cs" />
+    <Compile Include="Models\TransactionEntry.cs" />
+    <Compile Include="Services\AuditService.cs" />
+    <Compile Include="Services\IAuditService.cs" />
     <Compile Include="UI\OpenFileDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
