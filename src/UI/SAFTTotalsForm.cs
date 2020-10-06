@@ -1,4 +1,5 @@
 ﻿using SAFT_Reader.Extensions;
+using SAFT_Reader.Models;
 using Syncfusion.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -35,11 +36,12 @@ namespace SAFT_Reader.UI
         {
             var audit = Globals.AuditFile;
             var invoiceLines = Globals.LoadInvoiceLines();
-            var totals = Globals.LoadTaxTableEntryTotals(invoiceLines);
-            var invoices = Globals.LoadInvoiLoadDocuments();
-            var customers = Globals.LoadCustomerLines();
-            var products = Globals.LoadProductLines();
-            var tax = Globals.LoadTaxLines();
+            var totals = Globals.LoadTaxEntryTotals(invoiceLines);
+            var invoices = Globals.LoadInvoiceEntries();
+            var customers = Globals.LoadCustomerEntries();
+            var products = Globals.LoadProductEntries();
+            var tax = Globals.LoadTaxEntries();
+            var accounts = Globals.LoadAccountEntries();
 
             gridLines.DataSource = invoiceLines;
             gridTotals.DataSource = totals;
@@ -47,6 +49,7 @@ namespace SAFT_Reader.UI
             gridCustomers.DataSource = customers;
             gridProducts.DataSource = products;
             gridTax.DataSource = tax;
+            gridAccounts.DataSource = accounts;
 
             SetGridTotalsSummaries();
             SetGridLinesGroupSummaries();
@@ -55,6 +58,7 @@ namespace SAFT_Reader.UI
             SetCustomerLinesSummaries();
             SetProductLinesSummaries();
             SetTaxLinesSummaries();
+            SetAccountsSummaries();
 
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
@@ -107,6 +111,8 @@ namespace SAFT_Reader.UI
             gridTax.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
             gridTax.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
 
+            gridAccounts.Columns["AccountID"].CellStyle.Font.Bold = true;
+
             LoadAuditHeaderPropertyGrids();
         }
 
@@ -121,7 +127,7 @@ namespace SAFT_Reader.UI
                 pg.Dock = DockStyle.Fill;
                 pg.HelpVisible = false;
                 pg.ToolbarVisible = false;
-                tab.Text = $"{System.IO.Path.GetFileName(file.FilePath)}";
+                tab.Text = $"{System.IO.Path.GetFileName(file.FilePath)}".ToUpper();
                 tab.Controls.Add(pg);
 
                 tabControlAdv3.TabPages.Add(tab);
@@ -303,6 +309,47 @@ namespace SAFT_Reader.UI
             sum.SummaryColumns.Add(da);
 
             this.gridTax.TableSummaryRows.Add(sum);
+        }
+
+        private void SetAccountsSummaries()
+        {
+            GridTableSummaryRow sum = new GridTableSummaryRow();
+            sum.ShowSummaryInRow = false;
+            sum.TitleColumnCount = 1;
+            sum.Position = VerticalPosition.Bottom;
+            sum.Title = "Totais";
+
+            GridSummaryColumn odb = new GridSummaryColumn();
+            odb.Name = "OpeningDebitBalance";
+            odb.Format = "{Sum:c}";
+            odb.MappingName = "OpeningDebitBalance";
+            odb.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn ocb = new GridSummaryColumn();
+            ocb.Name = "OpeningCreditBalance";
+            ocb.Format = "{Sum:c}";
+            ocb.MappingName = "OpeningCreditBalance";
+            ocb.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn cdb = new GridSummaryColumn();
+            cdb.Name = "ClosingDebitBalance";
+            cdb.Format = "{Sum:c}";
+            cdb.MappingName = "ClosingDebitBalance";
+            cdb.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn ccb = new GridSummaryColumn();
+            ccb.Name = "ClosingCreditBalance";
+            ccb.Format = "{Sum:c}";
+            ccb.MappingName = "ClosingCreditBalance";
+            ccb.SummaryType = SummaryType.DoubleAggregate;
+
+
+            sum.SummaryColumns.Add(odb);
+            sum.SummaryColumns.Add(ocb);
+            sum.SummaryColumns.Add(cdb);
+            sum.SummaryColumns.Add(ccb);
+
+            this.gridAccounts.TableSummaryRows.Add(sum);
         }
 
         private void SetGridLinesGroupSummaries()
@@ -666,6 +713,22 @@ namespace SAFT_Reader.UI
             }
 
             Cursor.Current = Cursors.Default;
+        }
+
+        private void gridAccounts_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
+        {
+            if (e.RowType == RowType.DefaultRow)
+            {
+                if ((e.RowData as AccountEntry).GroupingCategory.Equals("GR".ToAuditGroupingCategoryDesc()))
+                {
+                    e.Style.Font.Bold = true;
+                    e.Style.BackColor = ColorTranslator.FromHtml("#ebebe0");
+                }
+                else if ((e.RowData as AccountEntry).GroupingCategory.Equals("GA".ToAuditGroupingCategoryDesc()))
+                {
+                    e.Style.Font.Bold = true;
+                }
+            }
         }
     }
 }

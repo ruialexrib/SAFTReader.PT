@@ -20,8 +20,5 @@ namespace SAFT_Reader.Models
         public string Numero_Certificado { get; set; }
         public string Nome_Aplicacao { get; set; }
         public string Versao_Aplicacao { get; set; }
-        public int Total_Registos { get; set; }
-        public float Total_Debitos { get; set; }
-        public float Total_Creditos { get; set; }
     }
 }
