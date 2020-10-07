@@ -1,5 +1,6 @@
 ﻿using Programatica.Saft.Models;
 using SAFT_Reader.Adapter;
+using SAFT_Reader.Services;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
@@ -15,11 +16,11 @@ namespace SAFT_Reader.UI
 
         private readonly IFileStreamAdapter _fileStreamAdapter;
         private readonly IXmlSerializerAdapter _xmlSerializerAdapter;
+        private readonly IAuditService _auditService;
 
-        public AttachedFilesFormDialog(IFileStreamAdapter fileStreamAdapter, IXmlSerializerAdapter xmlSerializerAdapter)
+        public AttachedFilesFormDialog(IAuditService auditService)
         {
-            _fileStreamAdapter = fileStreamAdapter;
-            _xmlSerializerAdapter = xmlSerializerAdapter;
+            _auditService = auditService;
 
             InitializeComponent();
             InitializeView();
@@ -36,12 +37,6 @@ namespace SAFT_Reader.UI
             RefreshGridView();
         }
 
-        private AuditFile OpenFile(string path)
-        {
-            var model = _fileStreamAdapter.Read(path);
-            return _xmlSerializerAdapter.ConvertXml<AuditFile>(model);
-        }
-
         private void cmdOK_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -52,7 +47,7 @@ namespace SAFT_Reader.UI
         private void cmdCancel_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Globals.AuditFile = MergeAudits();
+            Globals.AuditFile = _auditService.MergeAudits();
             this.DialogResult = DialogResult.OK;
             Cursor.Current = Cursors.Default;
         }
@@ -69,51 +64,12 @@ namespace SAFT_Reader.UI
             if (Globals.AttachedFiles.Count > 0) { cmdDelete.Enabled = true; }
         }
 
-        public AuditFile MergeAudits()
-        {
-            AuditFile audit = OpenFile(Globals.AttachedFiles
-                                                .Where(x => x.IsPrincipal == true)
-                                                .FirstOrDefault().FilePath);
-
-            foreach (var file in Globals.AttachedFiles.Where(x => x.IsPrincipal == false))
-            {
-                var subaudit = OpenFile(file.FilePath);
-
-                audit.MasterFiles.Customer = audit.MasterFiles.Customer
-                                                                .Concat(subaudit.MasterFiles.Customer)
-                                                                .ToList();
-
-                audit.MasterFiles.TaxTable.TaxTableEntry = audit.MasterFiles.TaxTable.TaxTableEntry
-                                                .Concat(subaudit.MasterFiles.TaxTable.TaxTableEntry)
-                                                .ToList();
-
-                audit.MasterFiles.Product = audit.MasterFiles.Product
-                                .Concat(subaudit.MasterFiles.Product)
-                                .ToList();
-
-                audit.SourceDocuments.SalesInvoices.Invoice = audit.SourceDocuments.SalesInvoices.Invoice
-                                                            .Concat(subaudit.SourceDocuments.SalesInvoices.Invoice)
-                                                            .ToList();
-
-                audit.SourceDocuments.SalesInvoices.TotalCredit = (float.Parse(audit.SourceDocuments.SalesInvoices.TotalCredit.Replace(".", ",")) +
-                    float.Parse(subaudit.SourceDocuments.SalesInvoices.TotalCredit.Replace(".", ","))).ToString();
-
-                audit.SourceDocuments.SalesInvoices.TotalDebit = (float.Parse(audit.SourceDocuments.SalesInvoices.TotalDebit.Replace(".", ",")) +
-                    float.Parse(subaudit.SourceDocuments.SalesInvoices.TotalDebit.Replace(".", ","))).ToString();
-
-                audit.SourceDocuments.SalesInvoices.NumberOfEntries = (int.Parse(audit.SourceDocuments.SalesInvoices.NumberOfEntries) +
-                    int.Parse(subaudit.SourceDocuments.SalesInvoices.NumberOfEntries)).ToString();
-            }
-
-            return audit;
-        }
-
         private void cmdAdd_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                var subaudit = OpenFile(openFileDialog1.FileName);
+                var subaudit = _auditService.OpenFile(openFileDialog1.FileName);
 
                 if (ValidateFile(subaudit) == true)
                 {
@@ -145,7 +101,7 @@ namespace SAFT_Reader.UI
         {
             bool r = true;
             var a = Globals.AttachedFiles.Where(x => x.IsPrincipal == true).FirstOrDefault().AuditFile;
-              if (a.Header.CompanyID != b.Header.CompanyID)
+            if (a.Header.CompanyID != b.Header.CompanyID)
             {
                 r = false;
             }

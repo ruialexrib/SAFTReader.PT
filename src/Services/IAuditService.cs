@@ -5,6 +5,10 @@ namespace SAFT_Reader.Services
 {
     public interface IAuditService
     {
-        AuditReport Audit(AuditFile audit);
+        AuditReport Audit();
+
+        AuditFile MergeAudits();
+
+        AuditFile OpenFile(string path);
     }
 }
