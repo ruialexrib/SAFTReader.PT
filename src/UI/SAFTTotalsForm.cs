@@ -32,7 +32,7 @@ namespace SAFT_Reader.UI
             SelectedGrid = gridLines;
         }
 
-        private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
+        private void LoadGrids()
         {
             var audit = Globals.AuditFile;
             var invoiceLines = Globals.LoadInvoiceLines();
@@ -43,6 +43,7 @@ namespace SAFT_Reader.UI
             var tax = Globals.LoadTaxEntries();
             var accounts = Globals.LoadAccountEntries();
 
+            // set grid datasources
             gridLines.DataSource = invoiceLines;
             gridTotals.DataSource = totals;
             gridDocuments.DataSource = invoices;
@@ -51,30 +52,33 @@ namespace SAFT_Reader.UI
             gridTax.DataSource = tax;
             gridAccounts.DataSource = accounts;
 
+            // set grid summaries
             SetGridTotalsSummaries();
-            SetGridLinesGroupSummaries();
+            SetGridLinesGroupColumnSummaries();
             SetGridLinesSummaries();
-            SetGridDocumentsSummaries();
-            SetCustomerLinesSummaries();
-            SetProductLinesSummaries();
-            SetTaxLinesSummaries();
-            SetAccountsSummaries();
+            SetGridDocumentsTableSummaries();
+            SetGridCustomerTableSummaries();
+            SetGridProductTableSummaries();
+            SetGridTaxTableSummaries();
+            SetGridAccountsTableSummaries();
 
+            // format gridTotals
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
-            gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridTotals.Columns["BalanceAmount"].CellStyle.Font.Bold = true;
-            gridTotals.Columns["BalanceTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridTotals.Columns["BalanceTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
             gridTotals.Columns["BalanceTaxPayable"].CellStyle.Font.Bold = true;
 
+            // format gridLines
             gridLines.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridLines.Columns["InvoiceNo"].CellStyle.Font.Bold = true;
-            gridLines.Columns["CreditTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridLines.Columns["CreditTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
             gridLines.Columns["CreditTaxPayable"].CellStyle.Font.Bold = true;
-            gridLines.Columns["DebitTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridLines.Columns["DebitTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
             gridLines.Columns["DebitTaxPayable"].CellStyle.Font.Bold = true;
-            gridLines.Columns["CreditAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridLines.Columns["CreditAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridLines.Columns["CreditAmount"].CellStyle.Font.Bold = true;
-            gridLines.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridLines.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridLines.Columns["DebitAmount"].CellStyle.Font.Bold = true;
             gridLines.Columns["ProductCode"].Width = 70;
             gridLines.Columns["LineNumber"].Width = 50;
@@ -84,36 +88,39 @@ namespace SAFT_Reader.UI
             gridLines.Columns["TaxPercentage"].Width = 50;
             gridLines.Columns["Quantity"].Width = 50;
 
+            // format gridDocuments
             gridDocuments.Columns["InvoiceNo"].CellStyle.Font.Bold = true;
-            gridDocuments.Columns["NetTotal"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridDocuments.Columns["NetTotal"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
             gridDocuments.Columns["NetTotal"].CellStyle.Font.Bold = true;
-            gridDocuments.Columns["TaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridDocuments.Columns["TaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridDocuments.Columns["TaxPayable"].CellStyle.Font.Bold = true;
-            gridDocuments.Columns["GrossTotal"].CellStyle.BackColor = ColorTranslator.FromHtml("#ccccb3");
+            gridDocuments.Columns["GrossTotal"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
             gridDocuments.Columns["GrossTotal"].CellStyle.Font.Bold = true;
 
+            // format gridCustomers
             gridCustomers.Columns["CustomerID"].CellStyle.Font.Bold = true;
             gridCustomers.Columns["CompanyName"].CellStyle.Font.Bold = true;
-            gridCustomers.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridCustomers.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridCustomers.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
-            gridCustomers.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridCustomers.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridCustomers.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
 
+            // format gridProducts
             gridProducts.Columns["ProductCode"].CellStyle.Font.Bold = true;
-            gridProducts.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridProducts.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridProducts.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
-            gridProducts.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridProducts.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridProducts.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
 
+            // format gridTax
             gridTax.Columns["TaxCode"].CellStyle.Font.Bold = true;
-            gridTax.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTax.Columns["TotalCreditAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridTax.Columns["TotalCreditAmmount"].CellStyle.Font.Bold = true;
-            gridTax.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml("#ebebe0");
+            gridTax.Columns["TotalDebitAmmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridTax.Columns["TotalDebitAmmount"].CellStyle.Font.Bold = true;
 
+            // format gridAccounts
             gridAccounts.Columns["AccountID"].CellStyle.Font.Bold = true;
-
-            LoadAuditHeaderPropertyGrids();
         }
 
         private void LoadAuditHeaderPropertyGrids()
@@ -128,13 +135,12 @@ namespace SAFT_Reader.UI
                 pg.HelpVisible = false;
                 pg.ToolbarVisible = false;
                 tab.Text = $"{System.IO.Path.GetFileName(file.FilePath)}".ToUpper();
+                tab.ImageIndex = 0;
                 tab.Controls.Add(pg);
 
                 tabControlAdv3.TabPages.Add(tab);
             }
         }
-
-
 
         private void SetGridTotalsSummaries()
         {
@@ -232,7 +238,7 @@ namespace SAFT_Reader.UI
         }
 
 
-        private void SetCustomerLinesSummaries()
+        private void SetGridCustomerTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow();
             sum.ShowSummaryInRow = false;
@@ -258,8 +264,7 @@ namespace SAFT_Reader.UI
             this.gridCustomers.TableSummaryRows.Add(sum);
         }
 
-
-        private void SetProductLinesSummaries()
+        private void SetGridProductTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow();
             sum.ShowSummaryInRow = false;
@@ -285,7 +290,7 @@ namespace SAFT_Reader.UI
             this.gridProducts.TableSummaryRows.Add(sum);
         }
 
-        private void SetTaxLinesSummaries()
+        private void SetGridTaxTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow();
             sum.ShowSummaryInRow = false;
@@ -311,7 +316,7 @@ namespace SAFT_Reader.UI
             this.gridTax.TableSummaryRows.Add(sum);
         }
 
-        private void SetAccountsSummaries()
+        private void SetGridAccountsTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow();
             sum.ShowSummaryInRow = false;
@@ -352,7 +357,7 @@ namespace SAFT_Reader.UI
             this.gridAccounts.TableSummaryRows.Add(sum);
         }
 
-        private void SetGridLinesGroupSummaries()
+        private void SetGridLinesGroupColumnSummaries()
         {
             // Creates the GridSummaryRow.
             GridSummaryRow captionSummaryRow = new GridSummaryRow();
@@ -395,7 +400,7 @@ namespace SAFT_Reader.UI
             this.gridLines.CaptionSummaryRow = captionSummaryRow;
         }
 
-        private void SetGridDocumentsSummaries()
+        private void SetGridDocumentsTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow();
             sum.ShowSummaryInRow = false;
@@ -426,6 +431,14 @@ namespace SAFT_Reader.UI
             sum.SummaryColumns.Add(gt);
 
             this.gridDocuments.TableSummaryRows.Add(sum);
+        }
+
+        #region  Events
+
+        private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
+        {
+            LoadGrids();
+            LoadAuditHeaderPropertyGrids();
         }
 
         private void GridEnter(object sender, EventArgs e)
@@ -730,5 +743,7 @@ namespace SAFT_Reader.UI
                 }
             }
         }
+
+        #endregion
     }
 }

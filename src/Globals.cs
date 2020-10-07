@@ -15,6 +15,9 @@ namespace SAFT_Reader
 
         public static List<AttachedFile> AttachedFiles { get; set; }
 
+        public const string LightColumnColor = "#ebebe0";
+        public const string DarkColumnColor = "#ccccb3";
+
         public static string VersionLabel
         {
             get
