@@ -1,10 +1,25 @@
-﻿namespace SAFT_Reader.Extensions
+﻿using System;
+
+namespace SAFT_Reader.Extensions
 {
     public static class AuditStringExtensions
     {
-        public static float ToAuditFloat(this string s)
+        public static float ToAuditFloat(this string s, bool round = true)
         {
-            return float.Parse(s.ToAuditDecimalString());
+            var r = float.Parse(s.ToAuditDecimalString());
+            if (round)
+            {
+                return r.ToAuditRound();
+            }
+            else
+            {
+                return r;
+            }
+        }
+
+        public static float ToAuditRound(this float f)
+        {
+            return (float)Math.Round(f, 2);
         }
 
         public static string ToAuditDecimalString(this string s)

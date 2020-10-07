@@ -183,15 +183,15 @@ namespace SAFT_Reader
                         };
                         if (line.CreditAmount != null)
                         {
-                            var ca = line.CreditAmount.ToAuditFloat();
-                            invoiceLine.CreditAmount = ca;
-                            invoiceLine.CreditTaxPayable = ca * (tp / 100);
+                            var ca = line.CreditAmount;
+                            invoiceLine.CreditAmount = ca.ToAuditFloat();
+                            invoiceLine.CreditTaxPayable = (ca.ToAuditFloat(false) * (tp / 100)).ToAuditRound();
                         }
                         if (line.DebitAmount != null)
                         {
-                            var da = line.DebitAmount.ToAuditFloat();
-                            invoiceLine.DebitAmount = da;
-                            invoiceLine.DebitTaxPayable = da * (tp / 100);
+                            var da = line.DebitAmount;
+                            invoiceLine.DebitAmount = da.ToAuditFloat();
+                            invoiceLine.DebitTaxPayable = (da.ToAuditFloat(true) * (tp / 100)).ToAuditRound();
                         }
                         invoiceLines.Add(invoiceLine);
                     }
@@ -253,9 +253,9 @@ namespace SAFT_Reader
                     CreditAmount = cl.Sum(c => c.CreditAmount),
                     DebitAmount = cl.Sum(d => d.DebitAmount),
                     BalanceAmount = cl.Sum(c => c.CreditAmount) - cl.Sum(d => d.DebitAmount),
-                    CreditTaxPayable = cl.Sum(c => c.CreditAmount) * (cl.First().TaxPercentage / 100),
-                    DebitTaxPayable = cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100),
-                    BalanceTaxPayable = cl.Sum(c => c.CreditAmount) * (cl.First().TaxPercentage / 100) - cl.Sum(d => d.DebitAmount) * (cl.First().TaxPercentage / 100)
+                    CreditTaxPayable = cl.Sum(c => c.CreditTaxPayable),
+                    DebitTaxPayable = cl.Sum(d => d.DebitTaxPayable ),
+                    BalanceTaxPayable = cl.Sum(c => c.CreditTaxPayable) - cl.Sum(d => d.DebitTaxPayable)
                 }).ToList();
 
             return totals;
