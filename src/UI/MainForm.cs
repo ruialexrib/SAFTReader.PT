@@ -15,11 +15,11 @@ using System.Windows.Forms;
 
 namespace SAFT_Reader.UI
 {
-    public partial class SAFTTotalsForm : RibbonForm
+    public partial class MainForm : RibbonForm
     {
         public SfDataGrid SelectedGrid { get; set; }
 
-        public SAFTTotalsForm()
+        public MainForm()
         {
             InitializeComponent();
             InitializeView();
@@ -639,7 +639,7 @@ namespace SAFT_Reader.UI
         private void cmdReset_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            var f = CompositionRoot.Resolve<SAFTTotalsForm>();
+            var f = CompositionRoot.Resolve<MainForm>();
             var o = this.Owner;
             this.Dispose();
             f.Show(o);
@@ -724,7 +724,7 @@ namespace SAFT_Reader.UI
 
             if (r == DialogResult.OK)
             {
-                var fr = CompositionRoot.Resolve<SAFTTotalsForm>();
+                var fr = CompositionRoot.Resolve<MainForm>();
                 var o = this.Owner;
                 this.Dispose();
                 fr.Show(o);

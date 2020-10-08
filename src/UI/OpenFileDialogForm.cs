@@ -75,7 +75,7 @@ namespace SAFT_Reader.UI
 
                 Globals.AuditFile = a;
 
-                var f = CompositionRoot.Resolve<SAFTTotalsForm>();
+                var f = CompositionRoot.Resolve<MainForm>();
                 f.ShowDialog(this);
             }
             catch (Exception)

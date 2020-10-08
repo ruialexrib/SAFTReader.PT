@@ -29,11 +29,13 @@ namespace SAFT_Reader.Models
         public string AccountID { get; set; }
         [Display(Name = "Descrição Linha")]
         public string LineDescription { get; set; }
-        [Display(Name = "Crédito")]
-        [DataType(DataType.Currency)]
-        public float CreditAmount { get; set; }
+
         [Display(Name = "Débito")]
         [DataType(DataType.Currency)]
         public float DebitAmount { get; set; }
+        [Display(Name = "Crédito")]
+        [DataType(DataType.Currency)]
+        public float CreditAmount { get; set; }
+
     }
 }

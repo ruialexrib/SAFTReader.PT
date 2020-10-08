@@ -242,11 +242,11 @@
     <Compile Include="UI\TaxByDocumentFormDialog.Designer.cs">
       <DependentUpon>TaxByDocumentFormDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SAFTTotalsForm.cs">
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\SAFTTotalsForm.Designer.cs">
-      <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Content Include="validador_v1_04.jar">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -281,8 +281,8 @@
     <EmbeddedResource Include="UI\TaxByDocumentFormDialog.resx">
       <DependentUpon>TaxByDocumentFormDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\SAFTTotalsForm.resx">
-      <DependentUpon>SAFTTotalsForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
