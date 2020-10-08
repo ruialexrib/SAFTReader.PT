@@ -14,8 +14,6 @@ namespace SAFT_Reader.UI
     {
         public SfDataGrid DataGrid { get; set; }
 
-        private readonly IFileStreamAdapter _fileStreamAdapter;
-        private readonly IXmlSerializerAdapter _xmlSerializerAdapter;
         private readonly IAuditService _auditService;
 
         public AttachedFilesFormDialog(IAuditService auditService)
