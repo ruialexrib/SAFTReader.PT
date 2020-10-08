@@ -732,12 +732,12 @@ namespace SAFT_Reader.UI
         {
             if (e.RowType == RowType.DefaultRow)
             {
-                if ((e.RowData as AccountEntry).GroupingCategory.Equals("GR".ToAuditGroupingCategoryDesc()))
+                if ((e.RowData as AccountEntry).GroupingCategory.Equals("GR".ToAccountGroupCatDesc()))
                 {
                     e.Style.Font.Bold = true;
                     e.Style.BackColor = ColorTranslator.FromHtml("#ebebe0");
                 }
-                else if ((e.RowData as AccountEntry).GroupingCategory.Equals("GA".ToAuditGroupingCategoryDesc()))
+                else if ((e.RowData as AccountEntry).GroupingCategory.Equals("GA".ToAccountGroupCatDesc()))
                 {
                     e.Style.Font.Bold = true;
                 }

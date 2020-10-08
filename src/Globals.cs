@@ -82,12 +82,12 @@ namespace SAFT_Reader
                                 TaxCountryRegion = c.TaxCountryRegion,
                                 TaxCode = c.TaxCode,
                                 Description = c.Description,
-                                TaxPercentage = (c.TaxPercentage ?? "0.00").ToAuditFloat(),
+                                TaxPercentage = (c.TaxPercentage ?? "0.00").ToFloat(),
                                 TotalCreditAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToAuditFloat())
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
                                                         .Sum(s => s.CreditAmount),
                                 TotalDebitAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToAuditFloat())
+                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
                                                         .Sum(s => s.DebitAmount),
 
                             }).ToList();
@@ -105,11 +105,11 @@ namespace SAFT_Reader
                                 {
                                     AccountID = c.AccountID,
                                     AccountDescription = c.AccountDescription,
-                                    OpeningDebitBalance = c.OpeningDebitBalance.ToAuditFloat(),
-                                    OpeningCreditBalance = c.OpeningCreditBalance.ToAuditFloat(),
-                                    ClosingDebitBalance = c.ClosingDebitBalance.ToAuditFloat(),
-                                    ClosingCreditBalance = c.ClosingCreditBalance.ToAuditFloat(),
-                                    GroupingCategory = c.GroupingCategory.ToAuditGroupingCategoryDesc(),
+                                    OpeningDebitBalance = c.OpeningDebitBalance.ToFloat(),
+                                    OpeningCreditBalance = c.OpeningCreditBalance.ToFloat(),
+                                    ClosingDebitBalance = c.ClosingDebitBalance.ToFloat(),
+                                    ClosingCreditBalance = c.ClosingCreditBalance.ToFloat(),
+                                    GroupingCategory = c.GroupingCategory.ToAccountGroupCatDesc(),
                                     GroupingCode = c.GroupingCode,
                                     TaxonomyCode = c.TaxonomyCode
                                 }).ToList() ?? new List<AccountEntry>();
@@ -156,7 +156,7 @@ namespace SAFT_Reader
                 foreach (var line in invoice.Line)
                 {
                     {
-                        var tp = line.Tax.TaxPercentage.ToAuditFloat();
+                        var tp = line.Tax.TaxPercentage.ToFloat();
                         var invoiceLine = new InvoiceLine
                         {
                             InvoiceNo = invoice.InvoiceNo,
@@ -176,22 +176,22 @@ namespace SAFT_Reader
                             LineNumber = line.LineNumber,
                             ProductCode = line.ProductCode,
                             ProductDescription = line.ProductDescription,
-                            Quantity = line.Quantity.ToAuditFloat(),
-                            UnitPrice = line.UnitPrice.ToAuditFloat(),
+                            Quantity = line.Quantity.ToFloat(),
+                            UnitPrice = line.UnitPrice.ToFloat(),
                             TaxCode = line.Tax.TaxCode,
                             TaxPercentage = tp
                         };
                         if (line.CreditAmount != null)
                         {
                             var ca = line.CreditAmount;
-                            invoiceLine.CreditAmount = ca.ToAuditFloat();
-                            invoiceLine.CreditTaxPayable = (ca.ToAuditFloat(false) * (tp / 100)).ToAuditRound();
+                            invoiceLine.CreditAmount = ca.ToFloat();
+                            invoiceLine.CreditTaxPayable = (ca.ToFloat(false) * (tp / 100)).Round();
                         }
                         if (line.DebitAmount != null)
                         {
                             var da = line.DebitAmount;
-                            invoiceLine.DebitAmount = da.ToAuditFloat();
-                            invoiceLine.DebitTaxPayable = (da.ToAuditFloat(true) * (tp / 100)).ToAuditRound();
+                            invoiceLine.DebitAmount = da.ToFloat();
+                            invoiceLine.DebitTaxPayable = (da.ToFloat(true) * (tp / 100)).Round();
                         }
                         invoiceLines.Add(invoiceLine);
                     }
@@ -226,9 +226,9 @@ namespace SAFT_Reader
                                                 .FirstOrDefault()
                                                 .CompanyName,
                         InvoiceStatus = i.DocumentStatus.InvoiceStatus,
-                        TaxPayable = i.DocumentTotals.TaxPayable.ToAuditFloat(),
-                        NetTotal = i.DocumentTotals.NetTotal.ToAuditFloat(),
-                        GrossTotal = i.DocumentTotals.GrossTotal.ToAuditFloat()
+                        TaxPayable = i.DocumentTotals.TaxPayable.ToFloat(),
+                        NetTotal = i.DocumentTotals.NetTotal.ToFloat(),
+                        GrossTotal = i.DocumentTotals.GrossTotal.ToFloat()
                     }).ToList() ?? new List<InvoiceEntry>();
         }
 

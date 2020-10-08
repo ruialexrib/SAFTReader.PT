@@ -4,12 +4,12 @@ namespace SAFT_Reader.Extensions
 {
     public static class AuditStringExtensions
     {
-        public static float ToAuditFloat(this string s, bool round = true)
+        public static float ToFloat(this string s, bool round = true)
         {
-            var r = float.Parse(s.ToAuditDecimalString());
+            var r = float.Parse(s.ToDecimal());
             if (round)
             {
-                return r.ToAuditRound();
+                return r.Round();
             }
             else
             {
@@ -17,22 +17,22 @@ namespace SAFT_Reader.Extensions
             }
         }
 
-        public static float ToAuditRound(this float f)
+        public static float Round(this float f)
         {
             return (float)Math.Round(f, 2);
         }
 
-        public static string ToAuditDecimalString(this string s)
+        public static string ToDecimal(this string s)
         {
             return s.Replace(".", ",");
         }
 
-        public static int ToAuditInt(this string s)
+        public static int ToInt(this string s)
         {
             return int.Parse(s);
         }
 
-        public static string ToAuditGroupingCategoryDesc(this string s)
+        public static string ToAccountGroupCatDesc(this string s)
         {
             switch (s)
             {

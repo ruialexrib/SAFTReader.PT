@@ -1,5 +1,4 @@
 ﻿using Programatica.Saft.Models;
-using SAFT_Reader.Adapter;
 using SAFT_Reader.Services;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
