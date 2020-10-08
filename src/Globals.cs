@@ -149,14 +149,12 @@ namespace SAFT_Reader
                                 ?.GeneralLedgerEntries
                                 ?.Journal;
 
-            foreach (var j in journals)
+            foreach (var j in journals ?? new List<Journal>())
             {
-
-
-                foreach (var t in j.Transaction)
+                foreach (var t in j.Transaction ?? new List<Transaction>())
                 {
 
-                    foreach (var l in t.Lines.DebitLine)
+                    foreach (var l in t?.Lines?.DebitLine ?? new List<DebitLine>() )
                     {
                         var line = new TransactionEntry();
                         line.JournalID = j.JournalID;
@@ -174,7 +172,7 @@ namespace SAFT_Reader
                         line.DebitAmount = l.DebitAmount.ToFloat();
                         transactionlines.Add(line);
                     }
-                    foreach (var l in t.Lines.CreditLine)
+                    foreach (var l in t?.Lines?.CreditLine ?? new List<CreditLine>())
                     {
                         var line = new TransactionEntry();
                         line.JournalID = j.JournalID;
@@ -196,7 +194,7 @@ namespace SAFT_Reader
                 }
 
             }
-            return transactionlines;           
+            return transactionlines;      
 
         }
 

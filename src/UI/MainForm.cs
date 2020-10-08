@@ -63,6 +63,7 @@ namespace SAFT_Reader.UI
             SetGridProductTableSummaries();
             SetGridTaxTableSummaries();
             SetGridAccountsTableSummaries();
+            SetGridTransactionsTableSummaries();
 
             // format gridTotals
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
@@ -123,6 +124,13 @@ namespace SAFT_Reader.UI
 
             // format gridAccounts
             gridAccounts.Columns["AccountID"].CellStyle.Font.Bold = true;
+
+            // format gridTransactions
+            gridTransactions.Columns["TransactionID"].CellStyle.Font.Bold = true;
+            gridTransactions.Columns["CreditAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
+            gridTransactions.Columns["CreditAmount"].CellStyle.Font.Bold = true;
+            gridTransactions.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
+            gridTransactions.Columns["DebitAmount"].CellStyle.Font.Bold = true;
         }
 
         private void LoadAuditHeaderPropertyGrids()
@@ -435,12 +443,39 @@ namespace SAFT_Reader.UI
             this.gridDocuments.TableSummaryRows.Add(sum);
         }
 
+        private void SetGridTransactionsTableSummaries()
+        {
+            GridTableSummaryRow sum = new GridTableSummaryRow();
+            sum.ShowSummaryInRow = false;
+            sum.TitleColumnCount = 1;
+            sum.Position = VerticalPosition.Bottom;
+            sum.Title = "Totais";
+
+            GridSummaryColumn cre = new GridSummaryColumn();
+            cre.Name = "CreditAmmount";
+            cre.Format = "{Sum:c}";
+            cre.MappingName = "CreditAmount";
+            cre.SummaryType = SummaryType.DoubleAggregate;
+
+            GridSummaryColumn deb = new GridSummaryColumn();
+            deb.Name = "DebitAmmount";
+            deb.Format = "{Sum:c}";
+            deb.MappingName = "DebitAmount";
+            deb.SummaryType = SummaryType.DoubleAggregate;
+
+            sum.SummaryColumns.Add(cre);
+            sum.SummaryColumns.Add(deb);
+
+            this.gridTransactions.TableSummaryRows.Add(sum);
+        }
+
         #region  Events
 
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
         {
             LoadGrids();
             LoadAuditHeaderPropertyGrids();
+            mainSplitter.Visible = true;
         }
 
         private void GridEnter(object sender, EventArgs e)
