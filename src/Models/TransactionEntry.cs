@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAFT_Reader.Models
 {
@@ -20,8 +16,24 @@ namespace SAFT_Reader.Models
         [Display(Name = "Data")]
         public DateTime TransactionDate { get; set; }
         [Display(Name = "Utilizador")]
-        public DateTime SourceID { get; set; }
+        public string SourceID { get; set; }
         [Display(Name = "Descrição Movimento")]
-        public string Description { get; set; }
+        public string TransactionDescription { get; set; }
+        [Display(Name = "Tipo")]
+        public string TransactionType { get; set; }
+        [Display(Name = "Arquivo")]
+        public string DocArchivalNumber { get; set; }
+        [Display(Name = "Cliente")]
+        public string CustomerID { get; set; }
+        [Display(Name = "Conta")]
+        public string AccountID { get; set; }
+        [Display(Name = "Descrição Linha")]
+        public string LineDescription { get; set; }
+        [Display(Name = "Crédito")]
+        [DataType(DataType.Currency)]
+        public float CreditAmount { get; set; }
+        [Display(Name = "Débito")]
+        [DataType(DataType.Currency)]
+        public float DebitAmount { get; set; }
     }
 }

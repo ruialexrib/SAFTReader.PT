@@ -42,6 +42,7 @@ namespace SAFT_Reader.UI
             var products = Globals.LoadProductEntries();
             var tax = Globals.LoadTaxEntries();
             var accounts = Globals.LoadAccountEntries();
+            var trans = Globals.LoadTransactionEntries();
 
             // set grid datasources
             gridLines.DataSource = invoiceLines;
@@ -51,6 +52,7 @@ namespace SAFT_Reader.UI
             gridProducts.DataSource = products;
             gridTax.DataSource = tax;
             gridAccounts.DataSource = accounts;
+            gridTransactions.DataSource = trans;
 
             // set grid summaries
             SetGridTotalsSummaries();
@@ -508,6 +510,9 @@ namespace SAFT_Reader.UI
                     break;
                 case 5:
                     gridAccounts.Focus();
+                    break;
+                case 6:
+                    gridTransactions.Focus();
                     break;
                 default:
                     break;

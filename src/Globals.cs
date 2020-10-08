@@ -140,6 +140,66 @@ namespace SAFT_Reader
 
         }
 
+        public static List<TransactionEntry> LoadTransactionEntries()
+        {
+            var transactionlines = new List<TransactionEntry>();
+            var audit = Globals.AuditFile;
+
+            var journals = audit
+                                ?.GeneralLedgerEntries
+                                ?.Journal;
+
+            foreach (var j in journals)
+            {
+
+
+                foreach (var t in j.Transaction)
+                {
+
+                    foreach (var l in t.Lines.DebitLine)
+                    {
+                        var line = new TransactionEntry();
+                        line.JournalID = j.JournalID;
+                        line.JournalDescription = j.Description;
+                        line.TransactionID = t.TransactionID;
+                        line.Period = t.Period;
+                        line.TransactionDate = DateTime.Parse(t.TransactionDate);
+                        line.SourceID = t.SourceID;
+                        line.TransactionDescription = t.Description;
+                        line.DocArchivalNumber = t.DocArchivalNumber;
+                        line.TransactionType = t.TransactionType;
+                        line.CustomerID = t.CustomerID;
+                        line.AccountID = l.AccountID;
+                        line.LineDescription = l.Description;
+                        line.DebitAmount = l.DebitAmount.ToFloat();
+                        transactionlines.Add(line);
+                    }
+                    foreach (var l in t.Lines.CreditLine)
+                    {
+                        var line = new TransactionEntry();
+                        line.JournalID = j.JournalID;
+                        line.JournalDescription = j.Description;
+                        line.TransactionID = t.TransactionID;
+                        line.Period = t.Period;
+                        line.TransactionDate = DateTime.Parse(t.TransactionDate);
+                        line.SourceID = t.SourceID;
+                        line.TransactionDescription = t.Description;
+                        line.DocArchivalNumber = t.DocArchivalNumber;
+                        line.TransactionType = t.TransactionType;
+                        line.CustomerID = t.CustomerID;
+                        line.AccountID = l.AccountID;
+                        line.LineDescription = l.Description;
+                        line.CreditAmount = l.CreditAmount.ToFloat();
+                        transactionlines.Add(line);
+                    }
+
+                }
+
+            }
+            return transactionlines;           
+
+        }
+
         public static List<InvoiceLine> LoadInvoiceLines()
         {
             var invoiceLines = new List<InvoiceLine>();
