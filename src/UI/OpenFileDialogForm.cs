@@ -1,8 +1,11 @@
-﻿using Programatica.Saft.Models;
-using SAFT_Reader.Adapter;
-using Syncfusion.WinForms.Controls;
-using System;
+﻿using System;
 using System.Windows.Forms;
+
+using Programatica.Saft.Models;
+
+using SAFT_Reader.Adapter;
+
+using Syncfusion.WinForms.Controls;
 
 namespace SAFT_Reader.UI
 {
@@ -30,7 +33,6 @@ namespace SAFT_Reader.UI
 
         private void InitializeView()
         {
-
         }
 
         private AuditFile OpenFile(string path)
@@ -77,6 +79,7 @@ namespace SAFT_Reader.UI
 
                 var f = CompositionRoot.Resolve<MainForm>();
                 f.ShowDialog(this);
+                Application.DoEvents();
             }
             catch (Exception)
             {
@@ -104,6 +107,5 @@ namespace SAFT_Reader.UI
             cmdOK.Enabled = true;
             Cursor.Current = Cursors.Default;
         }
-
     }
 }

@@ -1,10 +1,11 @@
-﻿using Syncfusion.Data;
-using Syncfusion.WinForms.Controls;
-using Syncfusion.WinForms.DataGrid;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+
+using Syncfusion.Data;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid;
 
 namespace SAFT_Reader.UI
 {
@@ -16,8 +17,6 @@ namespace SAFT_Reader.UI
         {
             InitializeComponent();
             InitializeView();
-
-
         }
 
         private void InitializeView()
@@ -25,8 +24,8 @@ namespace SAFT_Reader.UI
             var records = Globals.AuditFile.SourceDocuments
                                                 .SalesInvoices
                                                 .Invoice
-                                                .GroupBy(p=>p.InvoiceType)
-                                                .Select(p=>p.First())
+                                                .GroupBy(p => p.InvoiceType)
+                                                .Select(p => p.First())
                                                 .Select(z => new
                                                 {
                                                     Tipo = z.InvoiceType

@@ -1,5 +1,11 @@
-﻿using SAFT_Reader.Extensions;
+﻿using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
+
+using SAFT_Reader.Extensions;
 using SAFT_Reader.Models;
+
 using Syncfusion.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -8,16 +14,13 @@ using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGridConverter;
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace SAFT_Reader.UI
 {
     public partial class MainForm : RibbonForm
     {
         public SfDataGrid SelectedGrid { get; set; }
+        private readonly WaitingForm wf = new WaitingForm();
 
         public MainForm()
         {
@@ -27,24 +30,34 @@ namespace SAFT_Reader.UI
 
         private void InitializeView()
         {
-            this.ribbonControlAdv1.Size = new Size { Width = this.ribbonControlAdv1.Size.Width, Height = 150 };
+            ribbonControlAdv1.Size = new Size { Width = this.ribbonControlAdv1.Size.Width, Height = 150 };
             this.lblInfoApp.Text = $"{Globals.VersionLabel}";
             SelectedGrid = gridLines;
         }
 
         private void LoadGrids()
         {
+            SetWaitingMsg("A carregar ficheiro");
             var audit = Globals.AuditFile;
+            SetWaitingMsg("A carregar as linhas das faturas...");
             var invoiceLines = Globals.LoadInvoiceLines();
+            SetWaitingMsg("A carregar impostos das faturas...");
             var totals = Globals.LoadTaxEntryTotals(invoiceLines);
+            SetWaitingMsg("A carregar faturas...");
             var invoices = Globals.LoadInvoiceEntries();
+            SetWaitingMsg("A carregar clientes...");
             var customers = Globals.LoadCustomerEntries();
+            SetWaitingMsg("A carregar produtos...");
             var products = Globals.LoadProductEntries();
+            SetWaitingMsg("A carregar impostos...");
             var tax = Globals.LoadTaxEntries();
+            SetWaitingMsg("A carregar plano de contas...");
             var accounts = Globals.LoadAccountEntries();
+            SetWaitingMsg("A carregar outras transações...");
             var trans = Globals.LoadTransactionEntries();
 
             // set grid datasources
+            SetWaitingMsg("A preparar listas...");
             gridLines.DataSource = invoiceLines;
             gridTotals.DataSource = totals;
             gridDocuments.DataSource = invoices;
@@ -55,6 +68,7 @@ namespace SAFT_Reader.UI
             gridTransactions.DataSource = trans;
 
             // set grid summaries
+            SetWaitingMsg("A preparar resumos...");
             SetGridTotalsSummaries();
             SetGridLinesGroupColumnSummaries();
             SetGridLinesSummaries();
@@ -65,6 +79,7 @@ namespace SAFT_Reader.UI
             SetGridAccountsTableSummaries();
             SetGridTransactionsTableSummaries();
 
+            SetWaitingMsg("A acabar apresentação dos dados...");
             // format gridTotals
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
@@ -131,6 +146,8 @@ namespace SAFT_Reader.UI
             gridTransactions.Columns["CreditAmount"].CellStyle.Font.Bold = true;
             gridTransactions.Columns["DebitAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridTransactions.Columns["DebitAmount"].CellStyle.Font.Bold = true;
+
+            SetWaitingMsg("Pronto!");
         }
 
         private void LoadAuditHeaderPropertyGrids()
@@ -154,47 +171,61 @@ namespace SAFT_Reader.UI
 
         private void SetGridTotalsSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn ca = new GridSummaryColumn();
-            ca.Name = "CreditAmount";
-            ca.Format = "{Sum:c}";
-            ca.MappingName = "CreditAmount";
-            ca.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ca = new GridSummaryColumn
+            {
+                Name = "CreditAmount",
+                Format = "{Sum:c}",
+                MappingName = "CreditAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn da = new GridSummaryColumn();
-            da.Name = "DebitAmount";
-            da.Format = "{Sum:c}";
-            da.MappingName = "DebitAmount";
-            da.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn da = new GridSummaryColumn
+            {
+                Name = "DebitAmount",
+                Format = "{Sum:c}",
+                MappingName = "DebitAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn ba = new GridSummaryColumn();
-            ba.Name = "BalanceAmount";
-            ba.Format = "{Sum:c}";
-            ba.MappingName = "BalanceAmount";
-            ba.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ba = new GridSummaryColumn
+            {
+                Name = "BalanceAmount",
+                Format = "{Sum:c}",
+                MappingName = "BalanceAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn ctp = new GridSummaryColumn();
-            ctp.Name = "CreditTaxPayable";
-            ctp.Format = "{Sum:c}";
-            ctp.MappingName = "CreditTaxPayable";
-            ctp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ctp = new GridSummaryColumn
+            {
+                Name = "CreditTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "CreditTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn dtp = new GridSummaryColumn();
-            dtp.Name = "DebitTaxPayable";
-            dtp.Format = "{Sum:c}";
-            dtp.MappingName = "DebitTaxPayable";
-            dtp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn dtp = new GridSummaryColumn
+            {
+                Name = "DebitTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "DebitTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn btp = new GridSummaryColumn();
-            btp.Name = "BalanceTaxPayable";
-            btp.Format = "{Sum:c}";
-            btp.MappingName = "BalanceTaxPayable";
-            btp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn btp = new GridSummaryColumn
+            {
+                Name = "BalanceTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "BalanceTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
@@ -208,36 +239,45 @@ namespace SAFT_Reader.UI
 
         private void SetGridLinesSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn ca = new GridSummaryColumn();
-            ca.Name = "CreditAmount";
-            ca.Format = "{Sum:c}";
-            ca.MappingName = "CreditAmount";
-            ca.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ca = new GridSummaryColumn
+            {
+                Name = "CreditAmount",
+                Format = "{Sum:c}",
+                MappingName = "CreditAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn da = new GridSummaryColumn();
-            da.Name = "DebitAmount";
-            da.Format = "{Sum:c}";
-            da.MappingName = "DebitAmount";
-            da.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn da = new GridSummaryColumn
+            {
+                Name = "DebitAmount",
+                Format = "{Sum:c}",
+                MappingName = "DebitAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn ctp = new GridSummaryColumn();
-            ctp.Name = "CreditTaxPayable";
-            ctp.Format = "{Sum:c}";
-            ctp.MappingName = "CreditTaxPayable";
-            ctp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ctp = new GridSummaryColumn
+            {
+                Name = "CreditTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "CreditTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn dtp = new GridSummaryColumn();
-            dtp.Name = "DebitTaxPayable";
-            dtp.Format = "{Sum:c}";
-            dtp.MappingName = "DebitTaxPayable";
-            dtp.SummaryType = SummaryType.DoubleAggregate;
-
+            GridSummaryColumn dtp = new GridSummaryColumn
+            {
+                Name = "DebitTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "DebitTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
@@ -247,26 +287,31 @@ namespace SAFT_Reader.UI
             this.gridLines.TableSummaryRows.Add(sum);
         }
 
-
         private void SetGridCustomerTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn ca = new GridSummaryColumn();
-            ca.Name = "TotalCreditAmmount";
-            ca.Format = "{Sum:c}";
-            ca.MappingName = "TotalCreditAmmount";
-            ca.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ca = new GridSummaryColumn
+            {
+                Name = "TotalCreditAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalCreditAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn da = new GridSummaryColumn();
-            da.Name = "TotalDebitAmmount";
-            da.Format = "{Sum:c}";
-            da.MappingName = "TotalDebitAmmount";
-            da.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn da = new GridSummaryColumn
+            {
+                Name = "TotalDebitAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalDebitAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
@@ -276,23 +321,29 @@ namespace SAFT_Reader.UI
 
         private void SetGridProductTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn ca = new GridSummaryColumn();
-            ca.Name = "TotalCreditAmmount";
-            ca.Format = "{Sum:c}";
-            ca.MappingName = "TotalCreditAmmount";
-            ca.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ca = new GridSummaryColumn
+            {
+                Name = "TotalCreditAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalCreditAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn da = new GridSummaryColumn();
-            da.Name = "TotalDebitAmmount";
-            da.Format = "{Sum:c}";
-            da.MappingName = "TotalDebitAmmount";
-            da.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn da = new GridSummaryColumn
+            {
+                Name = "TotalDebitAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalDebitAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
@@ -302,23 +353,29 @@ namespace SAFT_Reader.UI
 
         private void SetGridTaxTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn ca = new GridSummaryColumn();
-            ca.Name = "TotalCreditAmmount";
-            ca.Format = "{Sum:c}";
-            ca.MappingName = "TotalCreditAmmount";
-            ca.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ca = new GridSummaryColumn
+            {
+                Name = "TotalCreditAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalCreditAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn da = new GridSummaryColumn();
-            da.Name = "TotalDebitAmmount";
-            da.Format = "{Sum:c}";
-            da.MappingName = "TotalDebitAmmount";
-            da.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn da = new GridSummaryColumn
+            {
+                Name = "TotalDebitAmmount",
+                Format = "{Sum:c}",
+                MappingName = "TotalDebitAmmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
@@ -328,36 +385,45 @@ namespace SAFT_Reader.UI
 
         private void SetGridAccountsTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn odb = new GridSummaryColumn();
-            odb.Name = "OpeningDebitBalance";
-            odb.Format = "{Sum:c}";
-            odb.MappingName = "OpeningDebitBalance";
-            odb.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn odb = new GridSummaryColumn
+            {
+                Name = "OpeningDebitBalance",
+                Format = "{Sum:c}",
+                MappingName = "OpeningDebitBalance",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn ocb = new GridSummaryColumn();
-            ocb.Name = "OpeningCreditBalance";
-            ocb.Format = "{Sum:c}";
-            ocb.MappingName = "OpeningCreditBalance";
-            ocb.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn ocb = new GridSummaryColumn
+            {
+                Name = "OpeningCreditBalance",
+                Format = "{Sum:c}",
+                MappingName = "OpeningCreditBalance",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn cdb = new GridSummaryColumn();
-            cdb.Name = "ClosingDebitBalance";
-            cdb.Format = "{Sum:c}";
-            cdb.MappingName = "ClosingDebitBalance";
-            cdb.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn cdb = new GridSummaryColumn
+            {
+                Name = "ClosingDebitBalance",
+                Format = "{Sum:c}",
+                MappingName = "ClosingDebitBalance",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn ccb = new GridSummaryColumn();
-            ccb.Name = "ClosingCreditBalance";
-            ccb.Format = "{Sum:c}";
-            ccb.MappingName = "ClosingCreditBalance";
-            ccb.SummaryType = SummaryType.DoubleAggregate;
-
+            GridSummaryColumn ccb = new GridSummaryColumn
+            {
+                Name = "ClosingCreditBalance",
+                Format = "{Sum:c}",
+                MappingName = "ClosingCreditBalance",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(odb);
             sum.SummaryColumns.Add(ocb);
@@ -370,35 +436,45 @@ namespace SAFT_Reader.UI
         private void SetGridLinesGroupColumnSummaries()
         {
             // Creates the GridSummaryRow.
-            GridSummaryRow captionSummaryRow = new GridSummaryRow();
-            captionSummaryRow.Name = "CaptionSummary";
-            captionSummaryRow.ShowSummaryInRow = false;
-            captionSummaryRow.TitleColumnCount = 3;
-            captionSummaryRow.Title = "{ColumnName} = {Key} ({ItemsCount} Registos)";
+            GridSummaryRow captionSummaryRow = new GridSummaryRow
+            {
+                Name = "CaptionSummary",
+                ShowSummaryInRow = false,
+                TitleColumnCount = 3,
+                Title = "{ColumnName} = {Key} ({ItemsCount} Registos)"
+            };
 
-            GridSummaryColumn summaryColumn1 = new GridSummaryColumn();
-            summaryColumn1.Name = "CreditAmount";
-            summaryColumn1.Format = "{Sum:c}";
-            summaryColumn1.MappingName = "CreditAmount";
-            summaryColumn1.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn summaryColumn1 = new GridSummaryColumn
+            {
+                Name = "CreditAmount",
+                Format = "{Sum:c}",
+                MappingName = "CreditAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn summaryColumn2 = new GridSummaryColumn();
-            summaryColumn2.Name = "DebitAmount";
-            summaryColumn2.Format = "{Sum:c}";
-            summaryColumn2.MappingName = "DebitAmount";
-            summaryColumn2.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn summaryColumn2 = new GridSummaryColumn
+            {
+                Name = "DebitAmount",
+                Format = "{Sum:c}",
+                MappingName = "DebitAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn summaryColumn3 = new GridSummaryColumn();
-            summaryColumn3.Name = "CreditTaxPayable";
-            summaryColumn3.Format = "{Sum:c}";
-            summaryColumn3.MappingName = "CreditTaxPayable";
-            summaryColumn3.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn summaryColumn3 = new GridSummaryColumn
+            {
+                Name = "CreditTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "CreditTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn summaryColumn4 = new GridSummaryColumn();
-            summaryColumn4.Name = "DebitTaxPayable";
-            summaryColumn4.Format = "{Sum:c}";
-            summaryColumn4.MappingName = "DebitTaxPayable";
-            summaryColumn4.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn summaryColumn4 = new GridSummaryColumn
+            {
+                Name = "DebitTaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "DebitTaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             // Adds the summary column in the SummaryColumns collection.
             captionSummaryRow.SummaryColumns.Add(summaryColumn1);
@@ -412,29 +488,37 @@ namespace SAFT_Reader.UI
 
         private void SetGridDocumentsTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn tp = new GridSummaryColumn();
-            tp.Name = "TaxPayable";
-            tp.Format = "{Sum:c}";
-            tp.MappingName = "TaxPayable";
-            tp.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn tp = new GridSummaryColumn
+            {
+                Name = "TaxPayable",
+                Format = "{Sum:c}",
+                MappingName = "TaxPayable",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn nt = new GridSummaryColumn();
-            nt.Name = "NetTotal";
-            nt.Format = "{Sum:c}";
-            nt.MappingName = "NetTotal";
-            nt.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn nt = new GridSummaryColumn
+            {
+                Name = "NetTotal",
+                Format = "{Sum:c}",
+                MappingName = "NetTotal",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn gt = new GridSummaryColumn();
-            gt.Name = "GrossTotal";
-            gt.Format = "{Sum:c}";
-            gt.MappingName = "GrossTotal";
-            gt.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn gt = new GridSummaryColumn
+            {
+                Name = "GrossTotal",
+                Format = "{Sum:c}",
+                MappingName = "GrossTotal",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(tp);
             sum.SummaryColumns.Add(nt);
@@ -445,23 +529,29 @@ namespace SAFT_Reader.UI
 
         private void SetGridTransactionsTableSummaries()
         {
-            GridTableSummaryRow sum = new GridTableSummaryRow();
-            sum.ShowSummaryInRow = false;
-            sum.TitleColumnCount = 1;
-            sum.Position = VerticalPosition.Bottom;
-            sum.Title = "Totais";
+            GridTableSummaryRow sum = new GridTableSummaryRow
+            {
+                ShowSummaryInRow = false,
+                TitleColumnCount = 1,
+                Position = VerticalPosition.Bottom,
+                Title = "Totais"
+            };
 
-            GridSummaryColumn cre = new GridSummaryColumn();
-            cre.Name = "CreditAmmount";
-            cre.Format = "{Sum:c}";
-            cre.MappingName = "CreditAmount";
-            cre.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn cre = new GridSummaryColumn
+            {
+                Name = "CreditAmmount",
+                Format = "{Sum:c}",
+                MappingName = "CreditAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
-            GridSummaryColumn deb = new GridSummaryColumn();
-            deb.Name = "DebitAmmount";
-            deb.Format = "{Sum:c}";
-            deb.MappingName = "DebitAmount";
-            deb.SummaryType = SummaryType.DoubleAggregate;
+            GridSummaryColumn deb = new GridSummaryColumn
+            {
+                Name = "DebitAmmount",
+                Format = "{Sum:c}",
+                MappingName = "DebitAmount",
+                SummaryType = SummaryType.DoubleAggregate
+            };
 
             sum.SummaryColumns.Add(cre);
             sum.SummaryColumns.Add(deb);
@@ -469,13 +559,34 @@ namespace SAFT_Reader.UI
             this.gridTransactions.TableSummaryRows.Add(sum);
         }
 
-        #region  Events
+        #region Events
+
+        private void SetWaitingMsg(string msg)
+        {
+            if (wf != null)
+            {
+                wf.SetMsg(msg);
+            }
+        }
 
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
         {
+            wf.Show();
+
             LoadGrids();
             LoadAuditHeaderPropertyGrids();
             mainSplitter.Visible = true;
+            SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridDocuments.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridCustomers.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridDocuments.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridTax.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridAccounts.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            gridTransactions.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+
+            wf.Hide();
+            wf.Close();
+            wf.Dispose();
         }
 
         private void GridEnter(object sender, EventArgs e)
@@ -531,24 +642,31 @@ namespace SAFT_Reader.UI
                 case 0:
                     gridLines.Focus();
                     break;
+
                 case 1:
                     gridDocuments.Focus();
                     break;
+
                 case 2:
                     gridCustomers.Focus();
                     break;
+
                 case 3:
                     gridProducts.Focus();
                     break;
+
                 case 4:
                     gridTax.Focus();
                     break;
+
                 case 5:
                     gridAccounts.Focus();
                     break;
+
                 case 6:
                     gridTransactions.Focus();
                     break;
+
                 default:
                     break;
             }
@@ -587,9 +705,11 @@ namespace SAFT_Reader.UI
             var excelEngine = SelectedGrid.ExportToExcel(SelectedGrid.View, options);
             var workBook = excelEngine.Excel.Workbooks[0];
 
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "xlsx File|*.xlsx|Ficheiro Excel|*.xlsx";
-            sfd.Title = "Guardar ficheiro Excel";
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "xlsx File|*.xlsx|Ficheiro Excel|*.xlsx",
+                Title = "Guardar ficheiro Excel"
+            };
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -632,9 +752,11 @@ namespace SAFT_Reader.UI
 
             PDFGrid.Draw(page, new PointF(), format);
 
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf";
-            sfd.Title = "Guardar ficheiro pdf";
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Pdf Image|*.pdf|Ficheiro pdf|*.pdf",
+                Title = "Guardar ficheiro pdf"
+            };
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -685,7 +807,7 @@ namespace SAFT_Reader.UI
         private void cmdToolAbout_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            var f = CompositionRoot.Resolve<SplashForm>();
+            var f = CompositionRoot.Resolve<WaitingForm>();
             f.ShowDialog(this);
             Cursor.Current = Cursors.Default;
         }
@@ -784,6 +906,6 @@ namespace SAFT_Reader.UI
             }
         }
 
-        #endregion
+        #endregion Events
     }
 }

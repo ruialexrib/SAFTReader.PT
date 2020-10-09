@@ -1,11 +1,14 @@
-﻿using Programatica.Saft.Models;
-using SAFT_Reader.Extensions;
-using SAFT_Reader.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+
+using Programatica.Saft.Models;
+
+using SAFT_Reader.Extensions;
+using SAFT_Reader.Models;
 
 namespace SAFT_Reader
 {
@@ -17,6 +20,8 @@ namespace SAFT_Reader
 
         public const string LightColumnColor = "#ebebe0";
         public const string DarkColumnColor = "#ccccb3";
+
+        public static char NumberDecimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
         public static string VersionLabel
         {
@@ -38,7 +43,6 @@ namespace SAFT_Reader
                 }
             }
         }
-
 
         public static List<CustomerEntry> LoadCustomerEntries()
         {
@@ -64,10 +68,9 @@ namespace SAFT_Reader
                                 TotalDebitAmmount = lines
                                                         .Where(x => x.CustomerTaxID == c.CustomerTaxID)
                                                         .Sum(s => s.DebitAmount),
-
                             }).ToList();
-
         }
+
         public static List<TaxEntry> LoadTaxEntries()
         {
             var audit = Globals.AuditFile;
@@ -89,9 +92,7 @@ namespace SAFT_Reader
                                 TotalDebitAmmount = lines
                                                         .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
                                                         .Sum(s => s.DebitAmount),
-
                             }).ToList();
-
         }
 
         public static List<AccountEntry> LoadAccountEntries()
@@ -115,7 +116,6 @@ namespace SAFT_Reader
                                 }).ToList() ?? new List<AccountEntry>();
         }
 
-
         public static List<ProductEntry> LoadProductEntries()
         {
             var audit = Globals.AuditFile;
@@ -135,9 +135,7 @@ namespace SAFT_Reader
                                 TotalDebitAmmount = lines
                                                         .Where(x => x.ProductCode == c.ProductCode)
                                                         .Sum(s => s.DebitAmount),
-
                             }).ToList();
-
         }
 
         public static List<TransactionEntry> LoadTransactionEntries()
@@ -153,49 +151,49 @@ namespace SAFT_Reader
             {
                 foreach (var t in j.Transaction ?? new List<Transaction>())
                 {
-
-                    foreach (var l in t?.Lines?.DebitLine ?? new List<DebitLine>() )
+                    foreach (var l in t?.Lines?.DebitLine ?? new List<DebitLine>())
                     {
-                        var line = new TransactionEntry();
-                        line.JournalID = j.JournalID;
-                        line.JournalDescription = j.Description;
-                        line.TransactionID = t.TransactionID;
-                        line.Period = t.Period;
-                        line.TransactionDate = DateTime.Parse(t.TransactionDate);
-                        line.SourceID = t.SourceID;
-                        line.TransactionDescription = t.Description;
-                        line.DocArchivalNumber = t.DocArchivalNumber;
-                        line.TransactionType = t.TransactionType;
-                        line.CustomerID = t.CustomerID;
-                        line.AccountID = l.AccountID;
-                        line.LineDescription = l.Description;
-                        line.DebitAmount = l.DebitAmount.ToFloat();
+                        var line = new TransactionEntry
+                        {
+                            JournalID = j.JournalID,
+                            JournalDescription = j.Description,
+                            TransactionID = t.TransactionID,
+                            Period = t.Period,
+                            TransactionDate = DateTime.Parse(t.TransactionDate),
+                            SourceID = t.SourceID,
+                            TransactionDescription = t.Description,
+                            DocArchivalNumber = t.DocArchivalNumber,
+                            TransactionType = t.TransactionType,
+                            CustomerID = t.CustomerID,
+                            AccountID = l.AccountID,
+                            LineDescription = l.Description,
+                            DebitAmount = l.DebitAmount.ToFloat()
+                        };
                         transactionlines.Add(line);
                     }
                     foreach (var l in t?.Lines?.CreditLine ?? new List<CreditLine>())
                     {
-                        var line = new TransactionEntry();
-                        line.JournalID = j.JournalID;
-                        line.JournalDescription = j.Description;
-                        line.TransactionID = t.TransactionID;
-                        line.Period = t.Period;
-                        line.TransactionDate = DateTime.Parse(t.TransactionDate);
-                        line.SourceID = t.SourceID;
-                        line.TransactionDescription = t.Description;
-                        line.DocArchivalNumber = t.DocArchivalNumber;
-                        line.TransactionType = t.TransactionType;
-                        line.CustomerID = t.CustomerID;
-                        line.AccountID = l.AccountID;
-                        line.LineDescription = l.Description;
-                        line.CreditAmount = l.CreditAmount.ToFloat();
+                        var line = new TransactionEntry
+                        {
+                            JournalID = j.JournalID,
+                            JournalDescription = j.Description,
+                            TransactionID = t.TransactionID,
+                            Period = t.Period,
+                            TransactionDate = DateTime.Parse(t.TransactionDate),
+                            SourceID = t.SourceID,
+                            TransactionDescription = t.Description,
+                            DocArchivalNumber = t.DocArchivalNumber,
+                            TransactionType = t.TransactionType,
+                            CustomerID = t.CustomerID,
+                            AccountID = l.AccountID,
+                            LineDescription = l.Description,
+                            CreditAmount = l.CreditAmount.ToFloat()
+                        };
                         transactionlines.Add(line);
                     }
-
                 }
-
             }
-            return transactionlines;      
-
+            return transactionlines;
         }
 
         public static List<InvoiceLine> LoadInvoiceLines()
@@ -312,13 +310,12 @@ namespace SAFT_Reader
                     DebitAmount = cl.Sum(d => d.DebitAmount),
                     BalanceAmount = cl.Sum(c => c.CreditAmount) - cl.Sum(d => d.DebitAmount),
                     CreditTaxPayable = cl.Sum(c => c.CreditTaxPayable),
-                    DebitTaxPayable = cl.Sum(d => d.DebitTaxPayable ),
+                    DebitTaxPayable = cl.Sum(d => d.DebitTaxPayable),
                     BalanceTaxPayable = cl.Sum(c => c.CreditTaxPayable) - cl.Sum(d => d.DebitTaxPayable)
                 }).ToList();
 
             return totals;
         }
-
     }
 
     public class AttachedFile
