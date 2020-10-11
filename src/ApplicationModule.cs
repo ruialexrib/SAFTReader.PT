@@ -1,5 +1,7 @@
 ﻿using Ninject.Modules;
+
 using Programatica.Framework.Core.Adapter;
+
 using SAFT_Reader.Adapter;
 using SAFT_Reader.Services;
 

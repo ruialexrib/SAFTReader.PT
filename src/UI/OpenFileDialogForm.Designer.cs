@@ -61,7 +61,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileName = "";
             this.openFileDialog1.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             // 
             // label3

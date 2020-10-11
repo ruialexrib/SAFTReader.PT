@@ -1,7 +1,8 @@
-﻿using Syncfusion.WinForms.Controls;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+
+using Syncfusion.WinForms.Controls;
 
 namespace SAFT_Reader.UI
 {
@@ -9,7 +10,7 @@ namespace SAFT_Reader.UI
     {
         public bool IsSplash { get; set; }
 
-        int _counter;
+        private int _counter;
 
         public SplashForm()
         {
@@ -28,8 +29,6 @@ namespace SAFT_Reader.UI
             lblReader.ForeColor = ColorTranslator.FromHtml("#00BFA6");
             lblCopy.Text = "Copyright 2020, Rui Ribeiro. Todos os direitos reservados.";
         }
-
-        
 
         private void timer1_Tick(object sender, EventArgs e)
         {

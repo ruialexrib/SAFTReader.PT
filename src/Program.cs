@@ -1,19 +1,20 @@
-﻿using Programatica.Saft.Models;
-using SAFT_Reader.UI;
-using Syncfusion.Licensing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using SAFT_Reader.UI;
+
+using Syncfusion.Licensing;
+
 namespace SAFT_Reader
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             SyncfusionLicenseProvider.RegisterLicense(FindLicenseKey());
             CompositionRoot.Wire(new ApplicationModule());
@@ -27,7 +28,7 @@ namespace SAFT_Reader
             Globals.AttachedFiles = new List<AttachedFile>();
 
             var splash = CompositionRoot.Resolve<SplashForm>();
-            splash.IsSplash=true;
+            splash.IsSplash = true;
             splash.ShowDialog();
 
             var openFileDialog = CompositionRoot.Resolve<OpenFileDialogForm>();

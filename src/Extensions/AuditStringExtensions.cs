@@ -24,7 +24,7 @@ namespace SAFT_Reader.Extensions
 
         public static string ToDecimal(this string s)
         {
-            return s.Replace(".", ",");
+            return s.Replace(".", Globals.NumberDecimalSeparator.ToString());
         }
 
         public static int ToInt(this string s)
@@ -38,16 +38,22 @@ namespace SAFT_Reader.Extensions
             {
                 case "GR":
                     return "Razão - CG";
+
                 case "GA":
                     return "Agregadora - CG";
+
                 case "GM":
                     return "Movimento - CG";
+
                 case "AR":
                     return "Razão - CA";
+
                 case "AA":
                     return "Agregadora - CA";
+
                 case "AM":
                     return "Movimento - CA";
+
                 default:
                     return "";
             }

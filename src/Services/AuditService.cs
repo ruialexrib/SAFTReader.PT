@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Programatica.Saft.Models;
+
 using SAFT_Reader.Adapter;
 using SAFT_Reader.Models;
 
@@ -9,7 +11,7 @@ namespace SAFT_Reader.Services
 {
     public class AuditService : IAuditService
     {
-        private AuditReport _auditReport;
+        private readonly AuditReport _auditReport;
 
         private readonly IFileStreamAdapter _fileStreamAdapter;
         private readonly IXmlSerializerAdapter _xmlSerializerAdapter;

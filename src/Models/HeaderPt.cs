@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SAFT_Reader.Models
+﻿namespace SAFT_Reader.Models
 {
     public class HeaderPt
     {
