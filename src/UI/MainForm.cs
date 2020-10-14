@@ -20,10 +20,13 @@ namespace SAFT_Reader.UI
     public partial class MainForm : RibbonForm
     {
         public SfDataGrid SelectedGrid { get; set; }
-        private readonly WaitingForm wf = new WaitingForm();
+        private readonly WaitingForm _wf;
 
         public MainForm()
         {
+            // handle injection
+            _wf = CompositionRoot.Resolve<WaitingForm>();
+
             InitializeComponent();
             InitializeView();
         }
@@ -37,6 +40,8 @@ namespace SAFT_Reader.UI
 
         private void LoadGrids()
         {
+
+            //TODO: change this SetWaitingMsg with events raised by globals functions
             SetWaitingMsg("A carregar ficheiro");
             var audit = Globals.AuditFile;
             SetWaitingMsg("A carregar as linhas das faturas...");
@@ -79,8 +84,8 @@ namespace SAFT_Reader.UI
             SetGridAccountsTableSummaries();
             SetGridTransactionsTableSummaries();
 
-            SetWaitingMsg("A acabar apresentação dos dados...");
             // format gridTotals
+            SetWaitingMsg("A acabar apresentação dos dados...");
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
             gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
             gridTotals.Columns["BalanceAmount"].CellStyle.Font.Bold = true;
@@ -559,34 +564,27 @@ namespace SAFT_Reader.UI
             this.gridTransactions.TableSummaryRows.Add(sum);
         }
 
-        #region Events
-
         private void SetWaitingMsg(string msg)
         {
-            if (wf != null)
+            if (_wf != null)
             {
-                wf.SetMsg(msg);
+                _wf.SetMsg(msg);
             }
         }
 
+        #region Events
+
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
         {
-            wf.Show();
+            Cursor.Current = Cursors.WaitCursor;
+            _wf.Show();
 
             LoadGrids();
             LoadAuditHeaderPropertyGrids();
             mainSplitter.Visible = true;
-            SelectedGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridDocuments.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridCustomers.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridDocuments.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridTax.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridAccounts.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
-            gridTransactions.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
 
-            wf.Hide();
-            wf.Close();
-            wf.Dispose();
+            _wf.Close(); _wf.Dispose();
+            Cursor.Current = Cursors.Default;
         }
 
         private void GridEnter(object sender, EventArgs e)
@@ -807,7 +805,7 @@ namespace SAFT_Reader.UI
         private void cmdToolAbout_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            var f = CompositionRoot.Resolve<WaitingForm>();
+            var f = CompositionRoot.Resolve<SplashForm>();
             f.ShowDialog(this);
             Cursor.Current = Cursors.Default;
         }
