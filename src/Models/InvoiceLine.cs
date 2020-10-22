@@ -45,20 +45,20 @@ namespace SAFT_Reader.Models
         [Display(Name = "% Imposto")]
         public float TaxPercentage { get; set; }
 
-        [Display(Name = "Crédito")]
-        [DataType(DataType.Currency)]
-        public float CreditAmount { get; set; }
-
-        [Display(Name = "Débito")]
+         [Display(Name = "Débito")]
         [DataType(DataType.Currency)]
         public float DebitAmount { get; set; }
-
-        [Display(Name = "Imp. Créd.")]
-        [DataType(DataType.Currency)]
-        public float CreditTaxPayable { get; set; }
 
         [Display(Name = "Imp. Deb.")]
         [DataType(DataType.Currency)]
         public float DebitTaxPayable { get; set; }
+
+        [Display(Name = "Crédito")]
+        [DataType(DataType.Currency)]
+        public float CreditAmount { get; set; }
+
+        [Display(Name = "Imp. Créd.")]
+        [DataType(DataType.Currency)]
+        public float CreditTaxPayable { get; set; }
     }
 }

@@ -87,10 +87,18 @@ namespace SAFT_Reader.UI
             // format gridTotals
             SetWaitingMsg("A acabar apresentação dos dados...");
             gridTotals.Columns["TaxCode"].CellStyle.Font.Bold = true;
-            gridTotals.Columns["BalanceAmount"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
-            gridTotals.Columns["BalanceAmount"].CellStyle.Font.Bold = true;
-            gridTotals.Columns["BalanceTaxPayable"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.DarkColumnColor);
-            gridTotals.Columns["BalanceTaxPayable"].CellStyle.Font.Bold = true;
+            gridTotals.Columns["TotalCredit"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
+            gridTotals.Columns["TotalCredit"].CellStyle.Font.Bold = true;
+            gridTotals.Columns["TotalDebit"].CellStyle.BackColor = ColorTranslator.FromHtml(Globals.LightColumnColor);
+            gridTotals.Columns["TotalDebit"].CellStyle.Font.Bold = true;
+
+            // stacked headers
+            var stackedHeaderRow1 = new StackedHeaderRow();
+            stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "TaxCode,TaxDescription,TaxPercentage", HeaderText = "Tipo de Imposto" });
+            stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "DebitAmount,DebitTaxPayable,TotalDebit", HeaderText = "Débito" });
+            stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "CreditAmount,CreditTaxPayable,TotalCredit", HeaderText = "Crédito" });
+
+            gridTotals.StackedHeaderRows.Add(stackedHeaderRow1);
 
             // format gridLines
             gridLines.Columns["TaxCode"].CellStyle.Font.Bold = true;
@@ -200,14 +208,6 @@ namespace SAFT_Reader.UI
                 SummaryType = SummaryType.DoubleAggregate
             };
 
-            GridSummaryColumn ba = new GridSummaryColumn
-            {
-                Name = "BalanceAmount",
-                Format = "{Sum:c}",
-                MappingName = "BalanceAmount",
-                SummaryType = SummaryType.DoubleAggregate
-            };
-
             GridSummaryColumn ctp = new GridSummaryColumn
             {
                 Name = "CreditTaxPayable",
@@ -224,20 +224,30 @@ namespace SAFT_Reader.UI
                 SummaryType = SummaryType.DoubleAggregate
             };
 
-            GridSummaryColumn btp = new GridSummaryColumn
+            GridSummaryColumn tc = new GridSummaryColumn
             {
-                Name = "BalanceTaxPayable",
+                Name = "TotalCredit",
                 Format = "{Sum:c}",
-                MappingName = "BalanceTaxPayable",
+                MappingName = "TotalCredit",
                 SummaryType = SummaryType.DoubleAggregate
             };
 
+            GridSummaryColumn td = new GridSummaryColumn
+            {
+                Name = "TotalDebit",
+                Format = "{Sum:c}",
+                MappingName = "TotalDebit",
+                SummaryType = SummaryType.DoubleAggregate
+            };
+
+
             sum.SummaryColumns.Add(ca);
             sum.SummaryColumns.Add(da);
-            sum.SummaryColumns.Add(ba);
+            sum.SummaryColumns.Add(td);
+            sum.SummaryColumns.Add(tc);
             sum.SummaryColumns.Add(ctp);
             sum.SummaryColumns.Add(dtp);
-            sum.SummaryColumns.Add(btp);
+   
 
             this.gridTotals.TableSummaryRows.Add(sum);
         }

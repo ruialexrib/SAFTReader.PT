@@ -308,10 +308,10 @@ namespace SAFT_Reader
                     TaxPercentage = cl.First().TaxPercentage,
                     CreditAmount = cl.Sum(c => c.CreditAmount),
                     DebitAmount = cl.Sum(d => d.DebitAmount),
-                    BalanceAmount = cl.Sum(c => c.CreditAmount) - cl.Sum(d => d.DebitAmount),
+                    TotalCredit = cl.Sum(c => c.CreditAmount) + cl.Sum(c => c.CreditTaxPayable),
                     CreditTaxPayable = cl.Sum(c => c.CreditTaxPayable),
                     DebitTaxPayable = cl.Sum(d => d.DebitTaxPayable),
-                    BalanceTaxPayable = cl.Sum(c => c.CreditTaxPayable) - cl.Sum(d => d.DebitTaxPayable)
+                    TotalDebit = cl.Sum(d => d.DebitAmount) + cl.Sum(d => d.DebitTaxPayable),
                 }).ToList();
 
             return totals;
