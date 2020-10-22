@@ -97,7 +97,6 @@ namespace SAFT_Reader.UI
             stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "TaxCode,TaxDescription,TaxPercentage", HeaderText = "Tipo de Imposto" });
             stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "DebitAmount,DebitTaxPayable,TotalDebit", HeaderText = "Débito" });
             stackedHeaderRow1.StackedColumns.Add(new StackedColumn() { ChildColumns = "CreditAmount,CreditTaxPayable,TotalCredit", HeaderText = "Crédito" });
-
             gridTotals.StackedHeaderRows.Add(stackedHeaderRow1);
 
             // format gridLines
