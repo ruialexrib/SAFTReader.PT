@@ -12,6 +12,9 @@ using SAFT_Reader.Models;
 
 namespace SAFT_Reader
 {
+    /// <summary>
+    /// Provides global variables and methods for the application.
+    /// </summary>
     public static class Globals
     {
         public static AuditFile AuditFile { get; set; }
@@ -23,9 +26,17 @@ namespace SAFT_Reader
         public static char NumberDecimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
         /// <summary>
-        /// Gets the version label for the application.
+        /// Gets a version label that includes information about the application's version.
         /// </summary>
-        /// <returns>The version label in the format "Versão: {major}.{minor}.{build}.{revision} (NetworkDeployed/Debug)"</returns>
+        /// <remarks>
+        /// This property returns a version label that includes information about the application's version,
+        /// including the major, minor, build, and revision numbers.
+        /// If the application is network-deployed, the label will also include "(NetworkDeployed)" to indicate
+        /// that the application has been deployed on the network. Otherwise, "(Debug)" will be included to indicate
+        /// that the application is in debug mode.
+        /// </remarks>
+        /// <returns>A string representing the application's version label.</returns>
+
         public static string VersionLabel
         {
             get

@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents an invoice line.
+    /// </summary>
     public class InvoiceLine
     {
         [Display(Name = "Doc.Nº")]

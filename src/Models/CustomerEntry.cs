@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents a customer entry.
+    /// </summary>
     public class CustomerEntry
     {
         [Display(Name = "ID")]

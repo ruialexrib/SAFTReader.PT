@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents an accounting account entry.
+    /// </summary>
     public class AccountEntry
     {
         [Display(Name = "Conta", Description = "Devem constar do ficheiro todas as contas, incluindo as respetivas contas integradoras, até às contas do Razão.")]

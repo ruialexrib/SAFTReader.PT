@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents a product entry.
+    /// </summary>
     public class ProductEntry
     {
         [Display(Name = "Tipo")]

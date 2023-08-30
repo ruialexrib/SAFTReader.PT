@@ -1,5 +1,8 @@
 ﻿namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents the header information.
+    /// </summary>
     public class HeaderPt
     {
         public string Ficheiro_Auditoria { get; set; }

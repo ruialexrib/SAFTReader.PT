@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents a tax entry.
+    /// </summary>
     public class TaxEntry
     {
         [Display(Name = "Tipo")]

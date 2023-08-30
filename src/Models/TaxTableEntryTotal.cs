@@ -2,6 +2,9 @@
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents a tax table entry total.
+    /// </summary>
     public class TaxTableEntryTotal
     {
         [Display(Name = "Cod. Imp.")]

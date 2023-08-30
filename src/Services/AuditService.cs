@@ -9,6 +9,10 @@ using SAFT_Reader.Models;
 
 namespace SAFT_Reader.Services
 {
+    /// <summary>
+    /// Represents an audit service for auditing operations.
+    /// </summary>
+
     public class AuditService : IAuditService
     {
         private readonly AuditReport _auditReport;

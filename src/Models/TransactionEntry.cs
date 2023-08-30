@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SAFT_Reader.Models
 {
+    /// <summary>
+    /// Represents a transaction entry.
+    /// </summary>
     public class TransactionEntry
     {
         [Display(Name = "Diário")]
