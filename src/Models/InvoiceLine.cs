@@ -45,7 +45,10 @@ namespace SAFT_Reader.Models
         [Display(Name = "% Imposto")]
         public float TaxPercentage { get; set; }
 
-         [Display(Name = "Débito")]
+        [Display(Name = "Cód. Ise.")]
+        public string TaxExemptionCode { get; set; }
+
+        [Display(Name = "Débito")]
         [DataType(DataType.Currency)]
         public float DebitAmount { get; set; }
 
@@ -60,5 +63,6 @@ namespace SAFT_Reader.Models
         [Display(Name = "Imp. Créd.")]
         [DataType(DataType.Currency)]
         public float CreditTaxPayable { get; set; }
+
     }
 }

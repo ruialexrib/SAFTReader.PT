@@ -12,10 +12,14 @@ namespace SAFT_Reader.UI
 
         private int _counter;
 
+        /// <summary>
+        /// Initializes a new instance of the SplashForm class.
+        /// </summary>
         public SplashForm()
         {
             InitializeComponent();
         }
+
 
         private void InitializeView()
         {

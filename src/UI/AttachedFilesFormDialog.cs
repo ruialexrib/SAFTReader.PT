@@ -18,6 +18,10 @@ namespace SAFT_Reader.UI
 
         private readonly IAuditService _auditService;
 
+        /// <summary>
+        /// Initializes a new instance of the AttachedFilesFormDialog class.
+        /// </summary>
+        /// <param name="auditService">An implementation of IAuditService for auditing operations.</param>
         public AttachedFilesFormDialog(IAuditService auditService)
         {
             _auditService = auditService;
@@ -26,6 +30,13 @@ namespace SAFT_Reader.UI
             InitializeView();
         }
 
+        /// <summary>
+        /// Initializes the view of the AttachedFilesFormDialog.
+        /// </summary>
+        /// <remarks>
+        /// This method sets the initial file path in the text box based on the principal attached file,
+        /// and refreshes the grid view to display the attached files.
+        /// </remarks>
         private void InitializeView()
         {
             this.txtFilePath.Text = Globals.AttachedFiles
@@ -35,13 +46,21 @@ namespace SAFT_Reader.UI
             RefreshGridView();
         }
 
+        /// <summary>
+        /// Handles the click event of the OK button in the dialog.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdOK_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Handles the click event of the Cancel button in the dialog.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdCancel_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -50,6 +69,14 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Refreshes the data displayed in the grid view of attached audit files.
+        /// </summary>
+        /// <remarks>
+        /// This method clears the current items in the grid view and populates it with information
+        /// about attached audit files, including their file paths, start dates, and end dates.
+        /// Additionally, it enables the delete button if there are attached files.
+        /// </remarks>
         private void RefreshGridView()
         {
             this.listView1.Items.Clear();
@@ -62,6 +89,11 @@ namespace SAFT_Reader.UI
             if (Globals.AttachedFiles.Count > 0) { cmdDelete.Enabled = true; }
         }
 
+        /// <summary>
+        /// Handles the click event of the Add button to add an attached audit file.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdAdd_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -94,6 +126,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Validates whether the provided audit file matches the company of the principal audit file.
+        /// </summary>
+        /// <param name="b">The audit file to validate.</param>
+        /// <returns>True if the provided audit file matches the company of the principal audit file; otherwise, false.</returns>
         private bool ValidateFile(AuditFile b)
         {
             bool r = true;
@@ -105,6 +142,11 @@ namespace SAFT_Reader.UI
             return r;
         }
 
+        /// <summary>
+        /// Handles the click event of the Delete button to remove an attached audit file.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdDelete_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;

@@ -4,8 +4,16 @@ using SAFT_Reader.Models;
 
 namespace SAFT_Reader.Extensions
 {
+    /// <summary>
+    /// Extension methods for converting AuditFile objects to HeaderPt objects.
+    /// </summary>
     public static class AuditFileExtensions
     {
+        /// <summary>
+        /// Converts an AuditFile object to a HeaderPt object.
+        /// </summary>
+        /// <param name="a">The AuditFile object to convert.</param>
+        /// <returns>A HeaderPt object with data converted from the AuditFile.</returns>
         public static HeaderPt ToHeaderPt(this AuditFile a)
         {
             return new HeaderPt
@@ -26,15 +34,6 @@ namespace SAFT_Reader.Extensions
                 Numero_Certificado = a.Header.SoftwareCertificateNumber,
                 Nome_Aplicacao = a.Header.ProductID,
                 Versao_Aplicacao = a.Header.ProductVersion,
-                //Total_Registos = a?.SourceDocuments?.SalesInvoices != null
-                //                                        ? a.SourceDocuments.SalesInvoices.NumberOfEntries.ToAuditInt()
-                //                                        : 0,
-                //Total_Creditos = a?.SourceDocuments?.SalesInvoices != null
-                //                                        ? a.SourceDocuments.SalesInvoices.TotalCredit.ToAuditFloat()
-                //                                        : 0,
-                //Total_Debitos = a?.SourceDocuments?.SalesInvoices != null
-                //                                        ? a.SourceDocuments.SalesInvoices.TotalDebit.ToAuditFloat()
-                //                                        : 0,
             };
         }
     }

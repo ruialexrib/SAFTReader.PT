@@ -15,7 +15,6 @@ namespace SAFT_Reader
     public static class Globals
     {
         public static AuditFile AuditFile { get; set; }
-
         public static List<AttachedFile> AttachedFiles { get; set; }
 
         public const string LightColumnColor = "#ebebe0";
@@ -23,27 +22,32 @@ namespace SAFT_Reader
 
         public static char NumberDecimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
+        /// <summary>
+        /// Gets the version label for the application.
+        /// </summary>
+        /// <returns>The version label in the format "Versão: {major}.{minor}.{build}.{revision} (NetworkDeployed/Debug)"</returns>
         public static string VersionLabel
         {
             get
             {
-                if (ApplicationDeployment.IsNetworkDeployed)
-                {
-                    Version ver = ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                    return string.Format("Versão: {0}.{1}.{2}.{3} (NetworkDeployed)",
-                        ver.Major, ver.Minor, ver.Build, ver.Revision,
-                        Assembly.GetEntryAssembly().GetName().Name);
-                }
-                else
-                {
-                    var ver = Assembly.GetExecutingAssembly().GetName().Version;
-                    return string.Format("Versão: {0}.{1}.{2}.{3} (Debug)",
-                        ver.Major, ver.Minor, ver.Build, ver.Revision,
-                        Assembly.GetEntryAssembly().GetName().Name);
-                }
+                var ver = ApplicationDeployment.IsNetworkDeployed
+                    ? ApplicationDeployment.CurrentDeployment.CurrentVersion
+                    : Assembly.GetExecutingAssembly().GetName().Version;
+
+                var deploymentType = ApplicationDeployment.IsNetworkDeployed ? "(NetworkDeployed)" : "(Debug)";
+
+                return $"Versão: {ver.Major}.{ver.Minor}.{ver.Build}.{ver.Revision} {deploymentType} {Assembly.GetEntryAssembly().GetName().Name}";
             }
         }
 
+        /// <summary>
+        /// Loads a list of customer entries based on audit data and associated invoice lines.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves customer entries from the audit file's master files and calculates
+        /// the total credit and debit amounts for each customer based on associated invoice lines.
+        /// </remarks>
+        /// <returns>A list of CustomerEntry objects representing customer information.</returns>
         public static List<CustomerEntry> LoadCustomerEntries()
         {
             var audit = Globals.AuditFile;
@@ -71,6 +75,14 @@ namespace SAFT_Reader
                             }).ToList();
         }
 
+        /// <summary>
+        /// Loads a list of tax entries based on audit data and associated invoice lines.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves tax entries from the audit file's tax table and calculates
+        /// the total credit and debit amounts for each tax entry based on associated invoice lines.
+        /// </remarks>
+        /// <returns>A list of TaxEntry objects representing tax information.</returns>
         public static List<TaxEntry> LoadTaxEntries()
         {
             var audit = Globals.AuditFile;
@@ -87,14 +99,24 @@ namespace SAFT_Reader
                                 Description = c.Description,
                                 TaxPercentage = (c.TaxPercentage ?? "0.00").ToFloat(),
                                 TotalCreditAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
+                                                        .Where(x => x.TaxCode == c.TaxCode && 
+                                                                    x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
                                                         .Sum(s => s.CreditAmount),
                                 TotalDebitAmmount = lines
-                                                        .Where(x => x.TaxCode == c.TaxCode && x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
+                                                        .Where(x => x.TaxCode == c.TaxCode && 
+                                                                    x.TaxPercentage == (c.TaxPercentage ?? "0.00").ToFloat())
                                                         .Sum(s => s.DebitAmount),
                             }).ToList();
         }
 
+        /// <summary>
+        /// Loads a list of account entries based on audit data.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves account entries from the audit file's general ledger accounts
+        /// and projects them into AccountEntry objects with relevant information.
+        /// </remarks>
+        /// <returns>A list of AccountEntry objects representing account information.</returns>
         public static List<AccountEntry> LoadAccountEntries()
         {
             var audit = Globals.AuditFile;
@@ -116,6 +138,14 @@ namespace SAFT_Reader
                                 }).ToList() ?? new List<AccountEntry>();
         }
 
+        /// <summary>
+        /// Loads a list of product entries based on audit data and associated invoice lines.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves product entries from the audit file's product data and calculates
+        /// the total credit and debit amounts for each product based on associated invoice lines.
+        /// </remarks>
+        /// <returns>A list of ProductEntry objects representing product information.</returns>
         public static List<ProductEntry> LoadProductEntries()
         {
             var audit = Globals.AuditFile;
@@ -137,6 +167,7 @@ namespace SAFT_Reader
                                                         .Sum(s => s.DebitAmount),
                             }).ToList();
         }
+
 
         public static List<TransactionEntry> LoadTransactionEntries()
         {
@@ -196,6 +227,14 @@ namespace SAFT_Reader
             return transactionlines;
         }
 
+        /// <summary>
+        /// Loads a list of transaction entries based on audit data.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves transaction entries from the audit file's general ledger entries,
+        /// including debit and credit lines, and projects them into TransactionEntry objects.
+        /// </remarks>
+        /// <returns>A list of TransactionEntry objects representing transaction information.</returns>
         public static List<InvoiceLine> LoadInvoiceLines()
         {
             var invoiceLines = new List<InvoiceLine>();
@@ -205,7 +244,6 @@ namespace SAFT_Reader
                             ?.SourceDocuments
                             ?.SalesInvoices
                             ?.Invoice;
-            //.Where(x => x.DocumentStatus.InvoiceStatus.Equals("N"));
 
             foreach (var invoice in invoices ?? new List<Invoice>())
             {
@@ -235,7 +273,8 @@ namespace SAFT_Reader
                             Quantity = line.Quantity.ToFloat(),
                             UnitPrice = line.UnitPrice.ToFloat(),
                             TaxCode = line.Tax.TaxCode,
-                            TaxPercentage = tp
+                            TaxPercentage = tp,
+                            TaxExemptionCode = line.TaxExemptionCode
                         };
                         if (line.CreditAmount != null)
                         {
@@ -253,7 +292,6 @@ namespace SAFT_Reader
                     }
                 }
             }
-
             return invoiceLines;
         }
 
@@ -288,6 +326,14 @@ namespace SAFT_Reader
                     }).ToList() ?? new List<InvoiceEntry>();
         }
 
+        /// <summary>
+        /// Loads a list of invoice entries based on audit data.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves invoice entries from the audit file's source documents and
+        /// projects them into InvoiceEntry objects with relevant information.
+        /// </remarks>
+        /// <returns>A list of InvoiceEntry objects representing invoice information.</returns>
         public static List<TaxTableEntryTotal> LoadTaxEntryTotals(List<InvoiceLine> invoiceLines)
         {
             var audit = Globals.AuditFile;
@@ -318,6 +364,9 @@ namespace SAFT_Reader
         }
     }
 
+    /// <summary>
+    /// Represents an attached file associated with an audit file.
+    /// </summary>
     public class AttachedFile
     {
         public Guid ID { get; set; }

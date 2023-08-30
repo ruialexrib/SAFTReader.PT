@@ -22,6 +22,9 @@ namespace SAFT_Reader.UI
         public SfDataGrid SelectedGrid { get; set; }
         private readonly WaitingForm _wf;
 
+        /// <summary>
+        /// Initializes a new instance of the MainForm class.
+        /// </summary>
         public MainForm()
         {
             // handle injection
@@ -31,6 +34,13 @@ namespace SAFT_Reader.UI
             InitializeView();
         }
 
+        /// <summary>
+        /// Initializes the view of the MainForm.
+        /// </summary>
+        /// <remarks>
+        /// This method adjusts the size of the ribbon control and sets the label text with the application version.
+        /// Additionally, it sets the SelectedGrid to the gridLines.
+        /// </remarks>
         private void InitializeView()
         {
             ribbonControlAdv1.Size = new Size { Width = this.ribbonControlAdv1.Size.Width, Height = 150 };
@@ -38,6 +48,9 @@ namespace SAFT_Reader.UI
             SelectedGrid = gridLines;
         }
 
+        /// <summary>
+        /// Loads data into various grids and customizes their appearance.
+        /// </summary>
         private void LoadGrids()
         {
 
@@ -115,6 +128,7 @@ namespace SAFT_Reader.UI
             gridLines.Columns["InvoiceType"].Width = 50;
             gridLines.Columns["InvoiceStatus"].Width = 50;
             gridLines.Columns["TaxCode"].Width = 50;
+            gridLines.Columns["TaxExemptionCode"].Width = 50;
             gridLines.Columns["TaxPercentage"].Width = 50;
             gridLines.Columns["Quantity"].Width = 50;
 
@@ -162,6 +176,9 @@ namespace SAFT_Reader.UI
             SetWaitingMsg("Pronto!");
         }
 
+        /// <summary>
+        /// Loads the Audit Header data into PropertyGrids for each attached file and displays them in separate tabs.
+        /// </summary>
         private void LoadAuditHeaderPropertyGrids()
         {
             foreach (var file in Globals.AttachedFiles)
@@ -181,6 +198,9 @@ namespace SAFT_Reader.UI
             }
         }
 
+        /// <summary>
+        /// Sets up summary calculations for the grid displaying totals.
+        /// </summary>
         private void SetGridTotalsSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -251,6 +271,9 @@ namespace SAFT_Reader.UI
             this.gridTotals.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Sets up summary calculations for the grid displaying line items.
+        /// </summary>
         private void SetGridLinesSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -301,6 +324,9 @@ namespace SAFT_Reader.UI
             this.gridLines.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Configures summary calculations for the grid displaying customer data.
+        /// </summary>
         private void SetGridCustomerTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -333,6 +359,9 @@ namespace SAFT_Reader.UI
             this.gridCustomers.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Configures summary calculations for the grid displaying product data.
+        /// </summary>
         private void SetGridProductTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -397,6 +426,9 @@ namespace SAFT_Reader.UI
             this.gridTax.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Configures summary calculations for the grid displaying tax data.
+        /// </summary>
         private void SetGridAccountsTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -447,6 +479,9 @@ namespace SAFT_Reader.UI
             this.gridAccounts.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Configures group column summaries for the grid displaying invoice lines.
+        /// </summary>
         private void SetGridLinesGroupColumnSummaries()
         {
             // Creates the GridSummaryRow.
@@ -500,6 +535,7 @@ namespace SAFT_Reader.UI
             this.gridLines.CaptionSummaryRow = captionSummaryRow;
         }
 
+
         private void SetGridDocumentsTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -541,6 +577,9 @@ namespace SAFT_Reader.UI
             this.gridDocuments.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Configures table summaries for the grid displaying invoice documents.
+        /// </summary>
         private void SetGridTransactionsTableSummaries()
         {
             GridTableSummaryRow sum = new GridTableSummaryRow
@@ -573,6 +612,10 @@ namespace SAFT_Reader.UI
             this.gridTransactions.TableSummaryRows.Add(sum);
         }
 
+        /// <summary>
+        /// Sets a waiting message in a waiting form if available.
+        /// </summary>
+        /// <param name="msg">The message to display in the waiting form.</param>
         private void SetWaitingMsg(string msg)
         {
             if (_wf != null)
@@ -583,6 +626,11 @@ namespace SAFT_Reader.UI
 
         #region Events
 
+        /// <summary>
+        /// Event handler for the loading of the TaxTableEntryTotalForm.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void TaxTableEntryTotalForm_Load(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -596,11 +644,21 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for entering a grid control, which updates the selected grid.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a grid control.</param>
+        /// <param name="e">The event arguments.</param>
         private void GridEnter(object sender, EventArgs e)
         {
             SelectedGrid = (SfDataGrid)sender;
         }
 
+        /// <summary>
+        /// Event handler for the "Group" button click, which toggles the visibility of the group drop area in the selected grid.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a button control.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolGroup_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -608,6 +666,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Auto Expand" button click, which toggles the auto-sizing mode of the selected grid between "All Cells" and "Fill."
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a button control.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolAutoExpand_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -622,6 +685,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Filter" button click, which enables filtering in the selected grid and applies the specified filter text.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a button control.</param>
+        /// <param name="e">The event arguments.</param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -630,6 +698,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Remove Filters" button click, which clears any filters applied to the selected grid and resets filtering-related controls.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a button control.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolRemoveFilters_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -640,6 +713,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the tab control's "SelectedIndexChanged" event. This method focuses on the appropriate grid when a tab is selected.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a tab control.</param>
+        /// <param name="e">The event arguments.</param>
         private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -680,6 +758,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for clicking on the GitHub link label. Opens the GitHub repository in the default web browser.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be a label.</param>
+        /// <param name="e">The event arguments.</param>
         private void lblInfoGithub_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -695,6 +778,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the KeyDown event of the filter text box.
+        /// Filters the data in the selected grid when the Enter key is pressed.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the filter text box.</param>
+        /// <param name="e">The event arguments containing information about the key press.</param>
         private void txtToolFilter_KeyDown(object sender, KeyEventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -706,6 +795,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Export to Excel button click.
+        /// Exports the data from the selected grid to an Excel (.xlsx) file.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Export to Excel button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolExportXLS_Click(object sender, EventArgs e)
         {
             var options = new ExcelExportingOptions();
@@ -726,6 +821,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Export to PDF button click.
+        /// Exports the data from the selected grid to a PDF file.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Export to PDF button.</param>
+        /// <param name="e">The event arguments.</param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -773,6 +874,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Exit button click.
+        /// Exits the application.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Exit button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolExit_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -780,6 +887,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Validate button click.
+        /// Launches an external SAFT file validator tool to validate the loaded audit data.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Validate button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolValidate_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -788,6 +901,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Tax by Document button click.
+        /// Switches to the grid view containing tax information by document.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Tax by Document button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolTaxByDocument_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -800,6 +919,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the Reset button click.
+        /// Resets the current view to the main form while disposing of the current form.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the Reset button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdReset_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -811,6 +936,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the About button click.
+        /// Displays information about the application using a splash form.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the About button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolAbout_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -819,6 +950,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the website label click.
+        /// Opens the website link in the default web browser when the label is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the website label.</param>
+        /// <param name="e">The event arguments.</param>
         private void lblWebsite_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -834,6 +971,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Tax by Document Type" tool button click.
+        /// Displays the "Tax by Document Type" form dialog and sets the data grid as its data source.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the "Tax by Document Type" tool button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolTaxByDocumentType_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -846,6 +989,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Tax by Customer" tool button click.
+        /// Displays the "Tax by Customer" form dialog and sets the data grid as its data source.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the "Tax by Customer" tool button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolTaxByCustomer_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -858,6 +1007,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Tax by Product" tool button click.
+        /// Displays the "Tax by Product" form dialog and sets the data grid as its data source.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the "Tax by Product" tool button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdTooltaxByProduct_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -870,6 +1025,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Open" tool button click.
+        /// Closes the current form, effectively closing the application.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the "Open" tool button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolOpen_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -877,6 +1038,12 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for the "Add SAFT" tool button click.
+        /// Opens a dialog to add SAFT files to the application.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the "Add SAFT" tool button.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdToolAddSaft_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -897,6 +1064,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Event handler for customizing the row style of the gridAccounts SfDataGrid.
+        /// </summary>
+        /// <param name="sender">The sender of the event, which should be the gridAccounts SfDataGrid.</param>
+        /// <param name="e">The event arguments containing information about the row to be styled.</param>
         private void gridAccounts_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
             if (e.RowType == RowType.DefaultRow)

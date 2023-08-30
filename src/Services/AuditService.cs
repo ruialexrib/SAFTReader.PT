@@ -16,6 +16,11 @@ namespace SAFT_Reader.Services
         private readonly IFileStreamAdapter _fileStreamAdapter;
         private readonly IXmlSerializerAdapter _xmlSerializerAdapter;
 
+        /// <summary>
+        /// Initializes a new instance of the AuditService class.
+        /// </summary>
+        /// <param name="fileStreamAdapter">An implementation of IFileStreamAdapter for file operations.</param>
+        /// <param name="xmlSerializerAdapter">An implementation of IXmlSerializerAdapter for XML serialization.</param>
         public AuditService(IFileStreamAdapter fileStreamAdapter, IXmlSerializerAdapter xmlSerializerAdapter)
         {
             _fileStreamAdapter = fileStreamAdapter;
@@ -28,12 +33,27 @@ namespace SAFT_Reader.Services
             };
         }
 
+        /// <summary>
+        /// Performs an audit of invoices and returns an AuditReport.
+        /// </summary>
+        /// <remarks>
+        /// This method executes the audit process for invoices and populates the AuditReport
+        /// with audit results and error information.
+        /// </remarks>
+        /// <returns>An AuditReport containing the results of the audit.</returns>
         public AuditReport Audit()
         {
             AuditInvoices();
             return _auditReport;
         }
 
+        /// <summary>
+        /// Performs an audit of invoices in the audit file.
+        /// </summary>
+        /// <remarks>
+        /// This method iterates through the invoices in the audit file's source documents,
+        /// performing various audit checks and assertions.
+        /// </remarks>
         private void AuditInvoices()
         {
             foreach (var i in Globals.AuditFile.SourceDocuments.SalesInvoices.Invoice)
@@ -43,6 +63,15 @@ namespace SAFT_Reader.Services
             }
         }
 
+        /// <summary>
+        /// Asserts whether the customer of an invoice exists in the customer list.
+        /// </summary>
+        /// <param name="i">The invoice to be audited.</param>
+        /// <remarks>
+        /// This method checks if the customer specified in the invoice exists in the customer list
+        /// within the audit file's 'MasterFiles.Customer' table. If not, an error is recorded in the AuditReport.
+        /// </remarks>
+        /// <param name="i">The invoice to be audited.</param>
         private void AssertInvoiceCustomerInCustomerList(Invoice i)
         {
             var c = Globals.AuditFile.MasterFiles.Customer.Where(x => x.CustomerID.Equals(i.CustomerID)).FirstOrDefault();
@@ -57,6 +86,16 @@ namespace SAFT_Reader.Services
             }
         }
 
+        /// <summary>
+        /// Asserts if the TaxExemptionReason is provided when TaxPercentage is not specified.
+        /// </summary>
+        /// <param name="i">The invoice to be audited.</param>
+        /// <remarks>
+        /// This method checks if a TaxExemptionReason is provided when the TaxPercentage is not specified
+        /// for each line in the invoice. If TaxPercentage is missing or zero, TaxExemptionReason should not be empty.
+        /// If the condition is not met, an error is recorded in the AuditReport.
+        /// </remarks>
+        /// <param name="i">The invoice to be audited.</param>
         private void AssertIfTaxExemptionReasonOnTaxPercentage(Invoice i)
         {
             foreach (var l in i.Line)
@@ -79,6 +118,15 @@ namespace SAFT_Reader.Services
             }
         }
 
+        /// <summary>
+        /// Merges multiple audit files into a single consolidated audit file.
+        /// </summary>
+        /// <remarks>
+        /// This method combines data from multiple audit files into a single audit file.
+        /// It merges customer data, tax tables, product data, invoices, and accounts
+        /// from the principal audit file with those from attached sub-audit files.
+        /// </remarks>
+        /// <returns>The consolidated AuditFile containing merged data.</returns>
         public AuditFile MergeAudits()
         {
             AuditFile audit = OpenFile(Globals.AttachedFiles
@@ -155,6 +203,11 @@ namespace SAFT_Reader.Services
             return audit;
         }
 
+        /// <summary>
+        /// Opens and deserializes an audit file from the specified path.
+        /// </summary>
+        /// <param name="path">The file path of the audit file to open and deserialize.</param>
+        /// <returns>The deserialized AuditFile object.</returns>
         public AuditFile OpenFile(string path)
         {
             var model = _fileStreamAdapter.Read(path);
