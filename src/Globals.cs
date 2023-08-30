@@ -168,7 +168,14 @@ namespace SAFT_Reader
                             }).ToList();
         }
 
-
+        /// <summary>
+        /// Loads transaction entries from the audit file and returns a list of TransactionEntry objects.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves transaction data from the audit file and transforms it into TransactionEntry objects.
+        /// It iterates through journals, transactions, and lines in the audit file to create TransactionEntry objects for each line.
+        /// </remarks>
+        /// <returns>A list of TransactionEntry objects representing the transaction entries.</returns>
         public static List<TransactionEntry> LoadTransactionEntries()
         {
             var transactionlines = new List<TransactionEntry>();
@@ -295,6 +302,14 @@ namespace SAFT_Reader
             return invoiceLines;
         }
 
+        /// <summary>
+        /// Loads a list of invoice entries based on audit data.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves invoice entries from the audit file's source documents and
+        /// projects them into InvoiceEntry objects with relevant information.
+        /// </remarks>
+        /// <returns>A list of InvoiceEntry objects representing invoice information.</returns>
         public static List<InvoiceEntry> LoadInvoiceEntries()
         {
             var audit = Globals.AuditFile;
@@ -327,13 +342,14 @@ namespace SAFT_Reader
         }
 
         /// <summary>
-        /// Loads a list of invoice entries based on audit data.
+        /// Loads tax entry totals from a list of invoice lines and returns a list of TaxTableEntryTotal objects.
         /// </summary>
         /// <remarks>
-        /// This method retrieves invoice entries from the audit file's source documents and
-        /// projects them into InvoiceEntry objects with relevant information.
+        /// This method calculates tax entry totals based on a list of invoice lines.
+        /// It groups the lines by tax code and percentage, and then calculates the total credit and debit amounts, as well as tax payable amounts.
         /// </remarks>
-        /// <returns>A list of InvoiceEntry objects representing invoice information.</returns>
+        /// <param name="invoiceLines">The list of invoice lines to calculate tax entry totals from.</param>
+        /// <returns>A list of TaxTableEntryTotal objects representing the tax entry totals.</returns>
         public static List<TaxTableEntryTotal> LoadTaxEntryTotals(List<InvoiceLine> invoiceLines)
         {
             var audit = Globals.AuditFile;

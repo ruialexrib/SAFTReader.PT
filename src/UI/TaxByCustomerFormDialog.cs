@@ -13,12 +13,18 @@ namespace SAFT_Reader.UI
     {
         public SfDataGrid DataGrid { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaxByCustomerFormDialog"/> class.
+        /// </summary>
         public TaxByCustomerFormDialog()
         {
             InitializeComponent();
             InitializeView();
         }
 
+        /// <summary>
+        /// Initializes the view of the TaxByCustomerFormDialog.
+        /// </summary>
         private void InitializeView()
         {
             var records = Globals.AuditFile.SourceDocuments
@@ -46,6 +52,11 @@ namespace SAFT_Reader.UI
             this.multiColumnComboBox1.ValueMember = "NIF";
         }
 
+        /// <summary>
+        /// Handles the click event of the OK button in the TaxByCustomerFormDialog.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdOK_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -77,6 +88,11 @@ namespace SAFT_Reader.UI
             Cursor.Current = Cursors.Default;
         }
 
+        /// <summary>
+        /// Handles the click event of the Cancel button in the TaxByCustomerFormDialog.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void cmdCancel_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;

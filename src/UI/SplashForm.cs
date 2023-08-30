@@ -20,7 +20,9 @@ namespace SAFT_Reader.UI
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Initializes the view for the SplashForm.
+        /// </summary>
         private void InitializeView()
         {
             if (!IsSplash)
@@ -34,6 +36,10 @@ namespace SAFT_Reader.UI
             lblCopy.Text = "Copyright 2020, Rui Ribeiro. Todos os direitos reservados.";
         }
 
+        /// <summary>
+        /// Event handler for the timer tick event.
+        /// Increments a counter and closes the form when the counter reaches a specific value.
+        /// </summary>
         private void timer1_Tick(object sender, EventArgs e)
         {
             _counter++;
@@ -45,6 +51,10 @@ namespace SAFT_Reader.UI
             }
         }
 
+        /// <summary>
+        /// Event handler for the form's Load event.
+        /// Initializes the view of the form.
+        /// </summary>
         private void SplashForm_Load(object sender, EventArgs e)
         {
             InitializeView();

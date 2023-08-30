@@ -22,9 +22,6 @@ namespace SAFT_Reader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Globals.AttachedFilePaths = new List<string>();
-            //Globals.AttachedAuditFiles = new List<AuditFile>();
-
             Globals.AttachedFiles = new List<AttachedFile>();
 
             var splash = CompositionRoot.Resolve<SplashForm>();
@@ -35,6 +32,10 @@ namespace SAFT_Reader
             Application.Run(openFileDialog);
         }
 
+        /// <summary>
+        /// Find the Syncfusion license key in the application directory.
+        /// </summary>
+        /// <returns>The Syncfusion license key as a string.</returns>
         public static string FindLicenseKey()
         {
             string licenseKeyFile = "SyncfusionLicense.txt";
