@@ -26,6 +26,13 @@ namespace SAFT_Reader.UI
         /// <summary>
         /// Initializes a new instance of the MainForm class.
         /// </summary>
+        /// <remarks>
+        /// This constructor is responsible for initializing a new instance of the MainForm class. It handles dependency injection
+        /// by resolving an instance of the WaitingForm (assuming CompositionRoot.Resolve is used for dependency injection). The
+        /// InitializeComponent method is called to initialize the form's components and layout. Additionally, the InitializeView method
+        /// is invoked to perform any custom view initialization. This constructor is typically called when creating a new MainForm
+        /// instance.
+        /// </remarks>
         public MainForm()
         {
             // handle injection

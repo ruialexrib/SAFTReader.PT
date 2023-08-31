@@ -8,6 +8,10 @@ using Syncfusion.Licensing;
 
 namespace SAFT_Reader
 {
+
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
@@ -16,18 +20,24 @@ namespace SAFT_Reader
         [STAThread]
         private static void Main()
         {
+            // Register Syncfusion license using the found license key.
             SyncfusionLicenseProvider.RegisterLicense(FindLicenseKey());
+
+            // Wire up the application's dependencies using CompositionRoot.
             CompositionRoot.Wire(new ApplicationModule());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Initialize the list of attached files.
             Globals.AttachedFiles = new List<AttachedFile>();
 
+            // Show a splash screen.
             var splash = CompositionRoot.Resolve<SplashForm>();
             splash.IsSplash = true;
             splash.ShowDialog();
 
+            // Initialize and run the main file dialog.
             var openFileDialog = CompositionRoot.Resolve<OpenFileDialogForm>();
             Application.Run(openFileDialog);
         }

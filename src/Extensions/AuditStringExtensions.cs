@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SAFT_Reader.Extensions
 {
@@ -63,29 +64,16 @@ namespace SAFT_Reader.Extensions
         /// <returns>The corresponding account grouping category description.</returns>
         public static string ToAccountGroupCatDesc(this string s)
         {
-            switch (s)
+            Dictionary<string, string> mapping = new Dictionary<string, string>
             {
-                case "GR":
-                    return "Razão - CG";
-
-                case "GA":
-                    return "Agregadora - CG";
-
-                case "GM":
-                    return "Movimento - CG";
-
-                case "AR":
-                    return "Razão - CA";
-
-                case "AA":
-                    return "Agregadora - CA";
-
-                case "AM":
-                    return "Movimento - CA";
-
-                default:
-                    return "";
-            }
+                { "GR", "Razão - CG" },
+                { "GA", "Agregadora - CG" },
+                { "GM", "Movimento - CG" },
+                { "AR", "Razão - CA" },
+                { "AA", "Agregadora - CA" },
+                { "AM", "Movimento - CA" }
+            };
+            return mapping.TryGetValue(s, out string result) ? result : "";
         }
     }
 }

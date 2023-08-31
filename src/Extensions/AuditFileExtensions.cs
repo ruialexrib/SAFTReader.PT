@@ -10,10 +10,10 @@ namespace SAFT_Reader.Extensions
     public static class AuditFileExtensions
     {
         /// <summary>
-        /// Converts an AuditFile object to a HeaderPt object.
+        /// Converts an AuditFile object to a HeaderPt object with Portuguese field names.
         /// </summary>
         /// <param name="a">The AuditFile object to convert.</param>
-        /// <returns>A HeaderPt object with data converted from the AuditFile.</returns>
+        /// <returns>A HeaderPt object containing audit file header information with Portuguese field names.</returns>
         public static HeaderPt ToHeaderPt(this AuditFile a)
         {
             return new HeaderPt
